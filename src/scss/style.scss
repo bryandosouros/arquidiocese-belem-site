@@ -1,0 +1,18 @@
+// src/scss/style.scss
+
+// 1. Variáveis (precisa ser usável pelos outros módulos)
+@forward 'variables'; // Torna as variáveis de _variables.scss disponíveis para outros módulos que importam style.scss
+                     // E também as inclui no CSS global (ex: :root custom properties)
+
+// 2. Módulo de Cor do Sass (se algum arquivo aqui usar color.adjust diretamente, o que não é o caso)
+// @use 'sass:color'; // Geralmente não precisa no arquivo principal se os parciais já usam
+
+// 3. Estilos Base e Reset
+@use 'base';
+
+// 4. Componentes de Layout Principais
+@use 'layout';
+
+// Se você tiver outros parciais, importe-os com @use também:
+// @use 'components/buttons';
+// @use 'pages/home';

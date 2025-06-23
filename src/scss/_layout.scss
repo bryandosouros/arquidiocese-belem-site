@@ -1,0 +1,806 @@
+// src/scss/_layout.scss
+@use 'sass:color'; // Garantindo que está aqui para color.adjust
+@use 'variables' as v;
+
+// ------------------------------
+// CONTAINER GLOBAL
+// ------------------------------
+.container {
+  width: 100%;
+  max-width: v.$container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: v.$espacamento-base * 2;
+  padding-right: v.$espacamento-base * 2;
+}
+
+// ------------------------------
+// HEADER (Estilo Vaticano Sóbrio)
+// ------------------------------
+.site-header {
+  background-color: v.$cor-fundo-secao-clara;
+  padding: v.$espacamento-base v.$espacamento-base * 0.75;
+  border-bottom: 1px solid v.$cor-bordas;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  .container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-area a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+
+    .logo-imagem {
+      height: 50px;
+      width: auto;
+      margin-right: v.$espacamento-base;
+      transition: opacity v.$transition-padrao;
+    }
+
+    .logo-texto {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      font-family: v.$fonte-titulos;
+
+      .texto-arquidiocese {
+        font-size: 0.8rem;
+        font-weight: v.$peso-regular;
+        color: v.$cor-texto-secundario;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      .texto-localidade {
+        font-size: 1.25rem;
+        font-weight: v.$peso-semibold;
+        color: v.$cor-texto-principal;
+      }
+    }
+
+    &:hover .logo-imagem,
+    &:focus .logo-imagem {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ------------------------------
+// NAVEGAÇÃO PRINCIPAL (Estilo Vaticano Sóbrio)
+// ------------------------------
+.navegacao-principal {
+  .menu-lista-principal {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-left: v.$espacamento-base * 0.75;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    a {
+      font-family: v.$fonte-corpo;
+      font-weight: v.$peso-semibold;
+      font-size: 0.9rem;
+      color: v.$cor-texto-secundario;
+      text-decoration: none;
+      padding: (v.$espacamento-base * 0.6) (v.$espacamento-base);
+      border-radius: v.$border-radius-padrao;
+      position: relative;
+      transition: color v.$transition-padrao;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover,
+      &:focus,
+      &.ativo {
+        color: v.$cor-primaria;
+        background-color: transparent;
+        text-decoration: none;
+      }
+
+      &.ativo {
+        font-weight: v.$peso-bold;
+      }
+    }
+  }
+
+  .menu-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 28px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1050;
+
+    .hamburger-linha {
+      width: 100%;
+      height: 2px;
+      background-color: v.$cor-texto-principal;
+      border-radius: 1px;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  @media (max-width: (v.$bp-desktop - 1px)) {
+    .menu-lista-principal {
+      display: none;
+      &.aberto {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: v.$cor-fundo-secao-clara;
+        box-shadow: v.$box-shadow-medio;
+        padding: v.$espacamento-base 0;
+        z-index: 999;
+        border-top: 1px solid v.$cor-bordas;
+
+        li {
+          margin: 0;
+          width: 100%;
+          text-align: left;
+        }
+
+        a {
+          display: block;
+          padding: (v.$espacamento-base * 0.75) (v.$espacamento-base * 2);
+          width: 100%;
+          border-radius: 0;
+          font-size: 1rem;
+          text-transform: none;
+          letter-spacing: normal;
+
+          &:hover, &:focus, &.ativo {
+            background-color: rgba(v.$cor-primaria, 0.05);
+            color: v.$cor-primaria;
+          }
+        }
+      }
+    }
+    .menu-hamburger {
+      display: flex;
+    }
+  }
+}
+
+.menu-hamburger.ativo .hamburger-linha:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menu-hamburger.ativo .hamburger-linha:nth-child(2) {
+  opacity: 0;
+}
+.menu-hamburger.ativo .hamburger-linha:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+// ------------------------------
+// SEÇÃO HERO (CARROSSEL - Estilo Vaticano)
+// ------------------------------
+.hero-vatican-inspired {
+  color: v.$cor-texto-claro;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  .hero-slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: v.$espacamento-base * 4 v.$espacamento-base * 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transition: v.$transition-carousel;
+
+    &[data-bg-color-var="--cor-fundo-hero-slide-1"] { background-color: var(--cor-fundo-hero-slide-1); }
+    &[data-bg-color-var="--cor-fundo-hero-slide-2"] { background-color: var(--cor-fundo-hero-slide-2); }
+    &[data-bg-color-var="--cor-fundo-hero-slide-3"] { background-color: var(--cor-fundo-hero-slide-3); }
+    &[data-bg-color-var="--cor-fundo-hero-slide-4"] { background-color: var(--cor-fundo-hero-slide-4); }
+
+    &.slide-ativo {
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-titulo {
+      font-family: v.$fonte-titulos;
+      font-weight: v.$peso-bold;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      line-height: 1.2;
+      margin-bottom: v.$espacamento-base * 1.5;
+      color: v.$cor-texto-claro;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.35);
+    }
+
+    .hero-subtitulo {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-family: v.$fonte-corpo;
+      font-weight: v.$peso-regular;
+      line-height: 1.7;
+      margin-bottom: v.$espacamento-base * 3;
+      opacity: 0.9;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+// ------------------------------
+// SEÇÕES GERAIS DO SITE (Estilo Vaticano)
+// ------------------------------
+.secao-site {
+  padding: v.$espacamento-base * 5 0;
+}
+
+.secao-alternada {
+  background-color: v.$cor-fundo-secao-media;
+  border-top: 1px solid v.$cor-bordas;
+  border-bottom: 1px solid v.$cor-bordas;
+}
+
+.secao-vatican-inspired {
+  .titulo-secao {
+    font-family: v.$fonte-titulos;
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+    text-align: center;
+    margin-bottom: v.$espacamento-base * 3;
+    color: v.$cor-texto-principal;
+    font-weight: v.$peso-semibold;
+    position: relative;
+    padding-bottom: v.$espacamento-base * 0.75;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background-color: v.$cor-ouro-vaticano-sutil;
+      border-radius: 0;
+    }
+  }
+}
+
+// ------------------------------
+// SEÇÃO: SOBRE A ARQUIDIOCESE (RESUMO)
+// ------------------------------
+#sobre-arquidiocese-resumo {
+  .sobre-resumo-conteudo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: v.$espacamento-base * 4;
+  }
+
+  .sobre-resumo-texto {
+    flex: 1;
+    min-width: min(100%, 320px);
+
+    h3 {
+      font-size: 1.6rem;
+      color: v.$cor-secundaria;
+      margin-bottom: v.$espacamento-base * 0.75;
+      font-weight: v.$peso-semibold;
+      font-family: v.$fonte-titulos;
+    }
+
+    p {
+      font-size: 1rem;
+      color: v.$cor-texto-secundario;
+      margin-bottom: v.$espacamento-base * 1.5;
+      &:last-of-type {
+        margin-bottom: v.$espacamento-base * 2;
+      }
+    }
+
+    .botao {
+      margin-top: v.$espacamento-base * 0.5;
+    }
+  }
+
+  .sobre-resumo-imagem-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: min(100%, 300px);
+  }
+
+  .sobre-resumo-imagem-placeholder {
+    width: 100%;
+    max-width: 350px;
+    height: 320px;
+    background-color: color.adjust(v.$cor-fundo-secao-media, $lightness: -5%); // <<<<<< LINHA 365 CORRIGIDA
+    border: 1px solid v.$cor-bordas;
+    border-radius: v.$border-radius-padrao * 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    color: v.$cor-texto-secundario;
+    opacity: 0.5;
+  }
+
+  @media (max-width: v.$bp-tablet) {
+    .sobre-resumo-conteudo {
+      flex-direction: column;
+      text-align: center;
+    }
+    .sobre-resumo-imagem-container {
+      margin-top: v.$espacamento-base * 2.5;
+      order: -1;
+    }
+    .sobre-resumo-texto {
+      h3 { text-align: center; }
+      .botao { display: block; margin-left: auto; margin-right: auto; max-width: 280px; }
+    }
+  }
+}
+
+// ------------------------------
+// SEÇÃO: PALAVRA DO ARCEBISPO
+// ------------------------------
+#palavra-arcebispo {
+  background-color: v.$cor-fundo-secao-clara;
+
+  .mensagem-arcebispo-conteudo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: v.$espacamento-base * 3;
+  }
+
+  .mensagem-arcebispo-foto-container {
+    flex-basis: 280px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: v.$espacamento-base * 2;
+
+    @media (max-width: v.$bp-tablet) {
+      margin-right: 0;
+      margin-bottom: v.$espacamento-base * 2;
+      width: 100%;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .mensagem-arcebispo-foto-placeholder {
+    width: 100%;
+    padding-top: 120%;
+    background-color: v.$cor-fundo-secao-media;
+    border: 1px solid v.$cor-bordas;
+    border-radius: v.$border-radius-padrao;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    color: v.$cor-texto-secundario;
+    opacity: 0.6;
+    position: relative;
+    overflow: hidden;
+
+    .placeholder-icone {
+      position: absolute;
+    }
+  }
+
+  .mensagem-arcebispo-texto {
+    flex: 1;
+    min-width: min(100%, 320px);
+  }
+
+  .mensagem-citacao {
+    border-left: 4px solid v.$cor-primaria;
+    padding-left: v.$espacamento-base * 1.5;
+    margin-bottom: v.$espacamento-base * 1.5;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: v.$cor-texto-secundario;
+
+    p {
+      margin-bottom: v.$espacamento-base * 0.75;
+      max-width: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .mensagem-assinatura {
+    display: block;
+    margin-top: v.$espacamento-base * 1.5;
+    font-style: normal;
+    text-align: right;
+
+    .nome-arcebispo {
+      display: block;
+      font-family: v.$fonte-titulos;
+      font-weight: v.$peso-bold;
+      font-size: 1.1rem;
+      color: v.$cor-texto-principal;
+    }
+
+    .titulo-arcebispo,
+    .titulo-localidade-arcebispo {
+      display: block;
+      font-size: 0.85rem;
+      color: v.$cor-texto-secundario;
+      line-height: 1.4;
+    }
+    .titulo-localidade-arcebispo {
+        font-weight: v.$peso-semibold;
+    }
+  }
+
+  .botao {
+    margin-top: v.$espacamento-base * 2;
+    float: right;
+  }
+
+  @media (max-width: v.$bp-tablet) {
+    .mensagem-arcebispo-conteudo {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .mensagem-citacao {
+      padding-left: v.$espacamento-base;
+      border-left-width: 3px;
+      text-align: left;
+    }
+    .mensagem-assinatura {
+      text-align: center;
+      margin-top: v.$espacamento-base * 2;
+    }
+    .botao {
+      float: none;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 300px;
+    }
+  }
+}
+
+
+// ------------------------------
+// CARDS DE NOTÍCIAS (Estilo Vaticano)
+// ------------------------------
+.grid-vatican-inspired {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: v.$espacamento-base * 2;
+}
+
+.card-vatican-inspired {
+  background-color: v.$cor-fundo-secao-clara;
+  border: 1px solid v.$cor-bordas;
+  border-radius: v.$border-radius-padrao;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: border-color v.$transition-padrao, transform v.$transition-padrao, box-shadow v.$transition-padrao;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: color.adjust(v.$cor-bordas, $lightness: -15%);
+    box-shadow: v.$box-shadow-cards;
+  }
+
+  .card-link-area {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-noticia-imagem-placeholder {
+    height: 200px;
+    background-color: v.$cor-fundo-secao-media;
+    border-top-left-radius: v.$border-radius-padrao;
+    border-top-right-radius: v.$border-radius-padrao;
+  }
+
+  .card-conteudo {
+    padding: v.$espacamento-base * 1.25;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-categoria {
+    display: inline-block;
+    font-family: v.$fonte-corpo;
+    font-size: 0.75rem;
+    font-weight: v.$peso-bold;
+    color: v.$cor-texto-secundario;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: v.$espacamento-base * 0.5;
+  }
+
+  .card-titulo {
+    font-family: v.$fonte-titulos;
+    font-size: 1.15rem;
+    color: v.$cor-texto-principal;
+    margin: 0 0 v.$espacamento-base * 0.5 0;
+    line-height: 1.35;
+    font-weight: v.$peso-semibold;
+  }
+
+  .card-resumo {
+    font-size: 0.9rem;
+    color: v.$cor-texto-secundario;
+    line-height: 1.6;
+    margin-bottom: v.$espacamento-base;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    padding: 0 v.$espacamento-base * 1.25 v.$espacamento-base * 1.25;
+    margin-top: auto;
+  }
+
+  .card-link-leia-mais {
+    font-family: v.$fonte-corpo;
+    font-size: 0.85rem;
+    font-weight: v.$peso-bold;
+    color: v.$cor-secundaria;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+
+    .seta {
+      margin-left: v.$espacamento-base * 0.3;
+      transition: transform v.$transition-padrao;
+      display: inline-block;
+    }
+
+    &:hover, &:focus {
+      color: v.$cor-primaria;
+      text-decoration: none;
+      .seta {
+        transform: translateX(5px);
+      }
+    }
+  }
+}
+
+// ------------------------------
+// BOTÕES (Estilo Vaticano)
+// ------------------------------
+.botao {
+  display: inline-block;
+  font-family: v.$fonte-titulos;
+  font-weight: v.$peso-semibold;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: (v.$espacamento-base * 0.8) (v.$espacamento-base * 2);
+  font-size: 0.9rem;
+  border-radius: v.$border-radius-padrao;
+  transition: all v.$transition-padrao;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  line-height: 1.5;
+
+  &:hover, &:focus {
+    transform: none;
+    text-decoration: none;
+    outline: none;
+  }
+  &:active {
+    transform: none;
+  }
+}
+
+.botao-primario-vatican {
+  background-color: v.$cor-primaria;
+  color: v.$cor-texto-claro;
+  border-color: v.$cor-primaria;
+
+  &:hover, &:focus {
+    background-color: color.adjust(v.$cor-primaria, $lightness: -7%);
+    border-color: color.adjust(v.$cor-primaria, $lightness: -7%);
+    color: v.$cor-texto-claro;
+  }
+}
+
+.botao-outline-branco-vatican {
+  background-color: transparent;
+  color: v.$cor-texto-claro;
+  border-color: rgba(v.$cor-texto-claro, 0.7);
+
+  &:hover, &:focus {
+    background-color: rgba(v.$cor-texto-claro, 0.15);
+    color: v.$cor-texto-claro;
+    border-color: v.$cor-texto-claro;
+  }
+}
+
+.botao-secundario-vatican { // Estava .botao-secundario
+  background-color: transparent;
+  color: v.$cor-secundaria;
+  border-color: v.$cor-secundaria;
+
+  &:hover, &:focus {
+    background-color: v.$cor-secundaria;
+    color: v.$cor-texto-claro;
+  }
+}
+.botao-pequeno {
+  font-size: 0.8rem;
+  padding: (v.$espacamento-base * 0.5) (v.$espacamento-base * 1.25);
+  letter-spacing: 0.5px;
+}
+
+
+// ------------------------------
+// FOOTER (Estilo Vaticano)
+// ------------------------------
+.footer-vatican-inspired {
+  background-color: v.$cor-fundo-secao-escura;
+  color: color.adjust(v.$cor-texto-secundario, $lightness: 30%);
+  padding: v.$espacamento-base * 3.5 0 v.$espacamento-base * 1.5;
+  font-size: 0.875rem;
+
+  .footer-conteudo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: v.$espacamento-base * 2;
+    margin-bottom: v.$espacamento-base * 2.5;
+    padding-bottom: v.$espacamento-base * 2.5;
+    border-bottom: 1px solid color.adjust(v.$cor-fundo-secao-escura, $lightness: 10%);
+  }
+
+  .footer-logo-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: v.$espacamento-base;
+
+    .footer-logo-imagem {
+      height: 40px;
+      margin-right: v.$espacamento-base * 0.75;
+    }
+    .footer-logo-texto {
+      font-family: v.$fonte-titulos;
+      color: v.$cor-texto-claro;
+      span {
+        display: block;
+        line-height: 1.2;
+        &:first-child {
+          font-size: 0.8rem;
+          font-weight: v.$peso-regular;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.8;
+        }
+        &:last-child {
+          font-size: 1.1rem;
+          font-weight: v.$peso-semibold;
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    h4 {
+      font-family: v.$fonte-titulos;
+      font-size: 1rem;
+      font-weight: v.$peso-semibold;
+      color: v.$cor-texto-claro;
+      margin-bottom: v.$espacamento-base;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+      li {
+        margin-bottom: v.$espacamento-base * 0.5;
+      }
+      a {
+        color: color.adjust(v.$cor-texto-secundario, $lightness: 35%);
+        text-decoration: none;
+        &:hover, &:focus {
+          color: v.$cor-texto-claro;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .footer-info {
+    max-width: 350px;
+    p {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+      opacity: 0.8;
+    }
+  }
+
+  .footer-copyright {
+    text-align: center;
+    padding-top: v.$espacamento-base * 1.5;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: (v.$bp-tablet - 1px)) {
+    .footer-conteudo {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-logo-area, .footer-links, .footer-info {
+      width: 100%;
+      margin-bottom: v.$espacamento-base * 2;
+    }
+    .footer-links ul {
+      padding-left: 0;
+    }
+  }
+}

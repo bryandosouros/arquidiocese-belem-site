@@ -1,0 +1,76 @@
+// src/scss/_variables.scss
+
+@use 'sass:color'; // Importa o módulo de cor do Sass
+
+// ------------------------------
+// CORES
+// ------------------------------
+$cor-primaria: #C0002A;
+$cor-secundaria: #004A7F;
+
+$cor-fundo-hero-slide-1: $cor-secundaria;
+$cor-fundo-hero-slide-2: $cor-primaria;
+$cor-fundo-hero-slide-3: color.adjust($cor-secundaria, $lightness: -8%);
+$cor-fundo-hero-slide-4: color.adjust($cor-primaria, $lightness: -8%);
+
+$cor-texto-principal: #212529;
+$cor-texto-secundario: #6c757d;
+$cor-texto-links: $cor-secundaria;
+$cor-texto-claro: #ffffff;
+
+$cor-fundo-pagina: #f9f9f9;
+$cor-fundo-secao-clara: #ffffff;
+$cor-fundo-secao-media: #e9ecef; // <<<<<< GARANTINDO QUE ESTÁ DEFINIDA CORRETAMENTE
+$cor-fundo-secao-escura: #202a36;
+
+$cor-bordas: #d8dde3;
+$cor-ouro-vaticano-sutil: #bda070;
+
+$cor-botao-branco-texto: $cor-secundaria;
+$cor-botao-branco-borda: $cor-texto-claro;
+$cor-botao-branco-hover-bg: $cor-texto-claro;
+$cor-botao-branco-hover-texto: $cor-secundaria;
+
+// ------------------------------
+// TIPOGRAFIA
+// ------------------------------
+$fonte-titulos: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$fonte-corpo: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$tamanho-base-fonte: 16px;
+$altura-linha-base: 1.75;
+$altura-linha-titulos: 1.3;
+
+$peso-leve: 300;
+$peso-regular: 400;
+$peso-medium: 500;
+$peso-semibold: 600;
+$peso-bold: 700;
+
+// ------------------------------
+// BREAKPOINTS
+// ------------------------------
+$bp-mobile: 576px;
+$bp-tablet: 768px;
+$bp-desktop: 992px;
+$bp-desktop-grande: 1200px;
+
+// ------------------------------
+// OUTRAS VARIÁVEIS
+// ------------------------------
+$espacamento-base: 1rem;
+$container-max-width: 1200px;
+$border-radius-padrao: 4px;
+$transition-padrao: all 0.25s ease-out;
+$transition-carousel: opacity 0.7s ease-in-out, visibility 0.7s ease-in-out;
+$box-shadow-sutil: 0 1px 3px rgba(0,0,0,0.04);
+$box-shadow-cards: 0 2px 8px rgba(0,0,0,0.07);
+$box-shadow-medio: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+// CSS Custom Properties para as cores de fundo dos slides do Hero
+:root {
+  --cor-fundo-hero-slide-1: #{$cor-fundo-hero-slide-1};
+  --cor-fundo-hero-slide-2: #{$cor-fundo-hero-slide-2};
+  --cor-fundo-hero-slide-3: #{$cor-fundo-hero-slide-3};
+  --cor-fundo-hero-slide-4: #{$cor-fundo-hero-slide-4};
+}

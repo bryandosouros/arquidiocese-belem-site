@@ -1,0 +1,23 @@
+{
+  "name": "lp-arquidiocese-belem",
+  "version": "1.0.0",
+  "description": "Site da Arquidiocese de Belém do Pará - Habbo V2.0",
+  "main": "public/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss:build": "sass src/scss/style.scss public/css/style.css",
+    "scss:watch": "sass --watch src/scss/style.scss public/css/style.css",
+    "dev": "npm run scss:watch",
+    "build": "npm run scss:build",
+    "clean": "rm -rf public/css/style.css public/css/style.css.map",
+    "start": "npm run build && echo \"Build completed! Open public/index.html in your browser.\""
+  },
+  "author": "Seu Nome ou Nome da Equipe Aqui",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.77.4"
+  },
+  "dependencies": {
+    "firebase": "^11.8.1"
+  }
+}

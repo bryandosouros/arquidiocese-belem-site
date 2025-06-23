@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquidiocese de Belém do Pará - Habbo</title>
+
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos temporários para os controles do carrossel */
+        .hero-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .hero-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-indicator.ativo {
+            background: white;
+            border-color: white;
+        }
+        
+        .hero-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .hero-nav:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-nav-prev {
+            left: 20px;
+        }
+        
+        .hero-nav-next {
+            right: 20px;
+        }
+        
+        .hero-slides-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header id="cabecalho-principal" class="site-header">
+        <div class="container container-header">
+            <div class="logo-area">
+                <a href="index.html" title="Página Inicial da Arquidiocese de Belém do Pará">
+                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese de Belém do Pará" class="logo-imagem">
+                    <div class="logo-texto">
+                        <span class="texto-arquidiocese">Arquidiocese de</span>
+                        <span class="texto-localidade">Belém do Pará</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="navegacao-principal" aria-label="Navegação Principal">
+                <button class="menu-hamburger" aria-expanded="false" aria-controls="menu-lista-principal">
+                    <span class="hamburger-linha"></span>
+                    <span class="hamburger-linha"></span>
+                    <span class="hamburger-linha"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <ul class="menu-lista-principal" id="menu-lista-principal">
+                    <li><a href="index.html" class="ativo">Início</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#clero">Clero</a></li>
+                    <li><a href="#documentos">Documentos</a></li>
+                    <li><a href="#admin">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="conteudo-principal">
+        <section id="hero" class="hero-section hero-vatican-inspired">
+            <div class="hero-slides-container">
+                <div class="hero-slide slide-ativo" data-bg-color-var="--cor-fundo-hero-slide-1">
+                    <div class="container">
+                        <h1 class="hero-titulo">Portal da Arquidiocese de Belém do Pará</h1>
+                        <p class="hero-subtitulo">Fé, comunidade e informação para todos os fiéis.</p>
+                        <a href="#noticias-recentes" class="botao botao-primario-vatican">Ver Últimas Notícias</a>
+                    </div>
+                </div>
+                <div class="hero-slide" data-bg-color-var="--cor-fundo-hero-slide-2">
+                    <div class="container">
+                        <h1 class="hero-titulo">Comunicados e Decretos Oficiais</h1>
+                        <p class="hero-subtitulo">Mantenha-se atualizado com as diretrizes da nossa Arquidiocese.</p>
+                        <a href="#documentos" class="botao botao-outline-branco-vatican">Acessar Documentos</a>
+                    </div>
+                </div>
+                <div class="hero-slide" data-bg-color-var="--cor-fundo-hero-slide-3">
+                     <div class="container">
+                        <h1 class="hero-titulo">Formação e Espiritualidade</h1>
+                        <p class="hero-subtitulo">Recursos para o seu crescimento na fé e na vida comunitária.</p>
+                        <a href="#formacao" class="botao botao-primario-vatican">Descobrir Mais</a>
+                    </div>
+                </div>
+                <div class="hero-slide" data-bg-color-var="--cor-fundo-hero-slide-4">
+                     <div class="container">
+                        <h1 class="hero-titulo">Nossa História, Nossa Missão</h1>
+                        <p class="hero-subtitulo">Conheça mais sobre a caminhada da Arquidiocese de Belém do Pará.</p>
+                        <a href="#sobre-arquidiocese-resumo" class="botao botao-outline-branco-vatican">Nossa Trajetória</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-indicators">
+                <div class="hero-indicator ativo" data-slide="0"></div>
+                <div class="hero-indicator" data-slide="1"></div>
+                <div class="hero-indicator" data-slide="2"></div>
+                <div class="hero-indicator" data-slide="3"></div>
+            </div>
+            <button class="hero-nav hero-nav-prev" aria-label="Slide Anterior">
+                &#10094;
+            </button>
+            <button class="hero-nav hero-nav-next" aria-label="Próximo Slide">
+                &#10095;
+            </button>
+        </section>
+
+        <section id="noticias-recentes" class="secao-site secao-vatican-inspired">
+            <div class="container">
+                <h2 class="titulo-secao">Notícias Recentes</h2>
+                <div class="grid-noticias grid-vatican-inspired">
+                    <article class="card-noticia card-vatican-inspired">
+                        <a href="#" class="card-link-area">
+                            <div class="card-noticia-imagem-placeholder">
+                            </div>
+                            <div class="card-conteudo">
+                                <span class="card-categoria">Decretos</span>
+                                <h3 class="card-titulo">Título da Notícia Impactante 1</h3>
+                                <p class="card-resumo">Um breve resumo sobre o acontecimento ou decreto importante que chama a atenção do leitor para continuar lendo mais...</p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <a href="#" class="card-link-leia-mais">Leia mais <span class="seta">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card-noticia card-vatican-inspired">
+                        <a href="#" class="card-link-area">
+                            <div class="card-noticia-imagem-placeholder"></div>
+                            <div class="card-conteudo">
+                                <span class="card-categoria">Comunicados</span>
+                                <h3 class="card-titulo">Comunicado Especial do Arcebispo</h3>
+                                <p class="card-resumo">Detalhes sobre o novo comunicado que afeta toda a comunidade e traz novas diretrizes para todos os fiéis virtuais.</p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <a href="#" class="card-link-leia-mais">Leia mais <span class="seta">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card-noticia card-vatican-inspired">
+                        <a href="#" class="card-link-area">
+                            <div class="card-noticia-imagem-placeholder"></div>
+                            <div class="card-conteudo">
+                                <span class="card-categoria">Nomeações</span>
+                                <h3 class="card-titulo">Novas Nomeações na Cúria</h3>
+                                <p class="card-resumo">Confira as últimas nomeações e mudanças administrativas que visam fortalecer ainda mais a nossa arquidiocese.</p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <a href="#" class="card-link-leia-mais">Leia mais <span class="seta">&rarr;</span></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-arquidiocese-resumo" class="secao-site secao-vatican-inspired secao-alternada">
+            <div class="container">
+                <h2 class="titulo-secao">Conheça Nossa Arquidiocese</h2>
+                <div class="sobre-resumo-conteudo">
+                    <div class="sobre-resumo-texto">
+                        <h3>Nossa Missão e Visão</h3>
+                        <p>A Arquidiocese de Belém do Pará, no contexto do Habbo Hotel, dedica-se a promover os valores da fé, da comunidade e do respeito mútuo entre todos os seus membros virtuais. Buscamos ser um farol de esperança e união, oferecendo um espaço de acolhimento e partilha.</p>
+                        <p>Inspirados pelos princípios cristãos, nossa missão é evangelizar e servir, utilizando as ferramentas e o ambiente digital para construir pontes e fortalecer laços de fraternidade. Convidamos a todos para conhecerem mais sobre nossa história e participarem de nossas atividades.</p>
+                        <a href="#sobre-completo" class="botao botao-secundario-vatican">Saiba Mais sobre Nós</a>
+                    </div>
+                    <div class="sobre-resumo-imagem-container">
+                        <div class="sobre-resumo-imagem-placeholder">
+                            <span class="placeholder-icone">🕊️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="palavra-arcebispo" class="secao-site secao-vatican-inspired">
+            <div class="container">
+                <h2 class="titulo-secao">Mensagem do Arcebispo</h2>
+                <div class="mensagem-arcebispo-conteudo">
+                    <div class="mensagem-arcebispo-foto-container">
+                        <div class="mensagem-arcebispo-foto-placeholder">
+                            <span class="placeholder-icone">👤</span>
+                            </div>
+                    </div>
+                    <div class="mensagem-arcebispo-texto">
+                        <blockquote class="mensagem-citacao">
+                            <p>"Queridos filhos e filhas da nossa amada Arquidiocese virtual, que a paz do Senhor esteja convosco! Neste tempo de grandes desafios e também de inúmeras oportunidades no mundo digital, convido cada um a ser um farol de fé, esperança e caridade. Que nossos pixels reflitam a luz de Cristo!"</p>
+                        </blockquote>
+                        <cite class="mensagem-assinatura">
+                            <span class="nome-arcebispo">TOMÁS ARAÚJO VON KLAPPERSCHLANGE</span>
+                            <span class="titulo-arcebispo">Pela graça de Deus e mercê da Santa Sé Apostólica</span>
+                            <span class="titulo-arcebispo">Arcebispo Metropolitano de Santa Maria de</span>
+                            <span class="titulo-localidade-arcebispo">BELÉM DO PARÁ</span>
+                        </cite>
+                        <a href="#mensagem-completa" class="botao botao-secundario-vatican botao-pequeno">Leia a Mensagem Completa</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    <footer id="rodape-principal" class="site-footer footer-vatican-inspired">
+        <div class="container">
+            <div class="footer-conteudo">
+                <div class="footer-logo-area">
+                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="footer-logo-imagem">
+                    <div class="footer-logo-texto">
+                        <span>Arquidiocese de</span>
+                        <span>Belém do Pará</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-info">
+                     <p>Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                 <p>&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará (Habbo). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>
