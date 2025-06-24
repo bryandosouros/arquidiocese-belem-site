@@ -46,7 +46,7 @@ async function loadPost() {
 function renderPost(post) {
     // Update page meta
     document.getElementById('post-title-meta').textContent = `${post.title} - Arquidiocese de Belém do Pará`;
-    document.getElementById('post-description-meta').content = post.metaDescription || post.excerpt || 'Arquidiocese de Belém do Pará';
+    document.getElementById('post-description-meta').content = post.metaDescription || post.excerpt || extractExcerpt(post.content) || 'Arquidiocese de Belém do Pará';
 
     // Render post content
     const container = document.getElementById('post-container');
@@ -62,7 +62,7 @@ function renderPost(post) {
             
             <div class="post-meta">
                 <span class="post-category ${post.category}">${getCategoryLabel(post.category)}</span>
-                <time class="post-date">${formatDate(post.publishDate)}</time>
+                <time class="post-date">${formatDate(post.createdAt)}</time>
                 ${post.priority && post.priority !== 'normal' ? `<span class="post-priority ${post.priority}">${getPriorityLabel(post.priority)}</span>` : ''}
             </div>
             
@@ -91,7 +91,7 @@ function renderPost(post) {
         ` : ''}
         
         <div class="post-navigation">
-            <a href="index.html#noticias" class="btn-back">← Voltar às Notícias</a>
+            <a href="index.html#noticias-recentes" class="btn-back">← Voltar às Notícias</a>
         </div>
     `;
 }
@@ -142,6 +142,16 @@ function formatDate(date) {
         month: 'long',
         day: 'numeric'
     });
+}
+
+function extractExcerpt(content) {
+    if (!content) return 'Clique para ler o conteúdo completo...';
+    
+    // Remove HTML tags e pega os primeiros 200 caracteres
+    const textContent = content.replace(/<[^>]*>/g, '');
+    return textContent.length > 200 ? 
+        textContent.substring(0, 200) + '...' : 
+        textContent;
 }
 
 // Load post when page loads

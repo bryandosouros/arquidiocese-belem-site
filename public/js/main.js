@@ -160,9 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Tornar o container focável para navegação por teclado
             slidesContainer.setAttribute('tabindex', '0');
             slidesContainer.setAttribute('role', 'region');
-            slidesContainer.setAttribute('aria-label', 'Carrossel de destaques');
-
-            // Adicionar elementos ao DOM
+            slidesContainer.setAttribute('aria-label', 'Carrossel de destaques');            // Adicionar elementos ao DOM
             slidesContainer.appendChild(prevButton);
             slidesContainer.appendChild(nextButton);
             slidesContainer.appendChild(indicatorsContainer);
@@ -175,26 +173,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load dynamic news from Firestore
     async function loadNews() {
+        console.log('🔄 Iniciando carregamento de notícias do Firestore...');
         try {
+            // Buscar posts ordenados por data de criação (compatível com admin.js atual)
             const q = query(
                 collection(db, 'posts'),
-                where('status', '==', 'published'),
-                orderBy('publishDate', 'desc'),
+                orderBy('createdAt', 'desc'),
                 limit(6)
             );
             
+            console.log('📡 Executando query no Firestore...');
             const querySnapshot = await getDocs(q);
             const posts = [];
             
             querySnapshot.forEach((doc) => {
-                posts.push({ id: doc.id, ...doc.data() });
+                const data = doc.data();
+                console.log('📄 Post encontrado:', { id: doc.id, title: data.title, status: data.status });
+                // Incluir posts publicados ou que não tenham status definido (para compatibilidade)
+                if (!data.status || data.status === 'published') {
+                    posts.push({ id: doc.id, ...data });
+                }
             });
+            
+            console.log(`✅ Total de posts válidos encontrados: ${posts.length}`);
             
             if (posts.length > 0) {
                 renderNews(posts);
-            }
-        } catch (error) {
-            console.error('Error loading news:', error);
+            } else {
+                console.log('⚠️ Nenhum post encontrado. Mantendo cards estáticos.');
+            }        } catch (error) {
+            console.error('❌ Error loading news:', error);
+            console.log('🔄 Mantendo cards estáticos como fallback.');
             // Keep static news as fallback
         }
     }
@@ -214,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="card-categoria">${getCategoryLabel(post.category)}</span>
                         <h3 class="card-titulo">${post.title}</h3>
                         <p class="card-resumo">${post.excerpt || extractExcerpt(post.content)}</p>
+                        <div class="card-data">${formatPostDate(post.createdAt)}</div>
                     </div>
                 </a>
                 <div class="card-footer">
@@ -221,12 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </article>
         `).join('');
+        
+        console.log(`✅ ${posts.length} posts carregados dinamicamente na homepage!`);
     }
 
     function getCategoryLabel(category) {
         const labels = {
             'decretos': 'Decretos',
-            'comunicados': 'Comunicados',
+            'comunicados': 'Comunicados', 
             'noticias': 'Notícias',
             'homilias': 'Homilias'
         };
@@ -236,10 +248,30 @@ document.addEventListener('DOMContentLoaded', function() {
     function extractExcerpt(content) {
         if (!content) return 'Clique para ler o conteúdo completo...';
         
+        // Remove HTML tags e pega os primeiros 150 caracteres
         const textContent = content.replace(/<[^>]*>/g, '');
         return textContent.length > 150 ? 
             textContent.substring(0, 150) + '...' : 
             textContent;
+    }
+
+    function formatPostDate(timestamp) {
+        if (!timestamp) return 'Data não disponível';
+        
+        let date;
+        if (timestamp.seconds) {
+            // Firestore timestamp
+            date = new Date(timestamp.seconds * 1000);
+        } else {
+            // JavaScript Date
+            date = new Date(timestamp);
+        }
+        
+        return date.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
     }
 
     // Initialize news loading
