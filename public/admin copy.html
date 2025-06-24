@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cúria Digital - Painel Administrativo</title>
+    
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body class="admin-body">
+    <!-- Header da Cúria -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo-area">
+                <img src="images/logo-arquidiocese-belem.png" alt="Logo" class="admin-logo">
+                <div class="admin-title-area">
+                    <h1 class="admin-main-title">Cúria Digital</h1>
+                    <p class="admin-subtitle">Painel Administrativo da Arquidiocese</p>
+                </div>
+            </div>
+            
+            <div class="admin-user-area">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <span class="avatar-icon">👤</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-name">Carregando...</span>
+                        <span class="user-title">Administrador</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logout-btn">
+                    <span>🚪</span>
+                    Sair
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="admin-layout">
+        <!-- Sidebar de Navegação -->
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Painel Geral</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#posts" class="nav-link" data-section="posts">
+                            <span class="nav-icon">📝</span>
+                            <span class="nav-text">Decretos & Notícias</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#media" class="nav-link" data-section="media">
+                            <span class="nav-icon">🖼️</span>
+                            <span class="nav-text">Biblioteca de Mídia</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pages" class="nav-link" data-section="pages">
+                            <span class="nav-icon">📄</span>
+                            <span class="nav-text">Páginas Institucionais</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-divider"></div>
+                
+                <div class="nav-quick-actions">
+                    <h4 class="quick-title">Ações Rápidas</h4>
+                    <button class="quick-btn" id="new-post-btn">
+                        <span class="quick-icon">✍️</span>
+                        Novo Decreto
+                    </button>
+                    <a href="index.html" target="_blank" class="quick-btn quick-link">
+                        <span class="quick-icon">👁️</span>
+                        Ver Site
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Área Principal de Conteúdo -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="section-header">
+                    <h2 class="section-title">Painel Geral</h2>
+                    <p class="section-subtitle">Visão geral das atividades da Arquidiocese</p>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-posts">0</div>
+                            <div class="stat-label">Decretos Publicados</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="posts-this-month">0</div>
+                            <div class="stat-label">Publicações Este Mês</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">Fiéis Alcançados</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfação dos Fiéis</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-widget">
+                        <h3 class="widget-title">Últimas Publicações</h3>
+                        <div class="recent-posts" id="recent-posts">
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+                                <p>Carregando publicações recentes...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-widget">
+                        <h3 class="widget-title">Calendário Litúrgico</h3>
+                        <div class="liturgical-calendar">
+                            <div class="calendar-today">
+                                <div class="today-date" id="today-date"></div>
+                                <div class="liturgical-info">
+                                    <div class="liturgical-color green"></div>
+                                    <span class="liturgical-season">Tempo Comum</span>
+                                </div>
+                            </div>
+                            <div class="upcoming-feasts">
+                                <h4>Próximas Celebrações</h4>
+                                <ul>
+                                    <li>🎄 Natal do Senhor - 25 de Dezembro</li>
+                                    <li>👼 Santa Maria, Mãe de Deus - 1° de Janeiro</li>
+                                    <li>⭐ Epifania do Senhor - 6 de Janeiro</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Posts Section -->
+            <section id="posts-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Decretos & Notícias</h2>
+                    <div class="section-actions">
+                        <button class="btn-primary" id="create-post-btn">
+                            <span>✍️</span>
+                            Novo Decreto
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="posts-management">
+                    <div class="posts-filters">
+                        <select class="filter-select" id="category-filter">
+                            <option value="">Todas as Categorias</option>
+                            <option value="decretos">Decretos</option>
+                            <option value="comunicados">Comunicados</option>
+                            <option value="noticias">Notícias</option>
+                            <option value="homilias">Homilias</option>
+                        </select>
+                        <select class="filter-select" id="status-filter">
+                            <option value="">Todos os Status</option>
+                            <option value="published">Publicado</option>
+                            <option value="draft">Rascunho</option>
+                        </select>
+                        <select class="filter-select" id="date-filter">
+                            <option value="">Todas as Datas</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Última Semana</option>
+                            <option value="month">Último Mês</option>
+                        </select>
+                        <select class="filter-select" id="priority-filter">
+                            <option value="">Todas as Prioridades</option>
+                            <option value="high">Alta Prioridade</option>
+                            <option value="normal">Prioridade Normal</option>
+                            <option value="low">Baixa Prioridade</option>
+                        </select>
+                        <input type="search" class="search-input" placeholder="Buscar por título, conteúdo ou tags..." id="search-posts">
+                    </div>
+                    
+                    <div class="posts-list" id="posts-list">
+                        <div class="loading-state">
+                            <div class="loading-spinner"></div>
+                            <p>Carregando decretos e notícias...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Outras sections serão adicionadas posteriormente -->
+        </main>
+    </div>
+    
+    <!-- Modal para Edição de Posts -->
+    <div id="post-editor-modal" class="modal-overlay">
+        <div class="modal-content post-editor">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editor-title">Novo Decreto</h3>
+                <button class="modal-close" id="close-editor">&times;</button>
+            </div>
+            
+            <form class="post-form" id="post-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="post-title">Título do Decreto</label>
+                        <input type="text" id="post-title" name="title" class="form-input" placeholder="Ex: Decreto sobre a organização das paróquias..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-category">Categoria</label>
+                        <select id="post-category" name="category" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="decretos">Decretos</option>
+                            <option value="comunicados">Comunicados</option>
+                            <option value="noticias">Notícias</option>
+                            <option value="homilias">Homilias</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-excerpt">Resumo/Chamada</label>
+                    <textarea id="post-excerpt" name="excerpt" class="form-textarea" rows="3" placeholder="Breve resumo que aparecerá nos cards de notícia..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-content">Conteúdo</label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" data-command="bold">
+                            <strong>B</strong>
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="italic">
+                            <em>I</em>
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="underline">
+                            <u>U</u>
+                        </button>
+                        <span class="toolbar-divider"></span>
+                        <button type="button" class="toolbar-btn" data-command="insertUnorderedList">
+                            • Lista
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="insertOrderedList">
+                            1. Lista
+                        </button>
+                    </div>
+                    <div id="post-content" class="content-editor" contenteditable="true" data-placeholder="Digite o conteúdo do decreto aqui..."></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-tags-input">Tags</label>
+                    <input type="text" id="post-tags-input" class="form-input" placeholder="Digite uma tag e pressione Enter...">
+                    <div id="post-tags-container" class="tags-container"></div>
+                    <small class="form-help">Pressione Enter ou vírgula para adicionar uma tag</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="post-status">Status</label>
+                        <select id="post-status" name="status" class="form-select">
+                            <option value="draft">Rascunho</option>
+                            <option value="published">Publicar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-date">Data de Publicação</label>
+                        <input type="datetime-local" id="post-date" name="publishDate" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-priority">Prioridade</label>
+                    <select id="post-priority" name="priority" class="form-select">
+                        <option value="normal">Normal</option>
+                        <option value="high">Alta</option>
+                        <option value="low">Baixa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="featured-image-url">Imagem Destacada (URL)</label>
+                    <input type="url" id="featured-image-url" name="featuredImage" class="form-input" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="meta-description">Meta Descrição (SEO)</label>
+                    <textarea id="meta-description" name="metaDescription" class="form-textarea" rows="2" placeholder="Descrição para motores de busca (recomendado: 150-160 caracteres)" maxlength="160"></textarea>
+                    <small class="form-help character-count">0/160 caracteres</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-edit">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="save-post">
+                        <span class="btn-text">Salvar Decreto</span>
+                        <div class="btn-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script type="module" src="js/admin.js"></script>
+    <script src="js/darkmode.js" defer></script>
+</body>
+</html>

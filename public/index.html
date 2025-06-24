@@ -12,65 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Estilos temporários para os controles do carrossel */
-        .hero-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        
-        .hero-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .hero-indicator.ativo {
-            background: white;
-            border-color: white;
-        }
-        
-        .hero-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            border: none;
-            font-size: 24px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        
-        .hero-nav:hover {
-            background: rgba(0, 0, 0, 0.6);
-        }
-        
-        .hero-nav-prev {
-            left: 20px;
-        }
-        
-        .hero-nav-next {
-            right: 20px;
-        }
-        
-        .hero-slides-container {
-            position: relative;
-        }
-    </style>
 </head>
 <body>
     <header id="cabecalho-principal" class="site-header">
@@ -97,7 +38,7 @@
                     <li><a href="#sobre">Sobre Nós</a></li>
                     <li><a href="#clero">Clero</a></li>
                     <li><a href="#documentos">Documentos</a></li>
-                    <li><a href="#admin">Admin</a></li>
+                    <li><a href="login.html">Admin</a></li>
                 </ul>
             </nav>
         </div>
@@ -135,18 +76,6 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-indicators">
-                <div class="hero-indicator ativo" data-slide="0"></div>
-                <div class="hero-indicator" data-slide="1"></div>
-                <div class="hero-indicator" data-slide="2"></div>
-                <div class="hero-indicator" data-slide="3"></div>
-            </div>
-            <button class="hero-nav hero-nav-prev" aria-label="Slide Anterior">
-                &#10094;
-            </button>
-            <button class="hero-nav hero-nav-next" aria-label="Próximo Slide">
-                &#10095;
-            </button>
         </section>
 
         <section id="noticias-recentes" class="secao-site secao-vatican-inspired">
@@ -271,5 +200,6 @@
     </footer>
 
     <script src="js/main.js" defer></script>
+    <script src="js/darkmode.js" defer></script>
 </body>
 </html>

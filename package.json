@@ -16,8 +16,5 @@
   "license": "ISC",
   "devDependencies": {
     "sass": "^1.77.4"
-  },
-  "dependencies": {
-    "firebase": "^11.8.1"
   }
 }

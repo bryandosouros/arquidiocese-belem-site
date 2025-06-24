@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Administrativa - Arquidiocese de Belém do Pará</title>
+    
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-body {
+            background: linear-gradient(135deg, #004A7F 0%, #C0002A 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="dark"] .login-body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        [data-theme="dark"] .login-card {
+            background: #2d2d2d;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .login-header {
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+            border-bottom-color: #495057;
+        }
+
+        [data-theme="dark"] .login-titulo {
+            color: #f8f9fa;
+        }
+
+        [data-theme="dark"] .login-subtitulo {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .input-label {
+            color: #f8f9fa;
+        }
+
+        [data-theme="dark"] .input-field {
+            background: #404040;
+            border-color: #495057;
+            color: #f8f9fa;
+        }
+
+        [data-theme="dark"] .input-field:focus {
+            border-color: #004A7F;
+            background: #4a4a4a;
+        }
+
+        [data-theme="dark"] .error-message {
+            background: #2d1b1b;
+            color: #f8d7da;
+            border-color: #721c24;
+        }
+
+        .login-body {
+            background: linear-gradient(135deg, #004A7F 0%, #C0002A 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: auto;
+            margin: 0 auto 1.5rem;
+        }
+
+        .login-titulo {
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitulo {
+            color: #6c757d;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-decoracao {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #C0002A, #004A7F);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .login-form {
+            padding: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: "Open Sans", sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #004A7F;
+            box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+        }
+
+        .form-actions {
+            margin: 2rem 0 1rem;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #C0002A 0%, #004A7F 100%);
+            color: #ffffff;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-login:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-loading {
+            display: none;
+        }
+
+        .btn-login.loading .btn-texto {
+            display: none;
+        }
+
+        .btn-login.loading .btn-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .form-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .forgot-link {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .forgot-link:hover {
+            color: #004A7F;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid #f5c6cb;
+        }
+
+        .error-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .error-text strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .login-footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .blessing-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .vatican-seal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="login-logo">
+                <h1 class="login-titulo">Área Administrativa</h1>
+                <p class="login-subtitulo">Arquidiocese de Belém do Pará</p>
+                <div class="login-decoracao"></div>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">E-mail</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="input-field" 
+                        placeholder="seu.email@arquidiocese.org"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                
+                <div class="input-group">
+                    <label for="password" class="input-label">Senha</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="input-field" 
+                        placeholder="Digite sua senha"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-login" disabled>
+                        <span class="btn-texto">Entrar</span>
+                        <div class="btn-loading">
+                            <div class="loading-spinner"></div>
+                            <span>Verificando credenciais...</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    <a href="#" class="forgot-link">Esqueceu sua senha?</a>
+                </div>
+            </form>
+            
+            <div id="error-message" class="error-message" style="display: none;">
+                <div class="error-content">
+                    <span class="error-icone">⚠️</span>
+                    <div class="error-text">
+                        <strong>Erro de Autenticação</strong>
+                        <p>Credenciais inválidas. Verifique seus dados e tente novamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-footer">
+            <p class="blessing-text">
+                "A paz esteja convosco"
+            </p>
+            <div class="vatican-seal">
+                <div class="seal-inner">✠</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js';
+        
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
+            authDomain: "belem-hb.firebaseapp.com",
+            projectId: "belem-hb",
+            storageBucket: "belem-hb.firebasestorage.app",
+            messagingSenderId: "669142237239",
+            appId: "1:669142237239:web:9fa0de02efe4da6865ffb2",
+            measurementId: "G-92E26Y6HB1"
+        };
+        
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        // Elementos do DOM
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const submitButton = document.querySelector('.btn-login');
+        const errorMessage = document.getElementById('error-message');
+        
+        // Verificar se já está logado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = 'admin.html';
+            }
+        });
+        
+        // Habilitar botão quando campos estiverem preenchidos
+        function checkForm() {
+            const isValid = emailInput.value.trim() && passwordInput.value.trim();
+            submitButton.disabled = !isValid;
+        }
+        
+        emailInput.addEventListener('input', checkForm);
+        passwordInput.addEventListener('input', checkForm);
+        
+        // Submissão do formulário
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            // Mostrar loading
+            submitButton.classList.add('loading');
+            errorMessage.style.display = 'none';
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // Redirecionamento será feito pelo onAuthStateChanged
+            } catch (error) {
+                console.error('Erro no login:', error);
+                
+                // Mostrar erro
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remover loading
+                submitButton.classList.remove('loading');
+            }
+        });
+    </script>
+    
+    <script src="js/darkmode.js" defer></script>
+</body>
+</html>

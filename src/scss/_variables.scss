@@ -73,4 +73,32 @@ $box-shadow-medio: 0 5px 15px rgba(0, 0, 0, 0.1);
   --cor-fundo-hero-slide-2: #{$cor-fundo-hero-slide-2};
   --cor-fundo-hero-slide-3: #{$cor-fundo-hero-slide-3};
   --cor-fundo-hero-slide-4: #{$cor-fundo-hero-slide-4};
+  
+  // Variáveis para Light Mode (padrão)
+  --cor-fundo-pagina: #{$cor-fundo-pagina};
+  --cor-fundo-secao-clara: #{$cor-fundo-secao-clara};
+  --cor-fundo-secao-media: #{$cor-fundo-secao-media};
+  --cor-fundo-secao-escura: #{$cor-fundo-secao-escura};
+  --cor-texto-principal: #{$cor-texto-principal};
+  --cor-texto-secundario: #{$cor-texto-secundario};
+  --cor-texto-claro: #{$cor-texto-claro};
+  --cor-bordas: #{$cor-bordas};
+  --box-shadow-sutil: #{$box-shadow-sutil};
+  --box-shadow-cards: #{$box-shadow-cards};
+  --box-shadow-medio: #{$box-shadow-medio};
+  
+  // Variáveis para Dark Mode
+  &[data-theme="dark"] {
+    --cor-fundo-pagina: #1a1a1a;
+    --cor-fundo-secao-clara: #2d2d2d;
+    --cor-fundo-secao-media: #404040;
+    --cor-fundo-secao-escura: #151515;
+    --cor-texto-principal: #f8f9fa;
+    --cor-texto-secundario: #adb5bd;
+    --cor-texto-claro: #ffffff;
+    --cor-bordas: #495057;
+    --box-shadow-sutil: 0 1px 3px rgba(0,0,0,0.3);
+    --box-shadow-cards: 0 2px 8px rgba(0,0,0,0.4);
+    --box-shadow-medio: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
 }

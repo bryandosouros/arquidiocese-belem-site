@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cúria Digital - Painel Administrativo</title>
+    
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo-area">
+                <img src="images/logo-arquidiocese-belem.png" alt="Logo" class="admin-logo">
+                <div class="admin-title-area">
+                    <h1 class="admin-main-title">Cúria Digital</h1>
+                    <p class="admin-subtitle">Painel Administrativo da Arquidiocese</p>
+                </div>
+            </div>
+            
+            <div class="admin-user-area">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <span class="avatar-icon">👤</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-name">Carregando...</span>
+                        <span class="user-title" id="user-role-display">--</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logout-btn">
+                    <span>🚪</span>
+                    Sair
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Painel Geral</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#posts" class="nav-link" data-section="posts">
+                            <span class="nav-icon">📝</span>
+                            <span class="nav-text">Decretos & Notícias</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#media" class="nav-link" data-section="media">
+                            <span class="nav-icon">🖼️</span>
+                            <span class="nav-text">Biblioteca de Mídia</span>
+                        </a>
+                    </li>
+                    <li id="nav-users-placeholder" class="nav-item" style="display: none;">
+                        <a href="#users" class="nav-link" data-section="users">
+                            <span class="nav-icon">🔑</span>
+                            <span class="nav-text">Gestão de Usuários</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-divider"></div>
+                
+                <div class="nav-quick-actions">
+                    <h4 class="quick-title">Ações Rápidas</h4>
+                    <button class="quick-btn" id="new-post-btn">
+                        <span class="quick-icon">✍️</span>
+                        Novo Decreto
+                    </button>
+                     <a href="index.html" target="_blank" class="quick-btn quick-link">
+                         <span class="quick-icon">👁️</span>
+                         Ver Site
+                     </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <main class="admin-main">
+            <section id="dashboard-section" class="admin-section active">
+                <div class="section-header">
+                    <h2 class="section-title">Painel Geral</h2>
+                    <p class="section-subtitle">Visão geral das atividades da Arquidiocese</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-posts">0</div>
+                            <div class="stat-label">Decretos Publicados</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="posts-this-month">0</div>
+                            <div class="stat-label">Publicações Este Mês</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-widget">
+                        <h3 class="widget-title">Últimas Publicações</h3>
+                        <div class="recent-posts" id="recent-posts">
+                            <div class="loading-state"><div class="loading-spinner"></div><p>Carregando...</p></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3 class="widget-title">Calendário Litúrgico</h3>
+                        <div class="liturgical-calendar">
+                            <div class="calendar-today">
+                                <div class="today-date" id="today-date"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="posts-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Decretos & Notícias</h2>
+                </div>
+                <div class="posts-management">
+                    <div class="posts-filters">
+                        <input type="search" class="search-input" placeholder="Buscar por título..." id="search-posts">
+                    </div>
+                    <div class="posts-list" id="posts-list">
+                        <div class="loading-state"><div class="loading-spinner"></div><p>Carregando decretos e notícias...</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="media-section" class="admin-section">
+                <h2 class="section-title">Biblioteca de Mídia (Release 3A)</h2>
+            </section>
+
+            <section id="users-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Gestão de Usuários</h2>
+                    <p class="section-subtitle">Disponível apenas para Super Admins</p>
+                </div>
+                <div class="user-management-content card">
+                    <form id="set-role-form">
+                        <h3>Atribuir Permissão</h3>
+                        <div class="form-group">
+                            <label for="user-email">Email do Usuário</label>
+                            <input type="email" id="user-email" required class="form-input" placeholder="exemplo@provedor.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-role">Permissão</label>
+                            <select id="user-role" required class="form-select">
+                                <option value="autor">Autor</option>
+                                <option value="editor">Editor</option>
+                                <option value="siteAdmin">Site Admin</option>
+                                <option value="superAdmin">Super Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Atribuir Permissão</button>
+                        <div id="role-feedback" class="feedback-message"></div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="post-editor-modal" class="modal-overlay">
+        <div class="modal-content post-editor">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editor-title">Novo Decreto</h3>
+                <button class="modal-close" id="close-editor">&times;</button>
+            </div>
+            <form class="post-form" id="post-form">
+                <div class="form-group">
+                    <label for="post-title">Título do Decreto</label>
+                    <input type="text" id="post-title" name="title" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-content">Conteúdo</label>
+                    <textarea id="post-content" name="content"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-edit">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="save-post">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
