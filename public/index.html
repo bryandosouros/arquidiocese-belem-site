@@ -5,27 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquidiocese de Belém do Pará - Habbo</title>
 
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia. Notícias, eventos e orientações pastorais.">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Arquidiocese">
+    <meta name="msapplication-TileColor" content="#1a365d">
+    <meta name="msapplication-config" content="browserconfig.xml">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/icon-192x192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Multi-Site Template CSS will be loaded dynamically -->
 </head>
-<body>
-    <header id="cabecalho-principal" class="site-header">
+<body class="site-transition">
+    <header id="cabecalho-principal" class="site-header header-main">
         <div class="container container-header">
             <div class="logo-area">
                 <a href="index.html" title="Página Inicial da Arquidiocese de Belém do Pará">
-                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese de Belém do Pará" class="logo-imagem">
+                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese de Belém do Pará" class="logo-imagem site-logo">
                     <div class="logo-texto">
-                        <span class="texto-arquidiocese">Arquidiocese de</span>
-                        <span class="texto-localidade">Belém do Pará</span>
+                        <span class="texto-arquidiocese site-name">Arquidiocese de</span>
+                        <span class="texto-localidade site-tagline">Belém do Pará</span>
                     </div>
                 </a>
             </div>
-            <nav class="navegacao-principal" aria-label="Navegação Principal">
+            <nav class="navegacao-principal nav-menu" aria-label="Navegação Principal">
                 <button class="menu-hamburger" aria-expanded="false" aria-controls="menu-lista-principal">
                     <span class="hamburger-linha"></span>
                     <span class="hamburger-linha"></span>
@@ -33,14 +51,40 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <ul class="menu-lista-principal" id="menu-lista-principal">
-                    <li><a href="index.html" class="ativo">Início</a></li>
-                    <li><a href="#noticias">Notícias</a></li>
-                    <li><a href="#sobre">Sobre Nós</a></li>
-                    <li><a href="#clero">Clero</a></li>
-                    <li><a href="#documentos">Documentos</a></li>
-                    <li><a href="login.html">Admin</a></li>
+                    <li><a href="index.html" class="ativo nav-link">Início</a></li>
+                    <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="#clero" class="nav-link">Clero</a></li>
+                    <li><a href="#documentos" class="nav-link">Documentos</a></li>
+                    <li><a href="login.html" class="nav-link">Admin</a></li>
                 </ul>
             </nav>
+            
+            <!-- PWA Controls -->
+            <div class="pwa-controls">
+                <!-- Install Button -->
+                <button id="pwa-install-btn" class="pwa-install-button" style="display: none;" title="Instalar App">
+                    <i class="fas fa-download"></i>
+                    <span>Instalar</span>
+                </button>
+                
+                <!-- PWA Demo Link -->
+                <a href="pwa-demo.html" class="demo-btn" title="Testar PWA" style="display: flex; align-items: center; gap: 0.5rem; background: #2563eb; color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">
+                    <span>🧪</span>
+                    <span>PWA Demo</span>
+                </a>
+                
+                <!-- Connection Status -->
+                <div id="connection-status" class="connection-indicator" title="Status da Conexão">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                
+                <!-- Update Available -->
+                <div id="update-notification" class="update-notification" style="display: none;">
+                    <span>Atualização disponível</span>
+                    <button id="update-btn" class="update-btn">Atualizar</button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -74,6 +118,18 @@
                         <p class="hero-subtitulo">Conheça mais sobre a caminhada da Arquidiocese de Belém do Pará.</p>
                         <a href="#sobre-arquidiocese-resumo" class="botao botao-outline-branco-vatican">Nossa Trajetória</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome Section - Dynamic based on site template -->
+        <section id="welcome" class="welcome-section">
+            <div class="container">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">
+                        <span class="welcome-message">Bem-vindos à Casa do Pai</span>
+                    </h2>
+                    <p class="mission-statement">Evangelizar e servir o povo de Deus na Amazônia</p>
                 </div>
             </div>
         </section>
@@ -197,7 +253,120 @@
                  <p>&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará (Habbo). Todos os direitos reservados.</p>
             </div>
         </div>
-    </footer>    <script src="js/main.js" type="module" defer></script>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/multi-site-template.js" type="module" defer></script>
+    <script src="js/main.js" type="module" defer></script>
     <script src="js/darkmode.js" defer></script>
+    
+    <!-- PWA Scripts -->
+    <script src="js/pwa-manager.js" defer></script>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/multi-site-template.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    <script type="module" src="js/pwa-manager.js"></script>
+    
+    <!-- PWA Initialization -->
+    <script>
+        // Inicialização do PWA
+        window.addEventListener('load', () => {
+            console.log('🚀 Inicializando Progressive Web App...');
+            
+            // Import PWA modules
+            import('./js/pwa-manager.js').then(module => {
+                console.log('✅ PWA Manager loaded');
+            }).catch(error => {
+                console.error('❌ Error loading PWA Manager:', error);
+            });
+            
+            import('./js/notification-system.js').then(module => {
+                console.log('✅ Notification System loaded');
+            }).catch(error => {
+                console.error('❌ Error loading Notification System:', error);
+            });
+            
+            import('./js/offline-cache-manager.js').then(module => {
+                console.log('✅ Offline Cache Manager loaded');
+            }).catch(error => {
+                console.error('❌ Error loading Offline Cache Manager:', error);
+            });
+            
+            console.log('✅ PWA inicializado com sucesso!');
+        });
+        
+        // PWA Installation and Offline Detection
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('📱 PWA pode ser instalado!');
+            
+            // Show install banner after a delay
+            setTimeout(() => {
+                if (window.pwaManager) {
+                    window.pwaManager.showInstallPrompt();
+                }
+            }, 3000);
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('🎉 PWA instalado com sucesso!');
+            
+            // Track installation
+            if (window.gtag) {
+                window.gtag('event', 'pwa_installed');
+            }
+        });
+        
+        // Handle offline state
+        window.addEventListener('offline', () => {
+            console.log('📵 Gone offline');
+            showOfflineToast();
+        });
+        
+        window.addEventListener('online', () => {
+            console.log('🌐 Back online');
+            hideOfflineToast();
+        });
+        
+        function showOfflineToast() {
+            const toast = document.createElement('div');
+            toast.id = 'offline-toast';
+            toast.className = 'offline-toast';
+            toast.innerHTML = `
+                <span class="offline-icon">📵</span>
+                <span>Você está offline. Suas ações serão sincronizadas quando voltar a ter conexão.</span>
+                <button onclick="this.parentElement.remove()">×</button>
+            `;
+            document.body.appendChild(toast);
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                if (document.getElementById('offline-toast')) {
+                    document.getElementById('offline-toast').remove();
+                }
+            }, 5000);
+        }
+        
+        function hideOfflineToast() {
+            const toast = document.getElementById('offline-toast');
+            if (toast) {
+                toast.remove();
+            }
+            
+            // Show back online toast
+            const onlineToast = document.createElement('div');
+            onlineToast.className = 'online-toast';
+            onlineToast.innerHTML = `
+                <span class="online-icon">🌐</span>
+                <span>Conectado! Sincronizando dados...</span>
+            `;
+            document.body.appendChild(onlineToast);
+            
+            setTimeout(() => {
+                onlineToast.remove();
+            }, 3000);
+        }
+    </script>
 </body>
 </html>

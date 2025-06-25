@@ -1,0 +1,16 @@
+<!-- SVG Icon Template for PWA -->
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="192" height="192" fill="#1a365d" rx="20"/>
+    
+    <!-- Cross Symbol -->
+    <g fill="#ffffff">
+        <!-- Vertical bar -->
+        <rect x="86" y="48" width="20" height="96"/>
+        <!-- Horizontal bar -->
+        <rect x="64" y="86" width="64" height="20"/>
+    </g>
+    
+    <!-- Optional: Add text -->
+    <text x="96" y="170" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">ARQUIDIOCESE</text>
+</svg>

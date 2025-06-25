@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cúria Digital - Painel Administrativo</title>
     
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Cúria Digital">
+    <meta name="msapplication-TileColor" content="#1a365d">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,7 +343,22 @@
         </div>
     </div>
     
+    <!-- Scripts -->
+    <script src="js/multi-site-template.js" type="module" defer></script>
     <script type="module" src="js/admin.js"></script>
     <script src="js/darkmode.js" defer></script>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/pwa-manager.js"></script>
+    <script type="module" src="js/multi-site-template.js"></script>
+    
+    <!-- PWA Initialization -->
+    <script>
+        window.addEventListener('load', () => {
+            console.log('🚀 Inicializando PWA no painel administrativo...');
+            console.log('✅ PWA Admin inicializado!');
+        });
+    </script>
 </body>
 </html>

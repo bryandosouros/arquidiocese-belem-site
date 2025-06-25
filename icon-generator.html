@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator</title>
+    <style>
+        canvas { display: none; }
+    </style>
+</head>
+<body>
+    <canvas id="iconCanvas"></canvas>
+    
+    <script>
+        // Simple icon generator for PWA
+        const sizes = [72, 96, 128, 144, 152, 192, 256, 384, 512];
+        
+        function generateIcon(size) {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Background
+            ctx.fillStyle = '#1a365d';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Cross symbol (simple church icon)
+            ctx.fillStyle = '#ffffff';
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const crossWidth = size * 0.15;
+            const crossHeight = size * 0.6;
+            
+            // Vertical bar
+            ctx.fillRect(centerX - crossWidth/2, centerY - crossHeight/2, crossWidth, crossHeight);
+            
+            // Horizontal bar
+            ctx.fillRect(centerX - crossHeight/3, centerY - crossWidth/2, crossHeight * 2/3, crossWidth);
+            
+            // Download link
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate all sizes
+        sizes.forEach(size => {
+            setTimeout(() => generateIcon(size), size);
+        });
+        
+        console.log('🎨 PWA icons generated! Check your downloads folder.');
+    </script>
+</body>
+</html>

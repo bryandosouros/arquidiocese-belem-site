@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Arquidiocese de Belém</title>
+    
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a87 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .offline-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .offline-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .retry-btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+        
+        .retry-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+        }
+        
+        .offline-features {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .features-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .features-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            opacity: 0.8;
+        }
+        
+        .features-list li::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .cached-content {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .cached-posts {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .cached-post {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cached-post:hover {
+            opacity: 0.8;
+        }
+        
+        .cached-post:last-child {
+            border-bottom: none;
+        }
+        
+        .post-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .post-meta {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: #f44336;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+        
+        .connection-status.online {
+            background: #4CAF50;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .offline-title {
+                font-size: 1.5rem;
+            }
+            
+            .offline-message {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="connection-status" id="connection-status">
+        📵 Offline
+    </div>
+    
+    <div class="offline-container">
+        <div class="offline-icon">📵</div>
+        
+        <h1 class="offline-title">Você está offline</h1>
+        
+        <p class="offline-message">
+            Não foi possível conectar com o servidor. Mas não se preocupe! 
+            Você ainda pode acessar o conteúdo que foi salvo anteriormente.
+        </p>
+        
+        <div class="offline-actions">
+            <button class="retry-btn" onclick="checkConnection()">
+                <span id="retry-text">Tentar Novamente</span>
+            </button>
+        </div>
+        
+        <div class="offline-features">
+            <h3 class="features-title">Funcionalidades Offline Disponíveis:</h3>
+            <ul class="features-list">
+                <li>Ler posts salvos anteriormente</li>
+                <li>Navegar pelo conteúdo em cache</li>
+                <li>Visualizar informações da Arquidiocese</li>
+                <li>Suas ações serão sincronizadas quando voltar online</li>
+            </ul>
+        </div>
+        
+        <div class="cached-content">
+            <h3 class="features-title">Conteúdo Disponível Offline:</h3>
+            <div class="cached-posts" id="cached-posts">
+                <div class="loading"></div>
+                Carregando conteúdo salvo...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if we're actually offline
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connection-status');
+            const isOnline = navigator.onLine;
+            
+            if (isOnline) {
+                statusElement.textContent = '🌐 Online';
+                statusElement.className = 'connection-status online';
+                
+                // Redirect to home if we're back online
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
+            } else {
+                statusElement.textContent = '📵 Offline';
+                statusElement.className = 'connection-status';
+            }
+        }
+        
+        // Check connection and try to reload
+        async function checkConnection() {
+            const retryBtn = document.querySelector('.retry-btn');
+            const retryText = document.getElementById('retry-text');
+            
+            retryBtn.disabled = true;
+            retryText.innerHTML = '<span class="loading"></span>Verificando...';
+            
+            try {
+                // Try to fetch a small resource
+                const response = await fetch('/', { 
+                    method: 'HEAD',
+                    cache: 'no-cache'
+                });
+                
+                if (response.ok) {
+                    retryText.textContent = 'Conectado! Redirecionando...';
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                } else {
+                    throw new Error('No connection');
+                }
+            } catch (error) {
+                retryText.textContent = 'Ainda offline';
+                setTimeout(() => {
+                    retryText.textContent = 'Tentar Novamente';
+                    retryBtn.disabled = false;
+                }, 2000);
+            }
+        }
+        
+        // Load cached posts
+        async function loadCachedPosts() {
+            const cachedPostsContainer = document.getElementById('cached-posts');
+            
+            try {
+                // Try to get cached posts from IndexedDB
+                if ('indexedDB' in window) {
+                    const cachedPosts = await getCachedPostsFromDB();
+                    
+                    if (cachedPosts && cachedPosts.length > 0) {
+                        cachedPostsContainer.innerHTML = '';
+                        
+                        cachedPosts.slice(0, 5).forEach(post => {
+                            const postElement = document.createElement('div');
+                            postElement.className = 'cached-post';
+                            postElement.onclick = () => viewCachedPost(post.id);
+                            
+                            postElement.innerHTML = `
+                                <div class="post-title">${post.title}</div>
+                                <div class="post-meta">
+                                    ${post.category} • ${formatDate(post.createdAt)}
+                                </div>
+                            `;
+                            
+                            cachedPostsContainer.appendChild(postElement);
+                        });
+                    } else {
+                        cachedPostsContainer.innerHTML = `
+                            <div style="text-align: center; opacity: 0.7;">
+                                Nenhum conteúdo salvo para offline.<br>
+                                Conecte-se à internet para salvar posts.
+                            </div>
+                        `;
+                    }
+                } else {
+                    cachedPostsContainer.innerHTML = `
+                        <div style="text-align: center; opacity: 0.7;">
+                            Armazenamento offline não suportado neste navegador.
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading cached posts:', error);
+                cachedPostsContainer.innerHTML = `
+                    <div style="text-align: center; opacity: 0.7;">
+                        Erro ao carregar conteúdo offline.
+                    </div>
+                `;
+            }
+        }
+        
+        // Get cached posts from IndexedDB
+        function getCachedPostsFromDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('ArquidiocesesOfflineDB', 1);
+                
+                request.onsuccess = (event) => {
+                    const db = event.target.result;
+                    
+                    if (!db.objectStoreNames.contains('posts')) {
+                        resolve([]);
+                        return;
+                    }
+                    
+                    const transaction = db.transaction(['posts'], 'readonly');
+                    const store = transaction.objectStore('posts');
+                    const getAllRequest = store.getAll();
+                    
+                    getAllRequest.onsuccess = () => {
+                        const posts = getAllRequest.result;
+                        // Sort by creation date
+                        posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                        resolve(posts);
+                    };
+                    
+                    getAllRequest.onerror = () => {
+                        reject(getAllRequest.error);
+                    };
+                };
+                
+                request.onerror = () => {
+                    reject(request.error);
+                };
+            });
+        }
+        
+        // View cached post
+        function viewCachedPost(postId) {
+            // Try to navigate to post page
+            window.location.href = `/post.html?id=${postId}&offline=true`;
+        }
+        
+        // Format date
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('pt-BR');
+            } catch (error) {
+                return 'Data inválida';
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Initialize
+        updateConnectionStatus();
+        loadCachedPosts();
+        
+        // Auto-check connection every 30 seconds
+        setInterval(updateConnectionStatus, 30000);
+    </script>
+</body>
+</html>

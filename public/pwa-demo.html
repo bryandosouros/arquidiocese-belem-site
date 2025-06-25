@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Demo - Arquidiocese de Belém</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Demonstração das funcionalidades PWA da Arquidiocese">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Arquidiocese PWA">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    <link rel="apple-touch-icon" href="images/logo-arquidiocese-belem.png">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .pwa-demo {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .demo-section h3 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .demo-btn {
+            background: #1a365d;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .demo-btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+        
+        .demo-btn.secondary {
+            background: #6b7280;
+        }
+        
+        .demo-btn.secondary:hover {
+            background: #4b5563;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-online {
+            background: #10b981;
+        }
+        
+        .status-offline {
+            background: #ef4444;
+        }
+        
+        .demo-output {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            border-left: 4px solid #1a365d;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li::before {
+            content: '✅';
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="pwa-demo">
+        <h1>🚀 PWA Demo - Release 4B</h1>
+        <p><strong>Arquidiocese de Belém do Pará</strong> - Progressive Web App</p>
+        
+        <!-- Status Section -->
+        <div class="demo-section">
+            <h3>📊 Status do PWA</h3>
+            <p>
+                <span class="status-indicator" id="connection-status-dot"></span>
+                Conexão: <span id="connection-status-text">Verificando...</span>
+            </p>
+            <p>Service Worker: <span id="sw-status">Verificando...</span></p>
+            <p>PWA Instalado: <span id="pwa-installed-status">Verificando...</span></p>
+            <p>Notificações: <span id="notification-permission">Verificando...</span></p>
+        </div>
+        
+        <!-- Installation Section -->
+        <div class="demo-section">
+            <h3>📱 Instalação do App</h3>
+            <p>Teste as funcionalidades de instalação do PWA:</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="testInstallPrompt()">Mostrar Prompt de Instalação</button>
+                <button class="demo-btn secondary" onclick="checkInstallStatus()">Verificar Status</button>
+            </div>
+            <div class="demo-output" id="install-output">Aguardando teste...</div>
+        </div>
+        
+        <!-- Notifications Section -->
+        <div class="demo-section">
+            <h3>🔔 Sistema de Notificações</h3>
+            <p>Teste as notificações em tempo real:</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="requestNotificationPermission()">Solicitar Permissão</button>
+                <button class="demo-btn" onclick="testInAppNotification()">Notificação In-App</button>
+                <button class="demo-btn" onclick="testPushNotification()">Push Notification</button>
+                <button class="demo-btn secondary" onclick="testNotificationCenter()">Central de Notificações</button>
+            </div>
+            <div class="demo-output" id="notification-output">Aguardando teste...</div>
+        </div>
+        
+        <!-- Offline Section -->
+        <div class="demo-section">
+            <h3>📴 Funcionalidades Offline</h3>
+            <p>Teste o funcionamento offline e sincronização:</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="simulateOffline()">Simular Offline</button>
+                <button class="demo-btn" onclick="testOfflineCache()">Testar Cache</button>
+                <button class="demo-btn" onclick="testBackgroundSync()">Background Sync</button>
+                <button class="demo-btn secondary" onclick="clearOfflineData()">Limpar Cache</button>
+            </div>
+            <div class="demo-output" id="offline-output">Aguardando teste...</div>
+        </div>
+        
+        <!-- Update Section -->
+        <div class="demo-section">
+            <h3>🔄 Atualizações do App</h3>
+            <p>Teste o sistema de atualizações:</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="checkForUpdates()">Verificar Atualizações</button>
+                <button class="demo-btn" onclick="simulateUpdate()">Simular Atualização</button>
+                <button class="demo-btn secondary" onclick="showUpdateBanner()">Banner de Update</button>
+            </div>
+            <div class="demo-output" id="update-output">Aguardando teste...</div>
+        </div>
+        
+        <!-- Features Summary -->
+        <div class="demo-section">
+            <h3>✨ Recursos Implementados</h3>
+            <ul class="feature-list">
+                <li>Service Worker com cache inteligente</li>
+                <li>Manifest.json completo para instalação</li>
+                <li>Sistema de notificações em tempo real</li>
+                <li>Funcionalidade offline e sincronização</li>
+                <li>Prompt de instalação personalizado</li>
+                <li>Indicadores de conexão e status</li>
+                <li>Sistema de atualizações automáticas</li>
+                <li>Background sync para dados</li>
+                <li>Cache de conteúdo para leitura offline</li>
+                <li>Push notifications</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="index.html" class="demo-btn">⬅️ Voltar ao Site Principal</a>
+        </div>
+    </div>
+
+    <script type="module">
+        // PWA Demo Functions
+        window.addEventListener('load', async () => {
+            console.log('🧪 PWA Demo loaded');
+            
+            // Import PWA modules
+            try {
+                await import('./js/pwa-manager.js');
+                await import('./js/notification-system.js');
+                await import('./js/offline-cache-manager.js');
+                console.log('✅ PWA modules loaded for demo');
+            } catch (error) {
+                console.error('❌ Error loading PWA modules:', error);
+            }
+            
+            updateStatus();
+            setupEventListeners();
+        });
+        
+        function updateStatus() {
+            // Connection status
+            const isOnline = navigator.onLine;
+            const statusDot = document.getElementById('connection-status-dot');
+            const statusText = document.getElementById('connection-status-text');
+            
+            if (isOnline) {
+                statusDot.className = 'status-indicator status-online';
+                statusText.textContent = 'Online';
+            } else {
+                statusDot.className = 'status-indicator status-offline';
+                statusText.textContent = 'Offline';
+            }
+            
+            // Service Worker status
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    const swStatus = document.getElementById('sw-status');
+                    swStatus.textContent = registration ? 'Ativo' : 'Não registrado';
+                });
+            } else {
+                document.getElementById('sw-status').textContent = 'Não suportado';
+            }
+            
+            // PWA installed status
+            const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
+            document.getElementById('pwa-installed-status').textContent = isInstalled ? 'Sim' : 'Não';
+            
+            // Notification permission
+            if ('Notification' in window) {
+                document.getElementById('notification-permission').textContent = Notification.permission;
+            } else {
+                document.getElementById('notification-permission').textContent = 'Não suportado';
+            }
+        }
+        
+        function setupEventListeners() {
+            window.addEventListener('online', updateStatus);
+            window.addEventListener('offline', updateStatus);
+        }
+        
+        // Test functions
+        window.testInstallPrompt = function() {
+            const output = document.getElementById('install-output');
+            output.textContent = '📱 Testando prompt de instalação...';
+            
+            if (window.pwaManager && window.pwaManager.deferredPrompt) {
+                window.pwaManager.promptInstall();
+                output.textContent = '✅ Prompt de instalação exibido!';
+            } else {
+                output.textContent = '⚠️ Prompt não disponível. PWA pode já estar instalado ou navegador não suporta.';
+            }
+        };
+        
+        window.checkInstallStatus = function() {
+            const output = document.getElementById('install-output');
+            const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
+            const hasPrompt = window.pwaManager ? !!window.pwaManager.deferredPrompt : false;
+            
+            output.innerHTML = `
+                PWA Instalado: ${isInstalled ? 'Sim' : 'Não'}<br>
+                Prompt disponível: ${hasPrompt ? 'Sim' : 'Não'}<br>
+                Modo de exibição: ${window.matchMedia('(display-mode: standalone)').matches ? 'Standalone' : 'Browser'}
+            `;
+        };
+        
+        window.requestNotificationPermission = async function() {
+            const output = document.getElementById('notification-output');
+            output.textContent = '🔔 Solicitando permissão...';
+            
+            if ('Notification' in window) {
+                const permission = await Notification.requestPermission();
+                output.textContent = `✅ Permissão: ${permission}`;
+                updateStatus();
+            } else {
+                output.textContent = '❌ Notificações não suportadas neste navegador';
+            }
+        };
+        
+        window.testInAppNotification = function() {
+            const output = document.getElementById('notification-output');
+            
+            if (window.notificationSystem) {
+                window.notificationSystem.createNotification({
+                    type: 'info',
+                    title: 'Teste de Notificação',
+                    message: 'Esta é uma notificação de teste do sistema PWA!',
+                    icon: '🧪'
+                });
+                output.textContent = '✅ Notificação in-app criada!';
+            } else {
+                output.textContent = '❌ Sistema de notificações não carregado';
+            }
+        };
+        
+        window.testPushNotification = function() {
+            const output = document.getElementById('notification-output');
+            
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('PWA Demo', {
+                    body: 'Esta é uma push notification de teste!',
+                    icon: '/images/logo-arquidiocese-belem.png',
+                    badge: '/images/logo-arquidiocese-belem.png'
+                });
+                output.textContent = '✅ Push notification enviada!';
+            } else {
+                output.textContent = '❌ Permissão necessária para push notifications';
+            }
+        };
+        
+        window.testNotificationCenter = function() {
+            const output = document.getElementById('notification-output');
+            
+            if (window.notificationSystem) {
+                window.notificationSystem.toggleNotificationCenter();
+                output.textContent = '✅ Central de notificações alternada!';
+            } else {
+                output.textContent = '❌ Sistema de notificações não disponível';
+            }
+        };
+        
+        window.simulateOffline = function() {
+            const output = document.getElementById('offline-output');
+            output.textContent = '📴 Simule ir offline no DevTools (Network -> Offline)';
+        };
+        
+        window.testOfflineCache = function() {
+            const output = document.getElementById('offline-output');
+            
+            if (window.offlineCacheManager) {
+                const status = window.offlineCacheManager.getOfflineStatus();
+                output.innerHTML = `
+                    Posts em cache: ${status.cachedPosts}<br>
+                    Ações pendentes: ${status.pendingActions}<br>
+                    Última sincronização: ${status.lastSync || 'Nunca'}<br>
+                    Status: ${status.isOnline ? 'Online' : 'Offline'}
+                `;
+            } else {
+                output.textContent = '❌ Gerenciador de cache offline não disponível';
+            }
+        };
+        
+        window.testBackgroundSync = async function() {
+            const output = document.getElementById('offline-output');
+            
+            if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+                try {
+                    const registration = await navigator.serviceWorker.ready;
+                    await registration.sync.register('test-sync');
+                    output.textContent = '✅ Background sync registrado!';
+                } catch (error) {
+                    output.textContent = `❌ Erro no background sync: ${error.message}`;
+                }
+            } else {
+                output.textContent = '❌ Background sync não suportado';
+            }
+        };
+        
+        window.clearOfflineData = function() {
+            const output = document.getElementById('offline-output');
+            
+            if (window.offlineCacheManager) {
+                window.offlineCacheManager.clearOfflineData();
+                output.textContent = '✅ Dados offline limpos!';
+            } else {
+                output.textContent = '❌ Gerenciador de cache não disponível';
+            }
+        };
+        
+        window.checkForUpdates = async function() {
+            const output = document.getElementById('update-output');
+            output.textContent = '🔄 Verificando atualizações...';
+            
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.getRegistration();
+                    if (registration) {
+                        await registration.update();
+                        output.textContent = '✅ Verificação de atualização concluída!';
+                    } else {
+                        output.textContent = '❌ Service Worker não registrado';
+                    }
+                } catch (error) {
+                    output.textContent = `❌ Erro: ${error.message}`;
+                }
+            } else {
+                output.textContent = '❌ Service Workers não suportados';
+            }
+        };
+        
+        window.simulateUpdate = function() {
+            const output = document.getElementById('update-output');
+            
+            if (window.pwaManager) {
+                window.pwaManager.showUpdateNotification();
+                output.textContent = '✅ Simulação de atualização exibida!';
+            } else {
+                output.textContent = '❌ PWA Manager não disponível';
+            }
+        };
+        
+        window.showUpdateBanner = function() {
+            const output = document.getElementById('update-output');
+            
+            // Create update banner manually for demo
+            const banner = document.createElement('div');
+            banner.className = 'pwa-update-notification';
+            banner.innerHTML = `
+                <div class="update-content">
+                    <div class="update-text">
+                        <strong>Atualização Disponível</strong>
+                        <p>Uma nova versão está disponível!</p>
+                    </div>
+                    <button class="update-btn" onclick="this.parentElement.parentElement.remove()">
+                        Atualizar
+                    </button>
+                    <button class="dismiss-btn" onclick="this.parentElement.parentElement.remove()">
+                        ✕
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(banner);
+            output.textContent = '✅ Banner de atualização exibido!';
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (document.body.contains(banner)) {
+                    banner.remove();
+                }
+            }, 10000);
+        };
+    </script>
+</body>
+</html>

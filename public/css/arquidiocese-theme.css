@@ -1,0 +1,253 @@
+/* Arquidiocese Theme - Estilo Formal Vatican-Inspired */
+
+:root {
+    --arquidiocese-primary: #1a365d;
+    --arquidiocese-secondary: #2d5a87;
+    --arquidiocese-accent: #d4af37;
+    --arquidiocese-background: #ffffff;
+    --arquidiocese-surface: #f8f9fa;
+    --arquidiocese-text: #2c3e50;
+    --arquidiocese-text-secondary: #6c757d;
+}
+
+/* Header Formal Style */
+[data-layout-header="formal"] .header-main {
+    background: linear-gradient(135deg, var(--arquidiocese-primary), var(--arquidiocese-secondary));
+    border-bottom: 3px solid var(--arquidiocese-accent);
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.2);
+}
+
+[data-layout-header="formal"] .site-logo {
+    border: 2px solid var(--arquidiocese-accent);
+    border-radius: 50%;
+    padding: 4px;
+}
+
+[data-layout-header="formal"] .nav-menu {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+[data-layout-header="formal"] .nav-link {
+    color: var(--arquidiocese-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+[data-layout-header="formal"] .nav-link:hover {
+    color: var(--arquidiocese-accent);
+    border-bottom: 2px solid var(--arquidiocese-accent);
+}
+
+/* Cards Arquidiocese */
+.card-arquidiocese {
+    background: var(--arquidiocese-surface);
+    border-left: 4px solid var(--arquidiocese-accent);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-arquidiocese:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 54, 93, 0.15);
+    border-left-color: var(--arquidiocese-primary);
+}
+
+.card-arquidiocese .card-categoria {
+    background: var(--arquidiocese-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Botões Arquidiocese */
+.btn-arquidiocese-primary {
+    background: linear-gradient(135deg, var(--arquidiocese-primary), var(--arquidiocese-secondary));
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-arquidiocese-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(26, 54, 93, 0.3);
+    background: linear-gradient(135deg, var(--arquidiocese-secondary), var(--arquidiocese-primary));
+}
+
+.btn-arquidiocese-secondary {
+    background: transparent;
+    color: var(--arquidiocese-primary);
+    border: 2px solid var(--arquidiocese-primary);
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-arquidiocese-secondary:hover {
+    background: var(--arquidiocese-primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Hero Section Arquidiocese */
+.hero-arquidiocese {
+    background: linear-gradient(135deg, var(--arquidiocese-primary) 0%, var(--arquidiocese-secondary) 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-arquidiocese::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cross" patternUnits="userSpaceOnUse" width="20" height="20"><path d="M 10,0 L 10,20 M 0,10 L 20,10" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23cross)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-arquidiocese .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.hero-arquidiocese .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-arquidiocese .hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+/* Footer Institucional */
+[data-layout-footer="institutional"] .footer-main {
+    background: var(--arquidiocese-primary);
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+[data-layout-footer="institutional"] .footer-section h4 {
+    color: var(--arquidiocese-accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+[data-layout-footer="institutional"] .footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s ease;
+}
+
+[data-layout-footer="institutional"] .footer-link:hover {
+    color: var(--arquidiocese-accent);
+}
+
+/* Donation Widget */
+.donation-widget {
+    background: linear-gradient(135deg, var(--arquidiocese-accent), #f4d03f);
+    color: var(--arquidiocese-primary);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 2rem 0;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.donation-widget h3 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.btn-donation {
+    background: var(--arquidiocese-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-donation:hover {
+    background: var(--arquidiocese-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+}
+
+/* Admin Panel Arquidiocese */
+.admin-section.arquidiocese {
+    background: var(--arquidiocese-surface);
+}
+
+.admin-section.arquidiocese .section-title {
+    color: var(--arquidiocese-primary);
+    border-bottom: 3px solid var(--arquidiocese-accent);
+    padding-bottom: 0.5rem;
+}
+
+.stat-card.arquidiocese {
+    background: linear-gradient(135deg, var(--arquidiocese-surface), white);
+    border-left: 4px solid var(--arquidiocese-accent);
+}
+
+.stat-card.arquidiocese .stat-number {
+    color: var(--arquidiocese-primary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-arquidiocese .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-arquidiocese .hero-content {
+        padding: 2rem 1rem;
+    }
+    
+    .donation-widget {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .card-arquidiocese {
+    background: #2d3748;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .btn-arquidiocese-secondary {
+    border-color: var(--arquidiocese-accent);
+    color: var(--arquidiocese-accent);
+}
+
+[data-theme="dark"] .btn-arquidiocese-secondary:hover {
+    background: var(--arquidiocese-accent);
+    color: var(--arquidiocese-primary);
+}

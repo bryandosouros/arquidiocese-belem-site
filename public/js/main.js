@@ -2,6 +2,7 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
 import { getFirestore, collection, getDocs, query, where, orderBy, limit } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
+import OfflineCacheManager from './offline-cache-manager.js';
 
 // Firebase config
 const firebaseConfig = {
@@ -18,9 +19,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log("JavaScript Carregado - Arquidiocese HB V2.0 - Prontos para a beleza babadeira com carrossel!");
+// PWA Integration
+let pwaManager = null;
+let notificationSystem = null;
+let offlineCacheManager = null;
+
+console.log("JavaScript Carregado - Arquidiocese HB V4.0 - PWA Release 4B!");
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initializing main application with PWA support...');
+    
+    // Initialize PWA modules
+    initializePWAModules();
+    
     // Atualiza o ano no rodapé
     const anoAtualSpan = document.getElementById('ano-atual');
     if (anoAtualSpan) {
@@ -172,8 +183,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load dynamic news from Firestore
+    // Initialize Offline Manager
+    const offlineManager = new OfflineCacheManager();
+
     async function loadNews() {
-        console.log('🔄 Iniciando carregamento de notícias do Firestore...');
+        console.log('🔄 Iniciando carregamento de notícias...');
+        
+        // Verificar se está online
+        if (!navigator.onLine) {
+            console.log('📴 Offline mode - loading cached posts');
+            const cachedPosts = offlineManager.getOfflinePosts();
+            if (cachedPosts.length > 0) {
+                renderNews(cachedPosts.slice(0, 6));
+                return;
+            }
+        }
+        
         try {
             // Buscar posts ordenados por data de criação (compatível com admin.js atual)
             const q = query(
@@ -199,12 +224,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (posts.length > 0) {
                 renderNews(posts);
+                // Cache posts for offline use
+                await offlineManager.cachePostsForOffline(posts);
             } else {
-                console.log('⚠️ Nenhum post encontrado. Mantendo cards estáticos.');
-            }        } catch (error) {
+                console.log('⚠️ Nenhum post encontrado. Tentando cache offline...');
+                const cachedPosts = offlineManager.getOfflinePosts();
+                if (cachedPosts.length > 0) {
+                    renderNews(cachedPosts.slice(0, 6));
+                }
+            }
+        } catch (error) {
             console.error('❌ Error loading news:', error);
-            console.log('🔄 Mantendo cards estáticos como fallback.');
-            // Keep static news as fallback
+            console.log('🔄 Tentando carregar do cache offline...');
+            
+            const cachedPosts = offlineManager.getOfflinePosts();
+            if (cachedPosts.length > 0) {
+                renderNews(cachedPosts.slice(0, 6));
+            } else {
+                console.log('📰 Mantendo cards estáticos como fallback.');
+            }
         }
     }
 
@@ -213,7 +251,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!newsGrid) return;
         
         newsGrid.innerHTML = posts.map(post => `
-            <article class="card-noticia card-vatican-inspired">
+            <article class="card-noticia card-vatican-inspired ${post.offline ? 'offline-card' : ''}">
+                ${post.offline ? '<div class="offline-badge">📴 Offline</div>' : ''}
                 <a href="post.html?id=${post.id}" class="card-link-area">
                     ${post.featuredImage ? 
                         `<img src="${post.featuredImage}" alt="${post.title}" class="card-noticia-imagem">` :
@@ -232,7 +271,14 @@ document.addEventListener('DOMContentLoaded', function() {
             </article>
         `).join('');
         
-        console.log(`✅ ${posts.length} posts carregados dinamicamente na homepage!`);
+        const totalPosts = posts.length;
+        const offlinePosts = posts.filter(p => p.offline).length;
+        
+        if (offlinePosts > 0) {
+            console.log(`📱 ${totalPosts} posts carregados (${offlinePosts} do cache offline)`);
+        } else {
+            console.log(`✅ ${totalPosts} posts carregados dinamicamente da rede!`);
+        }
     }
 
     function getCategoryLabel(category) {
@@ -277,3 +323,122 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize news loading
     loadNews();
 });
+
+// PWA Initialization Functions
+async function initializePWAModules() {
+    try {
+        console.log('📱 Loading PWA modules...');
+        
+        // Initialize PWA Manager
+        if (window.pwaManager) {
+            pwaManager = window.pwaManager;
+            console.log('✅ PWA Manager already initialized');
+        } else {
+            const { default: PWAManager } = await import('./pwa-manager.js');
+            pwaManager = new PWAManager();
+            window.pwaManager = pwaManager;
+            console.log('✅ PWA Manager initialized');
+        }
+        
+        // Initialize Notification System
+        const { default: NotificationSystem } = await import('./notification-system.js');
+        notificationSystem = new NotificationSystem();
+        window.notificationSystem = notificationSystem;
+        console.log('✅ Notification System initialized');
+        
+        // Initialize Offline Cache Manager
+        offlineCacheManager = new OfflineCacheManager();
+        window.offlineCacheManager = offlineCacheManager;
+        console.log('✅ Offline Cache Manager initialized');
+        
+        // Setup PWA event handlers
+        setupPWAEventHandlers();
+        
+        console.log('🎉 All PWA modules loaded successfully!');
+        
+    } catch (error) {
+        console.error('❌ Error initializing PWA modules:', error);
+    }
+}
+
+function setupPWAEventHandlers() {
+    // Install prompt handler
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        console.log('📱 PWA installation prompt available');
+        
+        if (pwaManager) {
+            pwaManager.deferredPrompt = e;
+            pwaManager.showInstallButton();
+        }
+    });
+    
+    // App installed handler
+    window.addEventListener('appinstalled', () => {
+        console.log('🎉 PWA installed successfully!');
+        
+        if (pwaManager) {
+            pwaManager.trackInstallation();
+            pwaManager.hideInstallButton();
+        }
+        
+        // Show success notification
+        if (notificationSystem) {
+            notificationSystem.createNotification({
+                type: 'success',
+                title: 'App Instalado!',
+                message: 'A Arquidiocese agora está disponível como aplicativo.',
+                icon: '🎉'
+            });
+        }
+    });
+    
+    // Offline/Online handlers
+    window.addEventListener('offline', () => {
+        console.log('📵 Application went offline');
+        showOfflineIndicator();
+        
+        if (offlineCacheManager) {
+            offlineCacheManager.handleOfflineMode();
+        }
+    });
+    
+    window.addEventListener('online', () => {
+        console.log('🌐 Application back online');
+        hideOfflineIndicator();
+        
+        if (offlineCacheManager) {
+            offlineCacheManager.syncPendingActions();
+        }
+        
+        if (pwaManager) {
+            pwaManager.syncWhenOnline();
+        }
+    });
+}
+
+function showOfflineIndicator() {
+    // Create or update offline indicator
+    let indicator = document.getElementById('offline-indicator');
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.id = 'offline-indicator';
+        indicator.className = 'offline-indicator';
+        indicator.innerHTML = `
+            <i class="fas fa-wifi-slash"></i>
+            <span>Modo Offline</span>
+        `;
+        document.body.appendChild(indicator);
+    }
+    indicator.style.display = 'flex';
+}
+
+function hideOfflineIndicator() {
+    const indicator = document.getElementById('offline-indicator');
+    if (indicator) {
+        indicator.style.display = 'none';
+    }
+}
+
+// Export for use in other modules
+export { db, pwaManager, notificationSystem, offlineCacheManager };

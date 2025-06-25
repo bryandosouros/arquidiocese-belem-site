@@ -1,0 +1,429 @@
+/* Shalom Theme - Estilo Contemplativo e Minimalista */
+
+:root {
+    --shalom-primary: #2e8b57;
+    --shalom-secondary: #20b2aa;
+    --shalom-accent: #ffd700;
+    --shalom-background: #f0fff0;
+    --shalom-surface: #f5fffa;
+    --shalom-text: #1c3a1c;
+    --shalom-text-secondary: #556b55;
+}
+
+/* Header Minimalista */
+[data-layout-header="minimalist"] .header-main {
+    background: linear-gradient(135deg, rgba(46, 139, 87, 0.95), rgba(32, 178, 170, 0.95));
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(46, 139, 87, 0.2);
+    box-shadow: 0 2px 20px rgba(46, 139, 87, 0.1);
+}
+
+[data-layout-header="minimalist"] .site-logo {
+    border: 2px solid var(--shalom-accent);
+    border-radius: 50%;
+    padding: 6px;
+    transition: all 0.3s ease;
+}
+
+[data-layout-header="minimalist"] .site-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+[data-layout-header="minimalist"] .nav-menu {
+    background: rgba(245, 255, 250, 0.98);
+    backdrop-filter: blur(15px);
+    border-radius: 8px;
+    border: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+[data-layout-header="minimalist"] .nav-link {
+    color: var(--shalom-primary);
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+[data-layout-header="minimalist"] .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--shalom-primary), var(--shalom-secondary));
+    transition: width 0.3s ease;
+}
+
+[data-layout-header="minimalist"] .nav-link:hover::before {
+    width: 100%;
+}
+
+[data-layout-header="minimalist"] .nav-link:hover {
+    color: var(--shalom-secondary);
+}
+
+/* Cards Shalom */
+.card-shalom {
+    background: var(--shalom-surface);
+    border: 1px solid rgba(46, 139, 87, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(46, 139, 87, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-shalom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--shalom-primary), var(--shalom-secondary), var(--shalom-accent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-shalom:hover::before {
+    opacity: 1;
+}
+
+.card-shalom:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.15);
+    border-color: var(--shalom-secondary);
+}
+
+.card-shalom .card-categoria {
+    background: rgba(46, 139, 87, 0.1);
+    color: var(--shalom-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(46, 139, 87, 0.2);
+}
+
+/* Botões Shalom */
+.btn-shalom-primary {
+    background: linear-gradient(135deg, var(--shalom-primary), var(--shalom-secondary));
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shalom-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%);
+}
+
+.btn-shalom-primary:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-shalom-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+}
+
+.btn-shalom-secondary {
+    background: transparent;
+    color: var(--shalom-primary);
+    border: 1px solid var(--shalom-primary);
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.btn-shalom-secondary:hover {
+    background: var(--shalom-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
+}
+
+/* Hero Section Shalom */
+.hero-shalom {
+    background: linear-gradient(135deg, var(--shalom-background) 0%, var(--shalom-surface) 100%);
+    color: var(--shalom-text);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-shalom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="peace" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="1" fill="rgba(46,139,87,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23peace)"/></svg>');
+    opacity: 0.5;
+}
+
+.hero-shalom .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-shalom .hero-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--shalom-primary);
+    line-height: 1.2;
+}
+
+.hero-shalom .hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    color: var(--shalom-text-secondary);
+    font-style: italic;
+}
+
+/* Navegação Centralizada */
+[data-layout-nav="centered"] .nav-menu {
+    display: flex;
+    justify-content: center;
+    background: var(--shalom-surface);
+    border-radius: 0;
+    border-top: 1px solid rgba(46, 139, 87, 0.1);
+    border-bottom: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+[data-layout-nav="centered"] .nav-link {
+    margin: 0 1rem;
+    padding: 1rem 0;
+    position: relative;
+}
+
+/* Footer Simples */
+[data-layout-footer="simple"] .footer-main {
+    background: var(--shalom-surface);
+    color: var(--shalom-text);
+    padding: 2rem 0 1rem;
+    border-top: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+[data-layout-footer="simple"] .footer-section h4 {
+    color: var(--shalom-primary);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+}
+
+[data-layout-footer="simple"] .footer-link {
+    color: var(--shalom-text-secondary);
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+[data-layout-footer="simple"] .footer-link:hover {
+    color: var(--shalom-primary);
+}
+
+/* Meditation Widget */
+.meditation-widget {
+    background: linear-gradient(135deg, var(--shalom-surface), white);
+    color: var(--shalom-text);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem 0;
+    border: 1px solid rgba(46, 139, 87, 0.1);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(46, 139, 87, 0.1);
+}
+
+.meditation-widget::before {
+    content: '🕊️';
+    position: absolute;
+    font-size: 2rem;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.3;
+    animation: gentle-float 4s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+.meditation-widget h3 {
+    margin-bottom: 1rem;
+    font-weight: 400;
+    color: var(--shalom-primary);
+}
+
+.meditation-text {
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--shalom-text-secondary);
+}
+
+.btn-meditation {
+    background: var(--shalom-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.btn-meditation:hover {
+    background: var(--shalom-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
+}
+
+/* Typography Shalom */
+.shalom-heading {
+    font-family: 'Crimson Text', serif;
+    font-weight: 300;
+    color: var(--shalom-primary);
+    line-height: 1.2;
+}
+
+.shalom-text {
+    font-family: 'Lora', serif;
+    line-height: 1.6;
+    color: var(--shalom-text);
+}
+
+/* Admin Panel Shalom */
+.admin-section.shalom {
+    background: var(--shalom-surface);
+    border: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.admin-section.shalom .section-title {
+    color: var(--shalom-primary);
+    font-weight: 400;
+    border-bottom: 1px solid rgba(46, 139, 87, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.stat-card.shalom {
+    background: linear-gradient(135deg, var(--shalom-surface), white);
+    border: 1px solid rgba(46, 139, 87, 0.1);
+    border-left: 3px solid var(--shalom-accent);
+}
+
+.stat-card.shalom .stat-number {
+    color: var(--shalom-primary);
+}
+
+/* Elementos contemplativos */
+.contemplative-quote {
+    background: rgba(46, 139, 87, 0.05);
+    border-left: 4px solid var(--shalom-primary);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--shalom-text-secondary);
+    border-radius: 0 4px 4px 0;
+}
+
+.peace-symbol {
+    display: inline-block;
+    color: var(--shalom-accent);
+    font-size: 1.2em;
+    margin: 0 0.5rem;
+    animation: gentle-glow 3s ease-in-out infinite;
+}
+
+@keyframes gentle-glow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-shalom .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-shalom .hero-content {
+        padding: 2rem 1rem;
+    }
+    
+    .meditation-widget {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    [data-layout-nav="centered"] .nav-menu {
+        flex-direction: column;
+    }
+    
+    [data-layout-nav="centered"] .nav-link {
+        margin: 0;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(46, 139, 87, 0.1);
+    }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .card-shalom {
+    background: #1a2f1a;
+    color: #e0f0e0;
+    border-color: rgba(46, 139, 87, 0.3);
+}
+
+[data-theme="dark"] .hero-shalom {
+    background: linear-gradient(135deg, #0f1f0f, #1a2f1a);
+    color: #e0f0e0;
+}
+
+[data-theme="dark"] .meditation-widget {
+    background: #1a2f1a;
+    color: #e0f0e0;
+    border-color: rgba(46, 139, 87, 0.3);
+}
+
+[data-theme="dark"] .btn-shalom-secondary {
+    border-color: var(--shalom-accent);
+    color: var(--shalom-accent);
+}
+
+[data-theme="dark"] .btn-shalom-secondary:hover {
+    background: var(--shalom-accent);
+    color: var(--shalom-text);
+}
