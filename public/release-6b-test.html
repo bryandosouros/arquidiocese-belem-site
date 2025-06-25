@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release 6B - Advanced PWA Features Test | Arquidiocese de Belém</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Arquidiocese Belém">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .test-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online { background: #28a745; }
+        .status-offline { background: #dc3545; }
+        .status-syncing { background: #ffc107; animation: pulse 2s infinite; }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <img src="/images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="logo">
+                <h1>Release 6B - Advanced PWA Testing</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- System Status -->
+            <div class="test-section">
+                <h2>🔄 Sistema PWA Avançado - Status</h2>
+                <div id="systemStatus">
+                    <p><span class="status-indicator status-offline"></span>Carregando status do sistema...</p>
+                </div>
+                <button class="test-button" onclick="checkSystemStatus()">Verificar Status</button>
+            </div>
+
+            <!-- Intelligent Caching Tests -->
+            <div class="test-section">
+                <h2>🧠 Cache Inteligente</h2>
+                <p>Testa o sistema de cache adaptativo e estratégias inteligentes de armazenamento.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="testIntelligentCaching()">Testar Cache Inteligente</button>
+                    <button class="test-button" onclick="analyzeCacheStrategy()">Analisar Estratégia</button>
+                    <button class="test-button" onclick="showCacheStats()">Estatísticas do Cache</button>
+                </div>
+                <div id="cacheResults" class="test-result"></div>
+            </div>
+
+            <!-- Background Sync Tests -->
+            <div class="test-section">
+                <h2>⚡ Sincronização em Background</h2>
+                <p>Testa a sincronização automática de dados quando a conexão é restaurada.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="testBackgroundSync()">Testar Background Sync</button>
+                    <button class="test-button" onclick="simulateOfflineAction()">Simular Ação Offline</button>
+                    <button class="test-button" onclick="checkSyncQueue()">Ver Fila de Sync</button>
+                </div>
+                <div id="syncResults" class="test-result"></div>
+            </div>
+
+            <!-- Push Notifications Enhanced -->
+            <div class="test-section">
+                <h2>🔔 Notificações Push Avançadas</h2>
+                <p>Testa notificações inteligentes, agendamento e personalização.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="testEnhancedNotifications()">Testar Notificações</button>
+                    <button class="test-button" onclick="scheduleNotification()">Agendar Notificação</button>
+                    <button class="test-button" onclick="testNotificationPersonalization()">Personalização</button>
+                </div>
+                <div id="notificationResults" class="test-result"></div>
+            </div>
+
+            <!-- Performance Monitoring -->
+            <div class="test-section">
+                <h2>📊 Monitoramento de Performance</h2>
+                <p>Monitora métricas de performance em tempo real e otimizações automáticas.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="runPerformanceAnalysis()">Análise Completa</button>
+                    <button class="test-button" onclick="measureCoreWebVitals()">Core Web Vitals</button>
+                    <button class="test-button" onclick="generatePerformanceReport()">Relatório Detalhado</button>
+                </div>
+                <div class="metrics-grid" id="performanceMetrics"></div>
+                <div id="performanceResults" class="test-result"></div>
+            </div>
+
+            <!-- Smart Preloading -->
+            <div class="test-section">
+                <h2>🎯 Preload Inteligente</h2>
+                <p>Testa o sistema de preload baseado em comportamento do usuário e predições.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="testSmartPreloading()">Testar Preload</button>
+                    <button class="test-button" onclick="analyzePredictions()">Ver Predições</button>
+                    <button class="test-button" onclick="optimizePreloadStrategy()">Otimizar Estratégia</button>
+                </div>
+                <div id="preloadResults" class="test-result"></div>
+            </div>
+
+            <!-- Analytics and Insights -->
+            <div class="test-section">
+                <h2>📈 Analytics e Insights</h2>
+                <p>Coleta e análise de dados de uso avançados com insights automáticos.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="testAnalytics()">Testar Analytics</button>
+                    <button class="test-button" onclick="generateInsights()">Gerar Insights</button>
+                    <button class="test-button" onclick="exportAnalyticsData()">Exportar Dados</button>
+                </div>
+                <div id="analyticsResults" class="test-result"></div>
+            </div>
+
+            <!-- Integration Tests -->
+            <div class="test-section">
+                <h2>🔗 Testes de Integração</h2>
+                <p>Testa a integração completa de todos os recursos avançados do PWA.</p>
+                <div class="button-group">
+                    <button class="test-button" onclick="runFullIntegrationTest()">Teste Completo</button>
+                    <button class="test-button" onclick="validateRelease6B()">Validar Release 6B</button>
+                    <button class="test-button" onclick="generateTestReport()">Relatório Final</button>
+                </div>
+                <div id="integrationResults" class="test-result"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/firebase-config.js"></script>
+    <script src="/js/pwa-manager.js"></script>
+    <script src="/js/offline-cache-manager.js"></script>
+    <script src="/js/push-notification-manager.js"></script>
+    <script src="/js/advanced-pwa-controller.js"></script>
+    
+    <script>
+        // Global test variables
+        let advancedPWA;
+        let testResults = {};
+
+        // Initialize Advanced PWA Controller
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                advancedPWA = new AdvancedPWAController();
+                await advancedPWA.initialize();
+                
+                updateSystemStatus('Inicializado', 'success');
+                console.log('Advanced PWA Controller initialized successfully');
+            } catch (error) {
+                updateSystemStatus('Erro na inicialização: ' + error.message, 'error');
+                console.error('Failed to initialize Advanced PWA Controller:', error);
+            }
+        });
+
+        // System Status Functions
+        function updateSystemStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('systemStatus');
+            const indicator = type === 'success' ? 'status-online' : type === 'error' ? 'status-offline' : 'status-syncing';
+            statusDiv.innerHTML = `<p><span class="status-indicator ${indicator}"></span>${message}</p>`;
+        }
+
+        async function checkSystemStatus() {
+            try {
+                if (!advancedPWA) {
+                    throw new Error('Advanced PWA Controller não está disponível');
+                }
+
+                const status = await advancedPWA.getSystemStatus();
+                updateSystemStatus(`Sistema Online - ${JSON.stringify(status)}`, 'success');
+            } catch (error) {
+                updateSystemStatus('Erro ao verificar status: ' + error.message, 'error');
+            }
+        }
+
+        // Intelligent Caching Tests
+        async function testIntelligentCaching() {
+            const resultDiv = document.getElementById('cacheResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Testando cache inteligente...';
+
+            try {
+                if (!advancedPWA) throw new Error('Controller não disponível');
+
+                const cacheTest = await advancedPWA.testIntelligentCaching();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Cache Inteligente: ${JSON.stringify(cacheTest, null, 2)}`;
+                testResults.intelligentCaching = true;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no teste de cache: ${error.message}`;
+                testResults.intelligentCaching = false;
+            }
+        }
+
+        async function analyzeCacheStrategy() {
+            const resultDiv = document.getElementById('cacheResults');
+            try {
+                const strategy = await advancedPWA.analyzeCacheStrategy();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📊 Estratégia de Cache: ${JSON.stringify(strategy, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na análise: ${error.message}`;
+            }
+        }
+
+        async function showCacheStats() {
+            const resultDiv = document.getElementById('cacheResults');
+            try {
+                const stats = await advancedPWA.getCacheStatistics();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📈 Estatísticas: ${JSON.stringify(stats, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro nas estatísticas: ${error.message}`;
+            }
+        }
+
+        // Background Sync Tests
+        async function testBackgroundSync() {
+            const resultDiv = document.getElementById('syncResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Testando sincronização em background...';
+
+            try {
+                const syncTest = await advancedPWA.testBackgroundSync();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Background Sync: ${JSON.stringify(syncTest, null, 2)}`;
+                testResults.backgroundSync = true;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no background sync: ${error.message}`;
+                testResults.backgroundSync = false;
+            }
+        }
+
+        async function simulateOfflineAction() {
+            const resultDiv = document.getElementById('syncResults');
+            try {
+                const offlineAction = await advancedPWA.simulateOfflineAction({
+                    type: 'prayer_request',
+                    data: { message: 'Teste de ação offline', timestamp: Date.now() }
+                });
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📱 Ação Offline: ${JSON.stringify(offlineAction, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na simulação: ${error.message}`;
+            }
+        }
+
+        async function checkSyncQueue() {
+            const resultDiv = document.getElementById('syncResults');
+            try {
+                const queue = await advancedPWA.getSyncQueue();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📋 Fila de Sync: ${JSON.stringify(queue, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na fila: ${error.message}`;
+            }
+        }
+
+        // Enhanced Push Notifications Tests
+        async function testEnhancedNotifications() {
+            const resultDiv = document.getElementById('notificationResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Testando notificações avançadas...';
+
+            try {
+                const notificationTest = await advancedPWA.testEnhancedNotifications();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Notificações Avançadas: ${JSON.stringify(notificationTest, null, 2)}`;
+                testResults.enhancedNotifications = true;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro nas notificações: ${error.message}`;
+                testResults.enhancedNotifications = false;
+            }
+        }
+
+        async function scheduleNotification() {
+            const resultDiv = document.getElementById('notificationResults');
+            try {
+                const scheduled = await advancedPWA.scheduleNotification({
+                    title: 'Momento de Oração',
+                    body: 'Hora da oração do terço em comunidade',
+                    scheduledTime: Date.now() + 10000, // 10 seconds from now
+                    type: 'prayer_reminder'
+                });
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `⏰ Notificação Agendada: ${JSON.stringify(scheduled, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no agendamento: ${error.message}`;
+            }
+        }
+
+        async function testNotificationPersonalization() {
+            const resultDiv = document.getElementById('notificationResults');
+            try {
+                const personalization = await advancedPWA.testNotificationPersonalization();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `🎨 Personalização: ${JSON.stringify(personalization, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na personalização: ${error.message}`;
+            }
+        }
+
+        // Performance Monitoring Tests
+        async function runPerformanceAnalysis() {
+            const resultDiv = document.getElementById('performanceResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Executando análise de performance...';
+
+            try {
+                const analysis = await advancedPWA.runPerformanceAnalysis();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Análise de Performance: ${JSON.stringify(analysis, null, 2)}`;
+                testResults.performanceMonitoring = true;
+                updatePerformanceMetrics(analysis);
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na análise: ${error.message}`;
+                testResults.performanceMonitoring = false;
+            }
+        }
+
+        async function measureCoreWebVitals() {
+            const resultDiv = document.getElementById('performanceResults');
+            try {
+                const vitals = await advancedPWA.measureCoreWebVitals();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `🎯 Core Web Vitals: ${JSON.stringify(vitals, null, 2)}`;
+                updatePerformanceMetrics(vitals);
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro nas métricas: ${error.message}`;
+            }
+        }
+
+        async function generatePerformanceReport() {
+            const resultDiv = document.getElementById('performanceResults');
+            try {
+                const report = await advancedPWA.generatePerformanceReport();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📊 Relatório: ${JSON.stringify(report, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no relatório: ${error.message}`;
+            }
+        }
+
+        function updatePerformanceMetrics(metrics) {
+            const metricsDiv = document.getElementById('performanceMetrics');
+            metricsDiv.innerHTML = '';
+            
+            Object.entries(metrics).forEach(([key, value]) => {
+                if (typeof value === 'number') {
+                    const card = document.createElement('div');
+                    card.className = 'metric-card';
+                    card.innerHTML = `
+                        <div class="metric-value">${value.toFixed(2)}</div>
+                        <div class="metric-label">${key}</div>
+                    `;
+                    metricsDiv.appendChild(card);
+                }
+            });
+        }
+
+        // Smart Preloading Tests
+        async function testSmartPreloading() {
+            const resultDiv = document.getElementById('preloadResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Testando preload inteligente...';
+
+            try {
+                const preloadTest = await advancedPWA.testSmartPreloading();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Smart Preloading: ${JSON.stringify(preloadTest, null, 2)}`;
+                testResults.smartPreloading = true;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no preload: ${error.message}`;
+                testResults.smartPreloading = false;
+            }
+        }
+
+        async function analyzePredictions() {
+            const resultDiv = document.getElementById('preloadResults');
+            try {
+                const predictions = await advancedPWA.analyzePredictions();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `🔮 Predições: ${JSON.stringify(predictions, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro nas predições: ${error.message}`;
+            }
+        }
+
+        async function optimizePreloadStrategy() {
+            const resultDiv = document.getElementById('preloadResults');
+            try {
+                const optimization = await advancedPWA.optimizePreloadStrategy();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `⚡ Otimização: ${JSON.stringify(optimization, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na otimização: ${error.message}`;
+            }
+        }
+
+        // Analytics Tests
+        async function testAnalytics() {
+            const resultDiv = document.getElementById('analyticsResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Testando analytics avançados...';
+
+            try {
+                const analyticsTest = await advancedPWA.testAnalytics();
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ Analytics: ${JSON.stringify(analyticsTest, null, 2)}`;
+                testResults.analytics = true;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no analytics: ${error.message}`;
+                testResults.analytics = false;
+            }
+        }
+
+        async function generateInsights() {
+            const resultDiv = document.getElementById('analyticsResults');
+            try {
+                const insights = await advancedPWA.generateInsights();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `💡 Insights: ${JSON.stringify(insights, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro nos insights: ${error.message}`;
+            }
+        }
+
+        async function exportAnalyticsData() {
+            const resultDiv = document.getElementById('analyticsResults');
+            try {
+                const exportData = await advancedPWA.exportData();
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📤 Dados Exportados: ${JSON.stringify(exportData, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na exportação: ${error.message}`;
+            }
+        }
+
+        // Integration Tests
+        async function runFullIntegrationTest() {
+            const resultDiv = document.getElementById('integrationResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Executando teste de integração completo...\n';
+
+            const tests = [
+                { name: 'Cache Inteligente', fn: testIntelligentCaching },
+                { name: 'Background Sync', fn: testBackgroundSync },
+                { name: 'Notificações Avançadas', fn: testEnhancedNotifications },
+                { name: 'Monitoramento de Performance', fn: runPerformanceAnalysis },
+                { name: 'Preload Inteligente', fn: testSmartPreloading },
+                { name: 'Analytics', fn: testAnalytics }
+            ];
+
+            let results = [];
+            for (const test of tests) {
+                try {
+                    resultDiv.textContent += `\n🔄 Testando ${test.name}...`;
+                    await test.fn();
+                    results.push(`✅ ${test.name}: PASSOU`);
+                } catch (error) {
+                    results.push(`❌ ${test.name}: FALHOU - ${error.message}`);
+                }
+            }
+
+            resultDiv.className = 'test-result success';
+            resultDiv.textContent = 'Teste de Integração Completo:\n\n' + results.join('\n');
+        }
+
+        async function validateRelease6B() {
+            const resultDiv = document.getElementById('integrationResults');
+            resultDiv.className = 'test-result info';
+            resultDiv.textContent = 'Validando Release 6B...';
+
+            try {
+                const validation = await advancedPWA.validateRelease6B();
+                const passed = Object.values(testResults).every(result => result === true);
+                
+                resultDiv.className = passed ? 'test-result success' : 'test-result error';
+                resultDiv.textContent = `${passed ? '✅' : '❌'} Release 6B Validation:\n${JSON.stringify(validation, null, 2)}\n\nTest Summary: ${JSON.stringify(testResults, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro na validação: ${error.message}`;
+            }
+        }
+
+        async function generateTestReport() {
+            const resultDiv = document.getElementById('integrationResults');
+            try {
+                const report = {
+                    timestamp: new Date().toISOString(),
+                    release: '6B - PWA Avançado e Performance',
+                    testResults: testResults,
+                    systemInfo: await advancedPWA.getSystemStatus(),
+                    summary: {
+                        totalTests: Object.keys(testResults).length,
+                        passed: Object.values(testResults).filter(r => r === true).length,
+                        failed: Object.values(testResults).filter(r => r === false).length
+                    }
+                };
+
+                resultDiv.className = 'test-result info';
+                resultDiv.textContent = `📋 Relatório de Teste Release 6B:\n${JSON.stringify(report, null, 2)}`;
+                
+                // Save report to localStorage for reference
+                localStorage.setItem('release6b-test-report', JSON.stringify(report));
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ Erro no relatório: ${error.message}`;
+            }
+        }
+
+        // Auto-run system status check
+        setTimeout(checkSystemStatus, 2000);
+    </script>
+</body>
+</html>

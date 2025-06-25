@@ -561,6 +561,10 @@
     <!-- PWA Scripts -->
     <script src="js/pwa-manager.js" defer></script>
     
+    <!-- Release 6B: Advanced PWA Features -->
+    <script src="js/advanced-pwa-controller.js" defer></script>
+    <script src="js/pwa-performance-monitor.js" defer></script>
+    
     <!-- Analytics & SEO Scripts -->
     <script type="module" src="js/analytics-manager.js" defer></script>
     <script type="module" src="js/seo-manager.js" defer></script>
@@ -584,6 +588,28 @@
                 console.log('✅ PWA Manager loaded');
             }).catch(error => {
                 console.error('❌ Error loading PWA Manager:', error);
+            });
+            
+            // Release 6B: Advanced PWA Controller
+            import('./js/advanced-pwa-controller.js').then(module => {
+                console.log('✅ Advanced PWA Controller loaded');
+            }).catch(error => {
+                console.error('❌ Error loading Advanced PWA Controller:', error);
+            });
+            
+            // PWA Performance Monitor
+            import('./js/pwa-performance-monitor.js').then(module => {
+                console.log('✅ PWA Performance Monitor loaded');
+                // Show monitor on development
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    setTimeout(() => {
+                        if (window.pwaMonitor) {
+                            window.pwaMonitor.show();
+                        }
+                    }, 3000);
+                }
+            }).catch(error => {
+                console.error('❌ Error loading PWA Performance Monitor:', error);
             });
             
             import('./js/notification-system.js').then(module => {

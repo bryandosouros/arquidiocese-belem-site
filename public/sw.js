@@ -1,12 +1,23 @@
-// Service Worker - Release 4B: Progressive Web App
-// Cache inteligente, offline support e sincronização background
+// Enhanced Service Worker - Release 6B: PWA Avançado e Performance
+// Cache inteligente avançado, performance otimizada e sincronização robusta
 
-const CACHE_NAME = 'arquidiocese-pwa-v1';
-const CONTENT_CACHE = 'arquidiocese-content-v1';
-const STATIC_CACHE = 'arquidiocese-static-v1';
-const DYNAMIC_CACHE = 'arquidiocese-dynamic-v1';
+const SW_VERSION = '6B.1.0';
+const CACHE_NAME = 'arquidiocese-pwa-v6b';
+const CONTENT_CACHE = 'arquidiocese-content-v6b';
+const STATIC_CACHE = 'arquidiocese-static-v6b';
+const DYNAMIC_CACHE = 'arquidiocese-dynamic-v6b';
+const MOBILE_CACHE = 'arquidiocese-mobile-v6b';
 
-// Recursos críticos para cache imediato
+// Performance and Analytics
+let performanceMetrics = {
+    cacheHits: 0,
+    cacheMisses: 0,
+    networkRequests: 0,
+    averageResponseTime: 0,
+    backgroundSyncCount: 0
+};
+
+// Enhanced critical resources for Release 6B
 const CRITICAL_RESOURCES = [
     '/',
     '/index.html',
@@ -24,11 +35,18 @@ const CRITICAL_RESOURCES = [
     '/js/content-strategy-ui.js',
     '/js/firebase-config.js',
     '/js/darkmode.js',
+    // Release 6A Mobile Scripts
+    '/js/mobile-ux.js',
+    '/js/mobile-gestures.js',
+    '/js/mobile-forms.js',
+    // Release 6B Advanced PWA Scripts
+    '/js/advanced-pwa-controller.js',
+    '/js/pwa-performance-monitor.js',
     '/images/logo-arquidiocese-belem.png',
     '/manifest.json'
 ];
 
-// Recursos estáticos (CSS, JS, imagens)
+// Enhanced static resources with mobile optimization
 const STATIC_RESOURCES = [
     '/css/',
     '/js/',
@@ -38,11 +56,23 @@ const STATIC_RESOURCES = [
     'https://www.gstatic.com/firebasejs/'
 ];
 
-// URLs de API que devem ser sempre atualizadas
-const API_URLS = [
+// API endpoints with intelligent caching
+const API_ENDPOINTS = [
     'https://belem-hb.firebaseapp.com',
-    'https://firestore.googleapis.com'
+    'https://firestore.googleapis.com',
+    '/api/posts',
+    '/api/user',
+    '/api/notifications',
+    '/api/analytics'
 ];
+
+// Performance monitoring
+const PERFORMANCE_THRESHOLDS = {
+    slowResponse: 3000, // 3 seconds
+    cacheHitRateTarget: 0.8, // 80%
+    maxCacheSize: 50 * 1024 * 1024, // 50MB
+    backgroundSyncTimeout: 30000 // 30 seconds
+};
 
 class PWAServiceWorker {
     constructor() {
