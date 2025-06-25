@@ -205,6 +205,9 @@
         </div>
     </div>
 
+    <!-- PWA Demo and Analytics Scripts -->
+    <script type="module" src="js/analytics-manager.js"></script>
+    <script type="module" src="js/seo-manager.js"></script>
     <script type="module">
         // PWA Demo Functions
         window.addEventListener('load', async () => {
@@ -216,6 +219,16 @@
                 await import('./js/notification-system.js');
                 await import('./js/offline-cache-manager.js');
                 console.log('✅ PWA modules loaded for demo');
+                
+                // Track PWA demo page view
+                if (window.analyticsManager) {
+                    window.analyticsManager.trackEvent('page_view', {
+                        page_title: 'PWA Demo - Arquidiocese de Belém do Pará',
+                        page_location: window.location.href,
+                        content_group1: 'PWA Demo',
+                        content_group2: 'Technical'
+                    });
+                }
             } catch (error) {
                 console.error('❌ Error loading PWA modules:', error);
             }

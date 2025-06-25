@@ -4,7 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="post-title-meta">Carregando... - Arquidiocese de Belém do Pará</title>
+    
+    <!-- Dynamic SEO Meta Tags -->
     <meta name="description" id="post-description-meta" content="Arquidiocese de Belém do Pará">
+    <meta name="keywords" id="post-keywords-meta" content="Arquidiocese, Belém, Pará, Igreja Católica">
+    <meta name="author" content="Arquidiocese de Belém do Pará">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" id="post-canonical" href="">
+    
+    <!-- Dynamic Open Graph Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="og-title" content="">
+    <meta property="og:description" id="og-description" content="">
+    <meta property="og:image" id="og-image" content="">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:site_name" content="Arquidiocese de Belém do Pará">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:author" content="Arquidiocese de Belém do Pará">
+    <meta property="article:published_time" id="article-published" content="">
+    <meta property="article:section" id="article-section" content="">
+    
+    <!-- Dynamic Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="">
+    <meta name="twitter:description" id="twitter-description" content="">
+    <meta name="twitter:image" id="twitter-image" content="">
+    
+    <!-- Dynamic JSON-LD Structured Data -->
+    <script type="application/ld+json" id="structured-data">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "",
+        "description": "",
+        "image": "",
+        "author": {
+            "@type": "Organization",
+            "name": "Arquidiocese de Belém do Pará"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Arquidiocese de Belém do Pará",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://arquidiocese-belem.web.app/images/logo-arquidiocese-belem.png"
+            }
+        },
+        "datePublished": "",
+        "dateModified": "",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": ""
+        }
+    }
+    </script>
     
     <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
     
@@ -72,5 +125,137 @@
 
     <script type="module" src="js/post.js"></script>
     <script src="js/darkmode.js" defer></script>
+    
+    <!-- Analytics & SEO Scripts -->
+    <script type="module" src="js/analytics-manager.js"></script>
+    <script type="module" src="js/seo-manager.js"></script>
+    <script type="module" src="js/sitemap-generator.js"></script>
+    
+    <!-- Analytics Manager -->
+    <script src="js/analytics-manager.js"></script>
+    <script>
+        // Initialize post-specific analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.analyticsManager) {
+                // Track post page view (will be updated when post loads)
+                analyticsManager.trackEvent('page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    content_group1: 'Post',
+                    content_group2: 'Arquidiocese'
+                });
+                
+                // Setup post-specific tracking
+                setupPostTracking();
+            }
+        });
+        
+        function setupPostTracking() {
+            // Track reading progress
+            const postContent = document.querySelector('.post-content');
+            if (postContent) {
+                analyticsManager.trackScrollDepth(postContent, 'post_content');
+                analyticsManager.trackTimeOnPage();
+            }
+            
+            // Track share buttons (when implemented)
+            document.querySelectorAll('.share-button, [data-share]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const shareType = this.dataset.share || 'unknown';
+                    analyticsManager.trackEvent('share', {
+                        method: shareType,
+                        content_type: 'post',
+                        content_id: new URLSearchParams(window.location.search).get('id') || 'unknown'
+                    });
+                });
+            });
+            
+            // Track external link clicks
+            document.querySelectorAll('a[href^="http"]:not([href*="arquidiocese-belem"])').forEach(link => {
+                link.addEventListener('click', function() {
+                    analyticsManager.trackEvent('click', {
+                        link_classes: 'external_link',
+                        link_domain: new URL(this.href).hostname,
+                        link_url: this.href,
+                        outbound: true
+                    });
+                });
+            });
+        }
+        
+        // Function to update SEO meta tags when post loads
+        window.updatePostSEO = function(post) {
+            if (!post) return;
+            
+            const baseUrl = 'https://arquidiocese-belem.web.app';
+            const postUrl = `${baseUrl}/post.html?id=${post.id}`;
+            const postImage = post.featuredImage || `${baseUrl}/images/logo-arquidiocese-belem.png`;
+            
+            // Update title and meta description
+            document.getElementById('post-title-meta').textContent = `${post.title} - Arquidiocese de Belém do Pará`;
+            document.getElementById('post-description-meta').content = post.excerpt || post.content.substring(0, 160);
+            document.getElementById('post-keywords-meta').content = `${post.tags ? post.tags.join(', ') + ', ' : ''}Arquidiocese, Belém, Pará, Igreja Católica`;
+            document.getElementById('post-canonical').href = postUrl;
+            
+            // Update Open Graph
+            document.getElementById('og-title').content = post.title;
+            document.getElementById('og-description').content = post.excerpt || post.content.substring(0, 200);
+            document.getElementById('og-image').content = postImage;
+            document.getElementById('og-url').content = postUrl;
+            document.getElementById('article-published').content = post.publishedAt || post.createdAt;
+            document.getElementById('article-section').content = post.category || 'Notícias';
+            
+            // Update Twitter Card
+            document.getElementById('twitter-title').content = post.title;
+            document.getElementById('twitter-description').content = post.excerpt || post.content.substring(0, 200);
+            document.getElementById('twitter-image').content = postImage;
+            
+            // Update JSON-LD
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": post.title,
+                "description": post.excerpt || post.content.substring(0, 200),
+                "image": postImage,
+                "author": {
+                    "@type": "Organization",
+                    "name": "Arquidiocese de Belém do Pará"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Arquidiocese de Belém do Pará",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${baseUrl}/images/logo-arquidiocese-belem.png`
+                    }
+                },
+                "datePublished": post.publishedAt || post.createdAt,
+                "dateModified": post.updatedAt || post.createdAt,
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": postUrl
+                }
+            };
+            
+            document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
+            
+            // Track updated post view with analytics
+            if (window.analyticsManager) {
+                analyticsManager.trackEvent('page_view', {
+                    page_title: post.title,
+                    page_location: postUrl,
+                    content_group1: 'Post',
+                    content_group2: post.category || 'Notícias',
+                    content_id: post.id
+                });
+                
+                analyticsManager.trackContentEngagement(post.id, 'view', {
+                    content_type: 'post',
+                    content_title: post.title,
+                    content_category: post.category
+                });
+            }
+        };
+    </script>
 </body>
 </html>

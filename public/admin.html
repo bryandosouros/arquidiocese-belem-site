@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cúria Digital - Painel Administrativo</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Arquidiocese de Belém do Pará">
+    
+    <!-- Admin Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <!-- PWA Meta Tags -->
     <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
     <meta name="theme-color" content="#1a365d">
@@ -352,6 +362,81 @@
     <script type="module" src="js/admin.js"></script>
     <script type="module" src="js/pwa-manager.js"></script>
     <script type="module" src="js/multi-site-template.js"></script>
+    <script type="module" src="js/sitemap-generator.js"></script>
+    <script type="module" src="js/analytics-dashboard.js"></script>
+    <script type="module" src="js/seo-manager.js"></script>
+    
+    <!-- Analytics Manager -->
+    <script src="js/analytics-manager.js"></script>
+    <script>
+        // Initialize admin-specific analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.analyticsManager) {
+                // Track admin panel access
+                analyticsManager.trackEvent('page_view', {
+                    page_title: 'Admin Panel - Cúria Digital',
+                    page_location: window.location.href,
+                    content_group1: 'Admin',
+                    content_group2: 'Private'
+                });
+                
+                // Setup admin-specific tracking
+                setupAdminTracking();
+            }
+        });
+        
+        function setupAdminTracking() {
+            // Track CMS actions
+            document.addEventListener('click', function(e) {
+                const target = e.target;
+                
+                // Track button clicks
+                if (target.matches('.btn-primary, .btn-secondary, .btn-danger, .admin-btn')) {
+                    const action = target.textContent.trim();
+                    analyticsManager.trackEvent('admin_action', {
+                        action_type: 'button_click',
+                        action_name: action,
+                        section: getActiveSection()
+                    });
+                }
+                
+                // Track tab switches
+                if (target.matches('.nav-item, .admin-nav-item')) {
+                    const tabName = target.textContent.trim();
+                    analyticsManager.trackEvent('admin_navigation', {
+                        tab_name: tabName,
+                        navigation_type: 'tab_switch'
+                    });
+                }
+            });
+            
+            // Track form submissions
+            document.addEventListener('submit', function(e) {
+                const form = e.target;
+                const formType = form.id || form.className || 'unknown_form';
+                
+                analyticsManager.trackEvent('admin_form_submit', {
+                    form_type: formType,
+                    section: getActiveSection()
+                });
+            });
+            
+            // Track content management actions
+            window.trackContentAction = function(action, contentType, contentId) {
+                analyticsManager.trackEvent('content_management', {
+                    action: action, // create, edit, delete, publish, schedule
+                    content_type: contentType,
+                    content_id: contentId || 'new',
+                    timestamp: new Date().toISOString()
+                });
+            };
+        }
+        
+        function getActiveSection() {
+            const activeTab = document.querySelector('.nav-item.active, .admin-nav-item.active');
+            return activeTab ? activeTab.textContent.trim() : 'unknown';
+        }
+    </script>
     
     <!-- PWA Initialization -->
     <script>

@@ -44,9 +44,71 @@ async function loadPost() {
 }
 
 function renderPost(post) {
-    // Update page meta
-    document.getElementById('post-title-meta').textContent = `${post.title} - Arquidiocese de Belém do Pará`;
-    document.getElementById('post-description-meta').content = post.metaDescription || post.excerpt || extractExcerpt(post.content) || 'Arquidiocese de Belém do Pará';
+    // Update page meta using SEO Manager if available
+    const pageTitle = `${post.title} - Arquidiocese de Belém do Pará`;
+    const pageDescription = post.metaDescription || post.excerpt || extractExcerpt(post.content) || 'Arquidiocese de Belém do Pará';
+    const pageKeywords = post.tags ? post.tags.concat(['Arquidiocese', 'Belém', 'Pará']) : ['Arquidiocese', 'Belém', 'Pará', 'Igreja Católica'];
+    
+    // Update traditional meta tags
+    document.getElementById('post-title-meta').textContent = pageTitle;
+    document.getElementById('post-description-meta').content = pageDescription;
+    
+    // Use SEO Manager for comprehensive SEO updates
+    if (window.seoManager) {
+        window.seoManager.updatePageSEO({
+            title: pageTitle,
+            description: pageDescription,
+            keywords: pageKeywords,
+            author: post.author || 'Arquidiocese de Belém do Pará',
+            image: post.image || `${window.location.origin}/images/logo-arquidiocese-belem.png`,
+            structuredData: {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": post.title,
+                "description": pageDescription,
+                "author": {
+                    "@type": "Organization",
+                    "name": post.author || "Arquidiocese de Belém do Pará"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Arquidiocese de Belém do Pará",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${window.location.origin}/images/logo-arquidiocese-belem.png`
+                    }
+                },
+                "datePublished": post.createdAt ? new Date(post.createdAt.seconds * 1000).toISOString() : new Date().toISOString(),
+                "dateModified": post.updatedAt ? new Date(post.updatedAt.seconds * 1000).toISOString() : new Date().toISOString(),
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": window.location.href
+                },
+                "image": post.image || `${window.location.origin}/images/logo-arquidiocese-belem.png`,
+                "articleSection": post.category || "Religious",
+                "inLanguage": "pt-BR"
+            }
+        });
+    } else {
+        // Fallback to manual meta tag updates
+        updateFallbackMetaTags(post);
+    }
+
+    // Update SEO meta tags
+    if (typeof window.updatePostSEO === 'function') {
+        window.updatePostSEO({
+            id: postId,
+            title: post.title,
+            content: post.content,
+            excerpt: post.excerpt || extractExcerpt(post.content),
+            featuredImage: post.featuredImage,
+            category: post.category,
+            tags: post.tags,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            publishedAt: post.publishedAt || post.createdAt
+        });
+    }
 
     // Render post content
     const container = document.getElementById('post-container');
@@ -94,6 +156,53 @@ function renderPost(post) {
             <a href="index.html#noticias-recentes" class="btn-back">← Voltar às Notícias</a>
         </div>
     `;
+}
+
+function updateFallbackMetaTags(post) {
+    // Manual meta tag updates when SEO Manager is not available
+    const pageDescription = post.metaDescription || post.excerpt || extractExcerpt(post.content) || 'Arquidiocese de Belém do Pará';
+    
+    // Update Open Graph
+    document.getElementById('og-title').content = `${post.title} - Arquidiocese de Belém do Pará`;
+    document.getElementById('og-description').content = pageDescription;
+    document.getElementById('og-url').content = window.location.href;
+    document.getElementById('og-image').content = post.image || `${window.location.origin}/images/logo-arquidiocese-belem.png`;
+    
+    // Update Twitter Cards
+    document.getElementById('twitter-title').content = `${post.title} - Arquidiocese de Belém do Pará`;
+    document.getElementById('twitter-description').content = pageDescription;
+    document.getElementById('twitter-image').content = post.image || `${window.location.origin}/images/logo-arquidiocese-belem.png`;
+    
+    // Update Structured Data
+    const structuredDataScript = document.getElementById('structured-data');
+    if (structuredDataScript) {
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "description": pageDescription,
+            "author": {
+                "@type": "Organization",
+                "name": post.author || "Arquidiocese de Belém do Pará"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Arquidiocese de Belém do Pará",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": `${window.location.origin}/images/logo-arquidiocese-belem.png`
+                }
+            },
+            "datePublished": post.createdAt ? new Date(post.createdAt.seconds * 1000).toISOString() : new Date().toISOString(),
+            "dateModified": post.updatedAt ? new Date(post.updatedAt.seconds * 1000).toISOString() : new Date().toISOString(),
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location.href
+            },
+            "image": post.image || `${window.location.origin}/images/logo-arquidiocese-belem.png`
+        };
+        structuredDataScript.textContent = JSON.stringify(structuredData, null, 2);
+    }
 }
 
 function showError(message) {

@@ -5,8 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arquidiocese de Belém do Pará - Habbo</title>
 
-    <!-- PWA Meta Tags -->
+    <!-- SEO Meta Tags -->
     <meta name="description" content="Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia. Notícias, eventos e orientações pastorais.">
+    <meta name="keywords" content="Arquidiocese, Belém, Pará, Igreja Católica, Amazônia, Pastoral, Fé, Comunidade">
+    <meta name="author" content="Arquidiocese de Belém do Pará">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://arquidiocese-belem.web.app/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia">
+    <meta property="og:description" content="Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia. Notícias, eventos e orientações pastorais.">
+    <meta property="og:image" content="https://arquidiocese-belem.web.app/images/logo-arquidiocese-belem.png">
+    <meta property="og:url" content="https://arquidiocese-belem.web.app/">
+    <meta property="og:site_name" content="Arquidiocese de Belém do Pará">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia">
+    <meta name="twitter:description" content="Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia. Notícias, eventos e orientações pastorais.">
+    <meta name="twitter:image" content="https://arquidiocese-belem.web.app/images/logo-arquidiocese-belem.png">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ReligiousOrganization",
+        "name": "Arquidiocese de Belém do Pará",
+        "description": "Igreja Mãe da Amazônia - Portal oficial da Arquidiocese de Belém do Pará",
+        "url": "https://arquidiocese-belem.web.app/",
+        "logo": "https://arquidiocese-belem.web.app/images/logo-arquidiocese-belem.png",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Belém",
+            "addressRegion": "PA",
+            "addressCountry": "BR"
+        },
+        "sameAs": [
+            "https://www.facebook.com/arquidiocesebelem",
+            "https://www.instagram.com/arquidiocesebelem"
+        ]
+    }
+    </script>
+
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -255,7 +298,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Core Scripts -->
     <script src="js/multi-site-template.js" type="module" defer></script>
     <script src="js/main.js" type="module" defer></script>
     <script src="js/darkmode.js" defer></script>
@@ -263,11 +306,10 @@
     <!-- PWA Scripts -->
     <script src="js/pwa-manager.js" defer></script>
     
-    <!-- Scripts -->
-    <script type="module" src="js/multi-site-template.js"></script>
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/darkmode.js"></script>
-    <script type="module" src="js/pwa-manager.js"></script>
+    <!-- Analytics & SEO Scripts -->
+    <script type="module" src="js/analytics-manager.js" defer></script>
+    <script type="module" src="js/seo-manager.js" defer></script>
+    <script type="module" src="js/sitemap-generator.js" defer></script>
     
     <!-- PWA Initialization -->
     <script>
@@ -366,6 +408,80 @@
             setTimeout(() => {
                 onlineToast.remove();
             }, 3000);
+        }
+    </script>
+
+    <!-- Analytics Manager -->
+    <script src="js/analytics-manager.js"></script>
+    <script>
+        // Initialize page-specific analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.analyticsManager) {
+                // Track homepage view with enhanced data
+                analyticsManager.trackEvent('page_view', {
+                    page_title: 'Homepage - Arquidiocese de Belém do Pará',
+                    page_location: window.location.href,
+                    content_group1: 'Homepage',
+                    content_group2: 'Main',
+                    site_type: 'religious_organization'
+                });
+                
+                // Track homepage engagement
+                analyticsManager.trackContentEngagement('homepage', 'view');
+                
+                // Setup homepage-specific tracking
+                setupHomepageTracking();
+            }
+            
+            // Initialize SEO Manager for dynamic updates
+            if (window.seoManager) {
+                console.log('🔍 SEO Manager disponível na homepage');
+                
+                // Example: Update meta tags when content loads
+                setTimeout(() => {
+                    if (window.seoManager) {
+                        window.seoManager.updatePageSEO({
+                            title: 'Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia',
+                            description: 'Portal oficial da Arquidiocese de Belém do Pará. Notícias, decretos, eventos e orientações pastorais da Igreja Mãe da Amazônia.',
+                            keywords: ['Arquidiocese', 'Belém', 'Pará', 'Igreja Católica', 'Amazônia', 'Notícias', 'Decretos']
+                        });
+                    }
+                }, 1000);
+            }
+        });
+        
+        function setupHomepageTracking() {
+            // Track hero section engagement
+            const heroSection = document.querySelector('.hero-section, .destaque-principal');
+            if (heroSection) {
+                analyticsManager.trackScrollDepth(heroSection, 'hero_section');
+            }
+            
+            // Track news/posts clicks
+            document.querySelectorAll('[data-post-id], .post-link, .noticia-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    const postId = this.dataset.postId || 'unknown';
+                    const postTitle = this.textContent.trim() || 'Untitled';
+                    
+                    analyticsManager.trackEvent('content_click', {
+                        content_type: 'post',
+                        content_id: postId,
+                        content_title: postTitle,
+                        click_source: 'homepage'
+                    });
+                });
+            });
+            
+            // Track navigation usage
+            document.querySelectorAll('.nav-menu a, .navegacao-principal a').forEach(link => {
+                link.addEventListener('click', function() {
+                    analyticsManager.trackEvent('navigation_click', {
+                        link_text: this.textContent.trim(),
+                        link_url: this.href,
+                        navigation_source: 'main_menu'
+                    });
+                });
+            });
         }
     </script>
 </body>
