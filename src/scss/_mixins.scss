@@ -1,0 +1,212 @@
+// src/scss/_mixins.scss
+
+@use 'variables' as v;
+
+// ------------------------------
+// MIXINS PARA MOBILE-FIRST
+// ------------------------------
+
+// Touch-friendly target sizes (minimum 44px x 44px)
+@mixin touch-target($size: 44px) {
+  min-width: $size;
+  min-height: $size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Safe area insets for notched devices
+@mixin safe-area-padding($property: padding, $side: all) {
+  @if $side == all {
+    #{$property}: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  } @else if $side == top {
+    #{$property}-top: env(safe-area-inset-top);
+  } @else if $side == bottom {
+    #{$property}-bottom: env(safe-area-inset-bottom);
+  } @else if $side == left {
+    #{$property}-left: env(safe-area-inset-left);
+  } @else if $side == right {
+    #{$property}-right: env(safe-area-inset-right);
+  }
+}
+
+// Mobile-first media queries
+@mixin mobile-up($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin mobile-down($breakpoint) {
+  @media (max-width: ($breakpoint - 1px)) {
+    @content;
+  }
+}
+
+@mixin between($min-width, $max-width) {
+  @media (min-width: $min-width) and (max-width: ($max-width - 1px)) {
+    @content;
+  }
+}
+
+// Fluid typography
+@mixin fluid-type($min-size, $max-size, $min-vw: v.$bp-xs, $max-vw: v.$bp-desktop) {
+  font-size: clamp(#{$min-size}, calc(#{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw}))), #{$max-size});
+}
+
+// Touch-friendly hover states
+@mixin hover-focus {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+  
+  &:focus-visible {
+    @content;
+  }
+}
+
+// Smooth animations for mobile
+@mixin mobile-animation($duration: 0.3s, $easing: ease-out) {
+  transition: all $duration $easing;
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// Container with mobile padding
+@mixin container-mobile {
+  max-width: v.$container-max-width;
+  margin: 0 auto;
+  padding: 0 1rem;
+  
+  @include mobile-up(v.$bp-sm) {
+    padding: 0 1.5rem;
+  }
+  
+  @include mobile-up(v.$bp-tablet) {
+    padding: 0 2rem;
+  }
+  
+  @include mobile-up(v.$bp-laptop) {
+    padding: 0 3rem;
+  }
+}
+
+// Grid system mobile-first
+@mixin grid-mobile($columns: 1, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  
+  @include mobile-up(v.$bp-sm) {
+    gap: 1.5rem;
+  }
+  
+  @include mobile-up(v.$bp-tablet) {
+    gap: 2rem;
+  }
+}
+
+// Scroll snap for mobile carousels
+@mixin scroll-snap-x {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  & > * {
+    scroll-snap-align: start;
+  }
+}
+
+// Sticky position with safe area
+@mixin sticky-safe($top: 0) {
+  position: sticky;
+  top: calc(#{$top} + env(safe-area-inset-top));
+}
+
+// Bottom sheet style for mobile modals
+@mixin bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  background: var(--cor-fundo-secao-clara);
+  
+  @include safe-area-padding(padding, bottom);
+  
+  @include mobile-up(v.$bp-tablet) {
+    position: relative;
+    border-radius: v.$border-radius-padrao;
+    box-shadow: var(--box-shadow-cards);
+  }
+}
+
+// Mobile navigation drawer
+@mixin mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 280px;
+  height: 100vh;
+  background: var(--cor-fundo-secao-clara);
+  z-index: 1001;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  
+  @include safe-area-padding(padding, top);
+  
+  &.open {
+    left: 0;
+  }
+  
+  @include mobile-up(v.$bp-tablet) {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    overflow-y: visible;
+    left: 0;
+  }
+}
+
+// Accessible focus outline
+@mixin focus-outline($color: v.$cor-primaria) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+  
+  @media (prefers-reduced-motion: no-preference) {
+    transition: outline-offset 0.2s ease;
+  }
+}
+
+// High contrast mode support
+@mixin high-contrast {
+  @media (prefers-contrast: high) {
+    @content;
+  }
+}
+
+// Dark mode preference
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+  
+  [data-theme="dark"] & {
+    @content;
+  }
+}
+
+// PWA viewport adjustments
+@mixin pwa-viewport {
+  @media (display-mode: standalone) {
+    @content;
+  }
+}

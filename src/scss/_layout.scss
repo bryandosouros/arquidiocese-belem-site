@@ -1,6 +1,7 @@
 // src/scss/_layout.scss
 @use 'sass:color'; // Garantindo que está aqui para color.adjust
 @use 'variables' as v;
+@use 'mixins' as m;
 
 // ------------------------------
 // CONTAINER GLOBAL
@@ -15,7 +16,7 @@
 }
 
 // ------------------------------
-// HEADER (Estilo Vaticano Sóbrio)
+// HEADER (Mobile-First Enhanced)
 // ------------------------------
 .site-header {
   background-color: var(--cor-fundo-secao-clara);
@@ -26,11 +27,13 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+  @include m.safe-area-padding(padding, top);
 
   .container-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include m.container-mobile;
   }
 
   .logo-area a {
@@ -133,6 +136,7 @@
     cursor: pointer;
     padding: 0;
     z-index: 1050;
+    @include m.touch-target();
 
     .hamburger-linha {
       width: 100%;
@@ -143,21 +147,54 @@
     }
   }
 
+  // Mobile Navigation Overlay
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+    
+    &.open {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   @media (max-width: (v.$bp-desktop - 1px)) {
     .menu-lista-principal {
       display: none;
       &.aberto {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
+        position: fixed;
+        top: 80px; // Altura do header
+        right: 0;
         width: 100%;
+        max-width: 320px;
+        height: calc(100vh - 80px);
         background-color: v.$cor-fundo-secao-clara;
-        box-shadow: v.$box-shadow-medio;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
         padding: v.$espacamento-base 0;
         z-index: 999;
-        border-top: 1px solid v.$cor-bordas;
+        border-left: 1px solid v.$cor-bordas;
+        overflow-y: auto;
+        @include m.mobile-animation(0.3s, ease);
+        @include m.safe-area-padding(padding, top);
+        @include m.safe-area-padding(padding, bottom);
+        
+        @media (max-width: v.$bp-sm) {
+          width: 100%;
+          max-width: none;
+          top: 70px;
+          height: calc(100vh - 70px);
+        }
 
         li {
           margin: 0;
@@ -166,23 +203,48 @@
         }
 
         a {
-          display: block;
-          padding: (v.$espacamento-base * 0.75) (v.$espacamento-base * 2);
+          display: flex;
+          align-items: center;
+          padding: 1rem 1.5rem;
           width: 100%;
           border-radius: 0;
           font-size: 1rem;
           text-transform: none;
           letter-spacing: normal;
+          @include m.touch-target(48px);
+          position: relative;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: v.$cor-primaria;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+          }
 
           &:hover, &:focus, &.ativo {
-            background-color: rgba(v.$cor-primaria, 0.05);
+            background-color: rgba(v.$cor-primaria, 0.08);
             color: v.$cor-primaria;
+            
+            &::before {
+              transform: scaleX(1);
+            }
+          }
+          
+          &:focus-visible {
+            @include m.focus-outline();
           }
         }
       }
     }
     .menu-hamburger {
       display: flex;
+      @include m.touch-target();
     }
   }
 }

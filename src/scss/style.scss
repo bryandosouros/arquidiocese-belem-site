@@ -7,11 +7,17 @@
 // 2. Módulo de Cor do Sass (se algum arquivo aqui usar color.adjust diretamente, o que não é o caso)
 // @use 'sass:color'; // Geralmente não precisa no arquivo principal se os parciais já usam
 
-// 3. Estilos Base e Reset
+// 3. Mixins (importado primeiro para uso nos outros módulos)
+@use 'mixins';
+
+// 4. Estilos Base e Reset
 @use 'base';
 
-// 4. Componentes de Layout Principais
+// 5. Componentes de Layout Principais
 @use 'layout';
+
+// 6. Mobile UX Enhancements - Release 6A
+@use 'mobile-ux';
 
 // Se você tiver outros parciais, importe-os com @use também:
 // @use 'components/buttons';

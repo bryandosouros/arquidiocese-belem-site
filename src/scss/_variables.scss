@@ -48,12 +48,21 @@ $peso-semibold: 600;
 $peso-bold: 700;
 
 // ------------------------------
-// BREAKPOINTS
+// BREAKPOINTS - Mobile First Enhanced
 // ------------------------------
-$bp-mobile: 576px;
-$bp-tablet: 768px;
-$bp-desktop: 992px;
-$bp-desktop-grande: 1200px;
+$bp-xs: 320px;      // Extra small phones
+$bp-sm: 375px;      // Small phones (iPhone SE)
+$bp-md: 414px;      // Medium phones (iPhone Pro)
+$bp-lg: 576px;      // Large phones / Small tablets
+$bp-tablet: 768px;  // Tablets
+$bp-laptop: 1024px; // Laptops
+$bp-desktop: 1200px; // Desktop
+$bp-xl: 1440px;     // Large desktop
+
+// Legacy breakpoints (mantidos para compatibilidade)
+$bp-mobile: $bp-lg;
+$bp-desktop: $bp-laptop;
+$bp-desktop-grande: $bp-desktop;
 
 // ------------------------------
 // OUTRAS VARIÁVEIS

@@ -100,6 +100,56 @@
                     <p>Carregando conteúdo...</p>
                 </div>
             </article>
+            
+            <!-- Comments Section -->
+            <section id="comments-section" class="comments-section section-engagement">
+                <div class="comments-header">
+                    <h3 class="comments-title">
+                        <span class="comments-icon">💬</span>
+                        Comentários
+                    </h3>
+                    <div class="comments-stats">
+                        <span id="comments-count">0</span> comentários
+                    </div>
+                </div>
+                
+                <!-- Comments Form Container -->
+                <div id="comments-form-container" class="comments-form-container">
+                    <!-- Form will be dynamically created by comment-system.js -->
+                </div>
+                
+                <!-- Comments List Container -->
+                <div id="comments-list-container" class="comments-list-container">
+                    <!-- Comments will be dynamically loaded by comment-system.js -->
+                </div>
+            </section>
+            
+            <!-- Social Share Section -->
+            <section id="post-share-section" class="post-share-section section-engagement">
+                <div class="share-header">
+                    <h3 class="share-title">Compartilhar este conteúdo</h3>
+                </div>
+                <div class="social-share-container">
+                    <button class="social-share-btn facebook share-btn" data-platform="facebook">
+                        <span>📘</span> Facebook
+                    </button>
+                    <button class="social-share-btn twitter share-btn" data-platform="twitter">
+                        <span>🐦</span> Twitter
+                    </button>
+                    <button class="social-share-btn whatsapp share-btn" data-platform="whatsapp">
+                        <span>💬</span> WhatsApp
+                    </button>
+                    <button class="social-share-btn telegram share-btn" data-platform="telegram">
+                        <span>✈️</span> Telegram
+                    </button>
+                    <button class="social-share-btn email share-btn" data-platform="email">
+                        <span>📧</span> Email
+                    </button>
+                    <button class="social-share-btn copy share-btn" data-platform="copy">
+                        <span>📋</span> Copiar Link
+                    </button>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -123,13 +173,54 @@
         </div>
     </footer>
 
+    <!-- Push Notification Modal -->
+    <div id="push-notification-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔔 Receber Notificações</h3>
+                <button class="modal-close" onclick="this.closest('.modal').style.display='none'">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Gostou deste conteúdo? Receba notificações sobre novos posts, eventos e comunicados da Arquidiocese.</p>
+                <div class="notification-benefits">
+                    <ul>
+                        <li>✅ Novos posts e artigos</li>
+                        <li>📅 Eventos importantes</li>
+                        <li>📋 Comunicados oficiais</li>
+                        <li>🙏 Momentos de oração</li>
+                    </ul>
+                </div>
+                <div class="notification-controls">
+                    <button id="enable-notifications" class="btn btn-primary">
+                        Ativar Notificações
+                    </button>
+                    <button class="btn btn-secondary" onclick="this.closest('.modal').style.display='none'">
+                        Talvez Depois
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/post.js"></script>
     <script src="js/darkmode.js" defer></script>
+    
+    <!-- Mobile UX Enhancement - Release 6A -->
+    <script src="js/mobile-ux.js" defer></script>
+    <script src="js/mobile-gestures.js" defer></script>
+    <script src="js/mobile-forms.js" defer></script>
     
     <!-- Analytics & SEO Scripts -->
     <script type="module" src="js/analytics-manager.js"></script>
     <script type="module" src="js/seo-manager.js"></script>
     <script type="module" src="js/sitemap-generator.js"></script>
+    
+    <!-- Engagement & Interaction Scripts -->
+    <script type="module" src="js/comment-system.js"></script>
+    <script type="module" src="js/newsletter-system.js"></script>
+    <script type="module" src="js/whatsapp-integration.js"></script>
+    <script type="module" src="js/push-notification-manager.js"></script>
+    <script type="module" src="js/notification-system.js"></script>
     
     <!-- Analytics Manager -->
     <script src="js/analytics-manager.js"></script>
@@ -255,7 +346,166 @@
                     content_category: post.category
                 });
             }
+            
+            // Initialize Engagement Systems for this post
+            initializePostEngagement(post);
         };
+        
+        // Initialize engagement systems for post page
+        function initializePostEngagement(post) {
+            try {
+                // Initialize Comments for this post
+                if (window.commentSystem) {
+                    const commentsSection = document.getElementById('comments-section');
+                    if (commentsSection && post.id) {
+                        window.commentSystem.loadComments(post.id);
+                    }
+                }
+                
+                // Initialize Social Sharing with post data
+                if (window.whatsappIntegration) {
+                    // Add WhatsApp share button specifically for this post
+                    const whatsappShareBtn = document.querySelector('.social-share-btn.whatsapp');
+                    if (whatsappShareBtn) {
+                        whatsappShareBtn.addEventListener('click', () => {
+                            const shareText = `${post.title}\n\n${post.excerpt || 'Confira este conteúdo da Arquidiocese de Belém do Pará'}\n\n${window.location.href}`;
+                            window.whatsappIntegration.sendWhatsAppMessage(shareText);
+                        });
+                    }
+                }
+                
+                // Setup sharing for all platforms
+                setupPostSharing(post);
+                
+                // Show push notification prompt if user reads enough
+                setupPushNotificationPrompt(post);
+                
+                console.log('✅ Post engagement systems initialized');
+            } catch (error) {
+                console.error('❌ Error initializing post engagement systems:', error);
+            }
+        }
+        
+        // Setup sharing functionality
+        function setupPostSharing(post) {
+            const shareData = {
+                title: post.title,
+                text: post.excerpt || 'Confira este conteúdo da Arquidiocese de Belém do Pará',
+                url: window.location.href
+            };
+            
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const platform = btn.dataset.platform;
+                    
+                    switch (platform) {
+                        case 'facebook':
+                            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`, '_blank');
+                            break;
+                        case 'twitter':
+                            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
+                            break;
+                        case 'whatsapp':
+                            window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`, '_blank');
+                            break;
+                        case 'telegram':
+                            window.open(`https://t.me/share/url?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`, '_blank');
+                            break;
+                        case 'email':
+                            window.location.href = `mailto:?subject=${encodeURIComponent(shareData.title)}&body=${encodeURIComponent(shareData.text + '\n\n' + shareData.url)}`;
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(shareData.url).then(() => {
+                                if (window.notificationSystem) {
+                                    window.notificationSystem.createNotification({
+                                        type: 'success',
+                                        title: 'Link Copiado',
+                                        message: 'O link foi copiado para a área de transferência!',
+                                        icon: '📋'
+                                    });
+                                }
+                            });
+                            break;
+                    }
+                    
+                    // Track share event
+                    if (window.analyticsManager) {
+                        window.analyticsManager.trackEvent('share', {
+                            method: platform,
+                            content_type: 'post',
+                            content_id: post.id,
+                            content_title: post.title
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Setup push notification prompt based on reading engagement
+        function setupPushNotificationPrompt(post) {
+            if (!window.pushNotificationManager) return;
+            
+            let hasScrolledEnough = false;
+            let timeOnPage = 0;
+            
+            // Track time on page
+            const timeInterval = setInterval(() => {
+                timeOnPage += 1000; // 1 second
+            }, 1000);
+            
+            // Track scroll depth
+            window.addEventListener('scroll', () => {
+                const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                
+                if (scrollPercent > 60 && !hasScrolledEnough) {
+                    hasScrolledEnough = true;
+                    
+                    // Show notification prompt if user has read enough and spent time
+                    setTimeout(() => {
+                        if (timeOnPage > 30000 && !localStorage.getItem('pushNotificationAsked')) { // 30 seconds
+                            showPushNotificationPrompt();
+                        }
+                    }, 5000);
+                }
+            });
+            
+            // Cleanup interval when leaving page
+            window.addEventListener('beforeunload', () => {
+                clearInterval(timeInterval);
+            });
+        }
+        
+        function showPushNotificationPrompt() {
+            const modal = document.getElementById('push-notification-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                
+                // Enable notifications button
+                const enableBtn = document.getElementById('enable-notifications');
+                enableBtn.addEventListener('click', async () => {
+                    try {
+                        const success = await window.pushNotificationManager.enableNotifications();
+                        if (success) {
+                            if (window.notificationSystem) {
+                                window.notificationSystem.createNotification({
+                                    type: 'success',
+                                    title: 'Notificações Ativadas',
+                                    message: 'Você receberá notificações sobre novos conteúdos!',
+                                    icon: '🔔'
+                                });
+                            }
+                        }
+                        modal.style.display = 'none';
+                    } catch (error) {
+                        console.error('Error enabling notifications:', error);
+                    }
+                });
+                
+                // Mark as asked
+                localStorage.setItem('pushNotificationAsked', 'true');
+            }
+        }
     </script>
 </body>
 </html>

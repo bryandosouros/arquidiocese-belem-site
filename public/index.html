@@ -2,8 +2,34 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquidiocese de Belém do Pará - Habbo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia</title>
+
+    <!-- Mobile-Specific Meta Tags -->
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    
+    <!-- iOS Safari Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Arquidiocese">
+    <meta name="apple-touch-fullscreen" content="yes">
+    
+    <!-- Android Chrome Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Arquidiocese">
+    
+    <!-- Windows Tile Meta Tags -->
+    <meta name="msapplication-TileColor" content="#1a365d">
+    <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="msapplication-starturl" content="/">
+    
+    <!-- PWA Theme Color -->
+    <meta name="theme-color" content="#1a365d" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#2d3748" media="(prefers-color-scheme: dark)">
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia. Notícias, eventos e orientações pastorais.">
@@ -49,14 +75,6 @@
     }
     </script>
 
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#1a365d">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Arquidiocese">
-    <meta name="msapplication-TileColor" content="#1a365d">
-    <meta name="msapplication-config" content="browserconfig.xml">
-
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 
@@ -73,6 +91,197 @@
     <link rel="stylesheet" href="css/style.css">
     
     <!-- Multi-Site Template CSS will be loaded dynamically -->
+    
+    <!-- Engagement & Newsletter Styles -->
+    <style>
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--cor-primaria-dourada, #d4af37) 0%, var(--cor-secundaria-azul, #1a365d) 100%);
+            color: white;
+            padding: 4rem 0;
+            margin: 2rem 0;
+        }
+        
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .newsletter-icon {
+            font-size: 2rem;
+        }
+        
+        .newsletter-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .newsletter-form-container,
+        .newsletter-preferences-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .section-engagement {
+            margin: 3rem 0;
+        }
+        
+        /* Social Share Buttons */
+        .social-share-container {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .social-share-btn.facebook { background: #1877f2; }
+        .social-share-btn.twitter { background: #1da1f2; }
+        .social-share-btn.whatsapp { background: #25d366; }
+        .social-share-btn.telegram { background: #0088cc; }
+        .social-share-btn.email { background: #666; }
+        .social-share-btn.copy { background: #8b5cf6; }
+        
+        /* WhatsApp Integration */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25d366;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-icon {
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .newsletter-title {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .whatsapp-btn span:not(.whatsapp-icon) {
+                display: none;
+            }
+            
+            .whatsapp-btn {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                padding: 0;
+                justify-content: center;
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--cor-secundaria-azul, #1a365d);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .modal-close:hover {
+            background: #f3f4f6;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+    </style>
 </head>
 <body class="site-transition">
     <header id="cabecalho-principal" class="site-header header-main">
@@ -173,6 +382,34 @@
                         <span class="welcome-message">Bem-vindos à Casa do Pai</span>
                     </h2>
                     <p class="mission-statement">Evangelizar e servir o povo de Deus na Amazônia</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription Section -->
+        <section id="newsletter-section" class="newsletter-section section-engagement">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-header">
+                        <h2 class="newsletter-title">
+                            <span class="newsletter-icon">📧</span>
+                            Receba Nossas Atualizações
+                        </h2>
+                        <p class="newsletter-description">
+                            Mantenha-se informado sobre decretos, eventos e novidades da Arquidiocese de Belém do Pará. 
+                            Receba diretamente em seu e-mail as informações mais importantes da nossa comunidade.
+                        </p>
+                    </div>
+                    
+                    <!-- Newsletter Subscription Form -->
+                    <div id="newsletter-form-container" class="newsletter-form-container">
+                        <!-- Form will be dynamically created by newsletter-system.js -->
+                    </div>
+                    
+                    <!-- Newsletter Preferences (shown after subscription) -->
+                    <div id="newsletter-preferences-container" class="newsletter-preferences-container" style="display: none;">
+                        <!-- Preferences will be dynamically created by newsletter-system.js -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -298,10 +535,28 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Business Integration -->
+    <div class="whatsapp-widget">
+        <a href="#" id="whatsapp-btn" class="whatsapp-btn" title="Fale conosco pelo WhatsApp">
+            <span class="whatsapp-icon">💬</span>
+            <span>Fale Conosco</span>
+        </a>
+    </div>
+
+    <!-- Social Share Modal (will be created dynamically) -->
+    <div id="social-share-modal" class="modal" style="display: none;">
+        <!-- Modal content will be created by social sharing system -->
+    </div>
+
     <!-- Core Scripts -->
     <script src="js/multi-site-template.js" type="module" defer></script>
     <script src="js/main.js" type="module" defer></script>
     <script src="js/darkmode.js" defer></script>
+    
+    <!-- Mobile UX Enhancement - Release 6A -->
+    <script src="js/mobile-ux.js" defer></script>
+    <script src="js/mobile-gestures.js" defer></script>
+    <script src="js/mobile-forms.js" defer></script>
     
     <!-- PWA Scripts -->
     <script src="js/pwa-manager.js" defer></script>
@@ -310,6 +565,13 @@
     <script type="module" src="js/analytics-manager.js" defer></script>
     <script type="module" src="js/seo-manager.js" defer></script>
     <script type="module" src="js/sitemap-generator.js" defer></script>
+    
+    <!-- Engagement & Interaction Scripts -->
+    <script type="module" src="js/newsletter-system.js" defer></script>
+    <script type="module" src="js/comment-system.js" defer></script>
+    <script type="module" src="js/whatsapp-integration.js" defer></script>
+    <script type="module" src="js/push-notification-manager.js" defer></script>
+    <script type="module" src="js/notification-system.js" defer></script>
     
     <!-- PWA Initialization -->
     <script>
@@ -449,6 +711,151 @@
                 }, 1000);
             }
         });
+        
+        // Initialize Newsletter and Engagement Systems
+        window.addEventListener('load', async () => {
+            try {
+                // Initialize Newsletter System
+                const { NewsletterSystem } = await import('./js/newsletter-system.js');
+                window.newsletterSystem = new NewsletterSystem();
+                
+                const formContainer = document.getElementById('newsletter-form-container');
+                const preferencesContainer = document.getElementById('newsletter-preferences-container');
+                
+                if (formContainer) {
+                    await window.newsletterSystem.initializeForm(formContainer, preferencesContainer);
+                }
+                
+                // Initialize WhatsApp Business Integration
+                initializeWhatsAppWidget();
+                
+                // Initialize Social Sharing
+                initializeSocialSharing();
+                
+                console.log('✅ Engagement systems initialized');
+            } catch (error) {
+                console.error('❌ Error initializing engagement systems:', error);
+            }
+        });
+        
+        function initializeWhatsAppWidget() {
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            if (whatsappBtn) {
+                // WhatsApp Business number (replace with actual number)
+                const phoneNumber = '5591999999999'; // Format: country code + area code + number
+                const defaultMessage = 'Olá! Gostaria de mais informações sobre a Arquidiocese de Belém do Pará.';
+                
+                whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
+                
+                // Track WhatsApp clicks
+                whatsappBtn.addEventListener('click', () => {
+                    if (window.analyticsManager) {
+                        window.analyticsManager.trackEvent('whatsapp_click', {
+                            source: 'homepage_widget',
+                            phone_number: phoneNumber
+                        });
+                    }
+                });
+            }
+        }
+        
+        function initializeSocialSharing() {
+            // Create social share buttons for homepage
+            const shareData = {
+                title: 'Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia',
+                text: 'Conheça o portal oficial da Arquidiocese de Belém do Pará',
+                url: window.location.href
+            };
+            
+            // Add share functionality to the page
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('.share-btn') || e.target.closest('.share-btn')) {
+                    e.preventDefault();
+                    showSocialShareModal(shareData);
+                }
+            });
+        }
+        
+        function showSocialShareModal(data) {
+            const modal = document.getElementById('social-share-modal');
+            if (!modal) return;
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Compartilhar</h3>
+                        <button class="modal-close" onclick="this.closest('.modal').style.display='none'">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="social-share-container">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.url)}" 
+                               target="_blank" class="social-share-btn facebook">
+                                <span>📘</span> Facebook
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(data.text)}&url=${encodeURIComponent(data.url)}" 
+                               target="_blank" class="social-share-btn twitter">
+                                <span>🐦</span> Twitter
+                            </a>
+                            <a href="https://wa.me/?text=${encodeURIComponent(data.text + ' ' + data.url)}" 
+                               target="_blank" class="social-share-btn whatsapp">
+                                <span>💬</span> WhatsApp
+                            </a>
+                            <a href="https://t.me/share/url?url=${encodeURIComponent(data.url)}&text=${encodeURIComponent(data.text)}" 
+                               target="_blank" class="social-share-btn telegram">
+                                <span>✈️</span> Telegram
+                            </a>
+                            <a href="mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(data.text + ' ' + data.url)}" 
+                               class="social-share-btn email">
+                                <span>📧</span> Email
+                            </a>
+                            <button onclick="copyToClipboard('${data.url}')" class="social-share-btn copy">
+                                <span>📋</span> Copiar Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+            
+            // Track social share modal open
+            if (window.analyticsManager) {
+                window.analyticsManager.trackEvent('social_share_modal_open', {
+                    page_title: data.title,
+                    page_url: data.url
+                });
+            }
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success message
+                const btn = event.target.closest('.copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span>✅</span> Copiado!';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+                
+                // Track copy action
+                if (window.analyticsManager) {
+                    window.analyticsManager.trackEvent('link_copied', {
+                        url: text,
+                        source: 'social_share_modal'
+                    });
+                }
+            }).catch(err => {
+                console.error('Error copying to clipboard:', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
         
         function setupHomepageTracking() {
             // Track hero section engagement

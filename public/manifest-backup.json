@@ -1,0 +1,266 @@
+{
+  "name": "Arquidiocese de Belém do Pará",
+  "short_name": "Arquidiocese",
+  "description": "Portal oficial da Arquidiocese de Belém do Pará - Igreja Mãe da Amazônia",
+  "version": "6.0.0",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1a365d",
+  "background_color": "#ffffff",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  
+  "categories": ["religion", "lifestyle", "education"],
+  
+  "shortcuts": [
+    {
+      "name": "Últimas Notícias",
+      "short_name": "Notícias",
+      "description": "Ver as últimas notícias da Arquidiocese",
+      "url": "/?section=noticias",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-news.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Eventos",
+      "short_name": "Eventos",
+      "description": "Próximos eventos e atividades",
+      "url": "/?section=eventos",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-events.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Contato",
+      "short_name": "Contato",
+      "description": "Entre em contato conosco",
+      "url": "/?section=contato",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-contact.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Área Admin",
+      "short_name": "Admin",
+      "description": "Área administrativa (requer login)",
+      "url": "/admin.html",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-admin.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  
+  "icons": [
+    {
+      "src": "images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Notícias",
+      "short_name": "Notícias",
+      "description": "Ver últimas notícias e decretos",
+      "url": "/#noticias",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-news.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Painel Admin",
+      "short_name": "Admin",
+      "description": "Acesso ao painel administrativo",
+      "url": "/admin.html",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-admin.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "RCC Belém",
+      "short_name": "RCC",
+      "description": "Portal da Renovação Carismática",
+      "url": "/?site=rcc",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-rcc.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Comunidade Shalom",
+      "short_name": "Shalom",
+      "description": "Portal da Comunidade Shalom",
+      "url": "/?site=shalom",
+      "icons": [
+        {
+          "src": "images/icons/shortcut-shalom.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  
+  "categories": [
+    "lifestyle",
+    "news",
+    "religion",
+    "social"
+  ],
+  
+  "screenshots": [
+    {
+      "src": "images/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homepage da Arquidiocese no desktop"
+    },
+    {
+      "src": "images/screenshots/mobile-home.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Homepage da Arquidiocese no mobile"
+    },
+    {
+      "src": "images/screenshots/admin-panel.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Painel administrativo"
+    },
+    {
+      "src": "images/screenshots/multi-site.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Sistema multi-site (RCC e Shalom)"
+    }
+  ],
+  
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://belem-hb.web.app/manifest.json"
+    }
+  ],
+  
+  "prefer_related_applications": false,
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+arquidiocese",
+      "url": "/?handler=%s"
+    }
+  ],
+  
+  "file_handlers": [
+    {
+      "action": "/admin.html",
+      "accept": {
+        "text/plain": [".txt"],
+        "text/markdown": [".md"]
+      }
+    }
+  ],
+  
+  "share_target": {
+    "action": "/admin.html?share=true",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*", "text/*"]
+        }
+      ]
+    }
+  }
+}

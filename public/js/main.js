@@ -38,20 +38,79 @@ document.addEventListener('DOMContentLoaded', function() {
         anoAtualSpan.textContent = new Date().getFullYear();
     }
 
-    // Lógica para o menu hambúrguer
+    // Mobile-Enhanced Navigation Logic
     const menuHamburger = document.querySelector('.menu-hamburger');
     const menuListaPrincipal = document.getElementById('menu-lista-principal');
+    const navegacaoPrincipal = document.querySelector('.navegacao-principal');
     const body = document.body;
 
-    if (menuHamburger && menuListaPrincipal) {
-        menuHamburger.addEventListener('click', function() {
+    if (menuHamburger && menuListaPrincipal && navegacaoPrincipal) {
+        // Create mobile overlay if it doesn't exist
+        let navOverlay = navegacaoPrincipal.querySelector('.nav-overlay');
+        if (!navOverlay) {
+            navOverlay = document.createElement('div');
+            navOverlay.className = 'nav-overlay';
+            navegacaoPrincipal.appendChild(navOverlay);
+        }
+
+        // Enhanced mobile menu toggle
+        function toggleMobileMenu() {
             const isExpanded = menuHamburger.getAttribute('aria-expanded') === 'true';
+            const isOpening = !isExpanded;
 
-            menuHamburger.setAttribute('aria-expanded', String(!isExpanded));
-            menuHamburger.classList.toggle('ativo');
-            menuListaPrincipal.classList.toggle('aberto');
+            menuHamburger.setAttribute('aria-expanded', String(isOpening));
+            menuHamburger.classList.toggle('ativo', isOpening);
+            menuListaPrincipal.classList.toggle('aberto', isOpening);
+            navOverlay.classList.toggle('open', isOpening);
 
-            body.style.overflow = menuListaPrincipal.classList.contains('aberto') ? 'hidden' : '';
+            // Prevent body scroll when menu is open
+            body.style.overflow = isOpening ? 'hidden' : '';
+            
+            // Manage focus for accessibility
+            if (isOpening) {
+                const firstMenuItem = menuListaPrincipal.querySelector('a');
+                if (firstMenuItem) {
+                    setTimeout(() => firstMenuItem.focus(), 300);
+                }
+            }
+        }
+
+        // Menu button click handler
+        menuHamburger.addEventListener('click', toggleMobileMenu);
+
+        // Overlay click handler
+        navOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Enhanced keyboard navigation
+        menuHamburger.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMobileMenu();
+            }
+        });
+
+        // Close menu when clicking menu items (mobile)
+        menuListaPrincipal.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 1200) { // Mobile breakpoint
+                    setTimeout(toggleMobileMenu, 100); // Small delay for smooth UX
+                }
+            });
+        });
+
+        // Enhanced escape key handler
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menuListaPrincipal.classList.contains('aberto')) {
+                toggleMobileMenu();
+                menuHamburger.focus();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1200 && menuListaPrincipal.classList.contains('aberto')) {
+                toggleMobileMenu();
+            }
         });
     }
 

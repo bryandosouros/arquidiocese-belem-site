@@ -101,6 +101,30 @@
                             <span class="nav-text">Configurações</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#engagement" class="nav-link" data-section="engagement">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">Engajamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#comments" class="nav-link" data-section="comments">
+                            <span class="nav-icon">🗨️</span>
+                            <span class="nav-text">Comentários</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#newsletter" class="nav-link" data-section="newsletter">
+                            <span class="nav-icon">📧</span>
+                            <span class="nav-text">Newsletter</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#notifications" class="nav-link" data-section="notifications">
+                            <span class="nav-icon">🔔</span>
+                            <span class="nav-text">Notificações</span>
+                        </a>
+                    </li>
                 </ul>
                 
                 <div class="nav-divider"></div>
@@ -243,6 +267,154 @@
                 </div>
             </section>
             
+            <!-- Engagement Section -->
+            <section id="engagement-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Engajamento Geral</h2>
+                    <p class="section-subtitle">Visão geral das interações e engajamento dos fiéis</p>
+                </div>
+                
+                <div class="engagement-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-comments">0</div>
+                            <div class="stat-label">Total de Comentários</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📧</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="newsletter-subscribers">0</div>
+                            <div class="stat-label">Inscritos Newsletter</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔔</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="push-subscribers">0</div>
+                            <div class="stat-label">Push Notifications</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="whatsapp-clicks">0</div>
+                            <div class="stat-label">Cliques WhatsApp</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="engagement-grid">
+                    <div class="engagement-widget">
+                        <h3 class="widget-title">Atividade Recente</h3>
+                        <div class="activity-feed" id="recent-activity">
+                            <!-- Recent activity will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="engagement-widget">
+                        <h3 class="widget-title">Configurações Rápidas</h3>
+                        <div class="quick-settings">
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="comments-enabled" checked>
+                                    Sistema de Comentários
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="moderation-enabled" checked>
+                                    Moderação de Comentários
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="newsletter-enabled" checked>
+                                    Sistema de Newsletter
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="whatsapp-widget" checked>
+                                    Widget WhatsApp
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comments Section -->
+            <section id="comments-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Moderação de Comentários</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" id="refresh-comments">
+                            🔄 Atualizar
+                        </button>
+                        <button class="btn btn-primary" id="bulk-approve">
+                            ✅ Aprovar Selecionados
+                        </button>
+                        <button class="btn btn-danger" id="bulk-reject">
+                            ❌ Rejeitar Selecionados
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="comments-filters">
+                    <select class="filter-select" id="comment-status-filter">
+                        <option value="pending">Pendentes</option>
+                        <option value="approved">Aprovados</option>
+                        <option value="rejected">Rejeitados</option>
+                        <option value="all">Todos</option>
+                    </select>
+                    <input type="search" class="search-input" placeholder="Buscar comentários..." id="search-comments">
+                </div>
+                
+                <div class="comments-moderation" id="comments-moderation">
+                    <!-- Comments will be loaded here by comment-system.js -->
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section id="newsletter-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Sistema de Newsletter</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="create-campaign">
+                            📧 Nova Campanha
+                        </button>
+                        <button class="btn btn-secondary" id="manage-subscribers">
+                            👥 Gerenciar Inscritos
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="newsletter-dashboard" id="newsletter-dashboard">
+                    <!-- Newsletter content will be loaded here by newsletter-system.js -->
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Push Notifications</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="send-notification">
+                            🔔 Enviar Notificação
+                        </button>
+                        <button class="btn btn-secondary" id="notification-settings">
+                            ⚙️ Configurações
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="notifications-dashboard" id="notifications-dashboard">
+                    <!-- Notifications content will be loaded here by push-notification-manager.js -->
+                </div>
+            </section>
+            
             <!-- Outras sections serão adicionadas posteriormente -->
         </main>
     </div>
@@ -358,6 +530,18 @@
     <script type="module" src="js/admin.js"></script>
     <script src="js/darkmode.js" defer></script>
     
+    <!-- Mobile UX Enhancement - Release 6A -->
+    <script src="js/mobile-ux.js" defer></script>
+    <script src="js/mobile-gestures.js" defer></script>
+    <script src="js/mobile-forms.js" defer></script>
+    
+    <!-- Engagement Scripts -->
+    <script type="module" src="js/comment-system.js"></script>
+    <script type="module" src="js/newsletter-system.js"></script>
+    <script type="module" src="js/whatsapp-integration.js"></script>
+    <script type="module" src="js/push-notification-manager.js"></script>
+    <script type="module" src="js/notification-system.js"></script>
+    
     <!-- Scripts -->
     <script type="module" src="js/admin.js"></script>
     <script type="module" src="js/pwa-manager.js"></script>
@@ -383,7 +567,122 @@
                 // Setup admin-specific tracking
                 setupAdminTracking();
             }
+            
+            // Initialize engagement systems for admin
+            initializeAdminEngagement();
         });
+        
+        async function initializeAdminEngagement() {
+            try {
+                console.log('🚀 Initializing admin engagement systems...');
+                
+                // Wait for engagement systems to be available
+                await waitForEngagementSystems();
+                
+                // Setup admin interfaces for each system
+                setupCommentSystemAdmin();
+                setupNewsletterSystemAdmin();
+                setupWhatsAppIntegrationAdmin();
+                setupPushNotificationAdmin();
+                
+                // Load engagement statistics
+                loadEngagementStats();
+                
+                console.log('✅ Admin engagement systems initialized');
+            } catch (error) {
+                console.error('❌ Error initializing admin engagement systems:', error);
+            }
+        }
+        
+        function waitForEngagementSystems() {
+            return new Promise((resolve) => {
+                const checkSystems = () => {
+                    if (window.commentSystem && window.newsletterSystem && 
+                        window.whatsappIntegration && window.pushNotificationManager) {
+                        resolve();
+                    } else {
+                        setTimeout(checkSystems, 100);
+                    }
+                };
+                checkSystems();
+            });
+        }
+        
+        function setupCommentSystemAdmin() {
+            const commentsSection = document.getElementById('comments-moderation');
+            if (commentsSection && window.commentSystem) {
+                // Create admin interface for comments
+                commentsSection.innerHTML = window.commentSystem.createAdminInterface();
+                
+                // Setup event listeners for comment moderation
+                document.getElementById('refresh-comments')?.addEventListener('click', () => {
+                    window.commentSystem.loadModerationStats();
+                });
+            }
+        }
+        
+        function setupNewsletterSystemAdmin() {
+            const newsletterDashboard = document.getElementById('newsletter-dashboard');
+            if (newsletterDashboard && window.newsletterSystem) {
+                // Create admin interface for newsletter
+                newsletterDashboard.innerHTML = window.newsletterSystem.createAdminInterface();
+            }
+        }
+        
+        function setupWhatsAppIntegrationAdmin() {
+            const engagementWidget = document.querySelector('.engagement-grid');
+            if (engagementWidget && window.whatsappIntegration) {
+                // Add WhatsApp admin section
+                const whatsappWidget = document.createElement('div');
+                whatsappWidget.className = 'engagement-widget';
+                whatsappWidget.innerHTML = window.whatsappIntegration.createAdminInterface();
+                engagementWidget.appendChild(whatsappWidget);
+            }
+        }
+        
+        function setupPushNotificationAdmin() {
+            const notificationsDashboard = document.getElementById('notifications-dashboard');
+            if (notificationsDashboard && window.pushNotificationManager) {
+                // Create admin interface for push notifications
+                notificationsDashboard.innerHTML = window.pushNotificationManager.createAdminInterface();
+                
+                // Setup send notification button
+                document.getElementById('send-notification')?.addEventListener('click', () => {
+                    window.pushNotificationManager.openSendNotificationDialog();
+                });
+            }
+        }
+        
+        async function loadEngagementStats() {
+            try {
+                // Load comment stats
+                if (window.commentSystem) {
+                    const commentStats = await window.commentSystem.getStats();
+                    document.getElementById('total-comments').textContent = commentStats.totalComments || 0;
+                }
+                
+                // Load newsletter stats
+                if (window.newsletterSystem) {
+                    const newsletterStats = await window.newsletterSystem.getStats();
+                    document.getElementById('newsletter-subscribers').textContent = newsletterStats.totalSubscribers || 0;
+                }
+                
+                // Load push notification stats
+                if (window.pushNotificationManager) {
+                    const pushStats = await window.pushNotificationManager.getStats();
+                    document.getElementById('push-subscribers').textContent = pushStats.totalSubscribers || 0;
+                }
+                
+                // Load WhatsApp stats
+                if (window.whatsappIntegration) {
+                    const whatsappStats = await window.whatsappIntegration.getStats();
+                    document.getElementById('whatsapp-clicks').textContent = whatsappStats.clicks || 0;
+                }
+                
+            } catch (error) {
+                console.error('Error loading engagement stats:', error);
+            }
+        }
         
         function setupAdminTracking() {
             // Track CMS actions

@@ -1,0 +1,420 @@
+/* Mobile UX Enhancements - Release 6A: Mobile-First Experience */
+
+/* ==========================================================================
+   MOBILE-FIRST FOUNDATION
+   ========================================================================== */
+
+/* Touch Target Optimizations */
+.touch-target-small {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.touch-active {
+    transform: scale(0.95);
+    opacity: 0.8;
+    transition: all 0.1s ease;
+}
+
+/* Device-specific styles */
+.ios-device {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.android-device {
+    text-rendering: optimizeLegibility;
+}
+
+/* Responsive breakpoint classes */
+.bp-xs,
+.bp-sm,
+.bp-md {
+    .social-share-container {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .newsletter-title {
+        font-size: 1.75rem !important;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .whatsapp-btn span:not(.whatsapp-icon) {
+        display: none;
+    }
+    
+    .whatsapp-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   SMART HEADER BEHAVIOR
+   ========================================================================== */
+
+.site-header {
+    transition: transform 0.3s ease;
+}
+
+.site-header.header-hidden {
+    transform: translateY(-100%);
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--cor-bordas);
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    [data-theme="dark"] .site-header {
+        background: rgba(45, 45, 45, 0.95);
+    }
+}
+
+/* ==========================================================================
+   ENHANCED MOBILE NAVIGATION
+   ========================================================================== */
+
+@media (max-width: 1199px) {
+    .navegacao-principal .menu-lista-principal.aberto {
+        animation: slideInRight 0.3s ease;
+    }
+    
+    .navegacao-principal .nav-overlay.open {
+        animation: fadeIn 0.3s ease;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
+   SAFE AREA SUPPORT
+   ========================================================================== */
+
+.has-safe-areas {
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+.pwa-standalone .site-header {
+    padding-top: calc(1rem + var(--safe-area-top, 0px));
+}
+
+.pwa-standalone .dark-mode-toggle {
+    bottom: calc(2rem + var(--safe-area-bottom, 0px));
+    right: calc(2rem + var(--safe-area-right, 0px));
+}
+
+/* ==========================================================================
+   KEYBOARD HANDLING
+   ========================================================================== */
+
+.keyboard-open {
+    .whatsapp-widget,
+    .dark-mode-toggle {
+        transform: translateY(-var(--keyboard-height, 0px));
+        transition: transform 0.3s ease;
+    }
+}
+
+/* Focus management */
+.user-is-tabbing *:focus {
+    outline: 2px solid var(--cor-primaria, #C0002A) !important;
+    outline-offset: 2px !important;
+}
+
+/* ==========================================================================
+   ORIENTATION HANDLING
+   ========================================================================== */
+
+.orientation-landscape {
+    .hero-vatican-inspired {
+        min-height: 90vh;
+    }
+    
+    .modal-content {
+        max-height: 85vh;
+    }
+}
+
+.orientation-portrait {
+    .hero-vatican-inspired {
+        min-height: 65vh;
+    }
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+.is-scrolling {
+    .hero-slides-container,
+    .modal-content {
+        pointer-events: none;
+    }
+}
+
+.is-resizing * {
+    transition: none !important;
+}
+
+/* ==========================================================================
+   MOBILE MODALS & BOTTOM SHEETS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .modal-overlay .modal-content {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: none;
+        border-radius: 1rem 1rem 0 0;
+        margin: 0;
+        max-height: 90vh;
+        animation: slideUpFromBottom 0.3s ease;
+    }
+    
+    .modal-overlay.active .modal-content {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUpFromBottom {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   MOBILE TOAST NOTIFICATIONS
+   ========================================================================== */
+
+.mobile-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 1rem;
+    right: 1rem;
+    background: #333;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+    text-align: center;
+}
+
+.mobile-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-toast-success {
+    background: #059669;
+}
+
+.mobile-toast-error {
+    background: #dc2626;
+}
+
+.mobile-toast-warning {
+    background: #d97706;
+}
+
+.mobile-toast-info {
+    background: #2563eb;
+}
+
+/* ==========================================================================
+   ENHANCED TOUCH INTERACTIONS
+   ========================================================================== */
+
+.touch-device {
+    /* Optimize tap highlighting */
+    * {
+        -webkit-tap-highlight-color: rgba(192, 0, 42, 0.2);
+        -webkit-touch-callout: none;
+    }
+    
+    /* Enhanced button interactions */
+    button,
+    .btn,
+    a[href] {
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    
+    button:active,
+    .btn:active,
+    a[href]:active {
+        transform: scale(0.98);
+    }
+    
+    /* Swipe-friendly cards */
+    .card,
+    .post-item,
+    .notification-toast {
+        touch-action: pan-y;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY
+   ========================================================================== */
+
+@media (max-width: 414px) {
+    html {
+        font-size: 15px; /* Slightly smaller base for small screens */
+    }
+    
+    .hero-vatican-inspired .hero-titulo {
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+        line-height: 1.2;
+    }
+    
+    .hero-vatican-inspired .hero-subtitulo {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        line-height: 1.4;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .mobile-toast,
+    .modal-content,
+    .navegacao-principal .menu-lista-principal,
+    .site-header {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .mobile-toast {
+        border: 2px solid currentColor;
+    }
+    
+    .touch-active {
+        outline: 3px solid;
+        outline-offset: 2px;
+    }
+}
+
+/* ==========================================================================
+   PWA ENHANCEMENTS
+   ========================================================================== */
+
+@media (display-mode: standalone) {
+    .pwa-controls {
+        display: none; /* Hide install button when already installed */
+    }
+    
+    .site-header {
+        padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+        background: var(--cor-fundo-secao-clara);
+    }
+    
+    body {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+/* ==========================================================================
+   MOBILE-SPECIFIC UTILITY CLASSES
+   ========================================================================== */
+
+.mobile-hidden {
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}
+
+.mobile-only {
+    display: none !important;
+    
+    @media (max-width: 768px) {
+        display: block !important;
+    }
+}
+
+.tablet-hidden {
+    @media (min-width: 769px) and (max-width: 1024px) {
+        display: none !important;
+    }
+}
+
+.desktop-hidden {
+    @media (min-width: 1025px) {
+        display: none !important;
+    }
+}
+
+/* Full-width mobile containers */
+.mobile-full-width {
+    @media (max-width: 768px) {
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+    }
+}
+
+/* Touch-friendly spacing */
+.mobile-touch-spacing {
+    @media (max-width: 768px) {
+        padding: 1.5rem 1rem !important;
+        gap: 1rem !important;
+    }
+}
+
+/* ==========================================================================
+   DYNAMIC VIEWPORT UNITS
+   ========================================================================== */
+
+.full-height-mobile {
+    height: 100vh; /* Fallback */
+    height: calc(var(--vh, 1vh) * 100); /* Dynamic viewport height */
+}
+
+.min-height-mobile {
+    min-height: 100vh; /* Fallback */
+    min-height: calc(var(--vh, 1vh) * 100); /* Dynamic viewport height */
+}

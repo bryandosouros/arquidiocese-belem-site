@@ -1,7 +1,8 @@
 // src/scss/_base.scss
 
-@use 'sass:color'; // <<<<<< ADICIONADO AQUI
+@use 'sass:color';
 @use 'variables' as v;
+@use 'mixins' as m;
 
 // ------------------------------
 // RESET BÁSICO E CONFIGURAÇÕES GLOBAIS
@@ -20,6 +21,11 @@ html {
   font-size: v.$tamanho-base-fonte;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  // Support for safe area insets
+  @include m.safe-area-padding(padding, top);
 }
 
 body {
@@ -34,21 +40,25 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh; // Dynamic viewport height for mobile
   transition: background-color 0.3s ease, color 0.3s ease;
+  
+  // Prevent zoom on input focus in iOS
+  -webkit-text-size-adjust: 100%;
 }
 
 #conteudo-principal {
   flex-grow: 1;
 }
 
-// Hierarquia Tipográfica
+// Hierarquia Tipográfica Mobile-First
 h1, .h1-style {
   font-family: v.$fonte-titulos;
   font-weight: v.$peso-bold;
   line-height: v.$altura-linha-titulos;
   margin-bottom: v.$espacamento-base * 1.5;
   color: var(--cor-texto-principal);
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  @include m.fluid-type(1.75rem, 3rem);
 }
 
 h2, .h2-style {
@@ -56,8 +66,8 @@ h2, .h2-style {
   font-weight: v.$peso-semibold;
   line-height: v.$altura-linha-titulos;
   margin-bottom: v.$espacamento-base * 1.25;
-  font-size: clamp(1.8rem, 4vw, 2.25rem);
   color: var(--cor-texto-principal);
+  @include m.fluid-type(1.5rem, 2.25rem);
 }
 
 h3, .h3-style {
@@ -65,7 +75,7 @@ h3, .h3-style {
   font-weight: v.$peso-semibold;
   line-height: v.$altura-linha-titulos;
   margin-bottom: v.$espacamento-base;
-  font-size: clamp(1.4rem, 3vw, 1.7rem);
+  @include m.fluid-type(1.25rem, 1.7rem);
 }
 
 h4, .h4-style {
@@ -73,7 +83,7 @@ h4, .h4-style {
   font-weight: v.$peso-medium;
   line-height: v.$altura-linha-titulos;
   margin-bottom: v.$espacamento-base * 0.75;
-  font-size: clamp(1.15rem, 2.5vw, 1.3rem);
+  @include m.fluid-type(1.1rem, 1.3rem);
 }
 
 p {
@@ -116,7 +126,6 @@ svg {
   max-width: 100%;
   height: auto;
   display: block;
-  vertical-align: middle;
 }
 
 hr.divisor-sutil {
@@ -138,49 +147,51 @@ hr.divisor-sutil {
   border: 0;
 }
 
-// Dark Mode Toggle Button
+// Dark Mode Toggle Button - Mobile Enhanced
 .dark-mode-toggle {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 50px;
-  height: 50px;
+  @include m.touch-target(50px);
   border-radius: 50%;
   border: 2px solid var(--cor-bordas);
   background: var(--cor-fundo-secao-clara);
   color: var(--cor-texto-principal);
   cursor: pointer;
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 1.5rem;
-  transition: all v.$transition-padrao;
+  @include m.mobile-animation();
   box-shadow: var(--box-shadow-cards);
+  @include m.safe-area-padding(margin, bottom);
+  @include m.safe-area-padding(margin, right);
   
-  &:hover {
+  @include m.hover-focus {
     transform: scale(1.1);
     background: var(--cor-fundo-secao-media);
   }
   
-  &:focus {
-    outline: 2px solid v.$cor-primaria;
-    outline-offset: 2px;
+  &:focus-visible {
+    @include m.focus-outline();
   }
   
   .toggle-icon {
-    transition: transform 0.3s ease;
+    @include m.mobile-animation(0.3s);
   }
   
   &.rotating .toggle-icon {
     transform: rotate(180deg);
   }
   
-  @media (max-width: v.$bp-mobile) {
-    width: 45px;
-    height: 45px;
+  @include m.mobile-down(v.$bp-sm) {
+    @include m.touch-target(45px);
     bottom: 1.5rem;
     right: 1.5rem;
     font-size: 1.3rem;
+  }
+  
+  // PWA standalone mode adjustments
+  @include m.pwa-viewport {
+    bottom: calc(2rem + env(safe-area-inset-bottom));
+    right: calc(2rem + env(safe-area-inset-right));
   }
 }
