@@ -118,27 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const slidesContainer = document.querySelector('.hero-slides-container');
     if (slidesContainer) {
         const slides = slidesContainer.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.hero-indicator');
+        const prevButton = document.querySelector('.hero-prev');
+        const nextButton = document.querySelector('.hero-next');
+        
         let currentSlide = 0;
         const slideInterval = 5000;
         let autoSlideTimer;
 
         if (slides.length > 0) {
-            // Criar indicadores
-            const indicatorsContainer = document.createElement('div');
-            indicatorsContainer.className = 'hero-indicators';
-            indicatorsContainer.setAttribute('aria-label', 'Indicadores do carrossel');
-            
-            // Criar controles de navegação
-            const prevButton = document.createElement('button');
-            prevButton.className = 'hero-nav hero-nav-prev';
-            prevButton.innerHTML = '<span aria-hidden="true">‹</span>';
-            prevButton.setAttribute('aria-label', 'Slide anterior');
-            
-            const nextButton = document.createElement('button');
-            nextButton.className = 'hero-nav hero-nav-next';
-            nextButton.innerHTML = '<span aria-hidden="true">›</span>';
-            nextButton.setAttribute('aria-label', 'Próximo slide');
-
             // Função para mostrar o slide
             function mostrarSlide(index) {
                 slides.forEach((slide, i) => {
@@ -147,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Atualizar indicadores
-                document.querySelectorAll('.hero-indicator').forEach((indicator, i) => {
+                indicators.forEach((indicator, i) => {
                     indicator.classList.toggle('ativo', i === index);
                     indicator.setAttribute('aria-pressed', i === index ? 'true' : 'false');
                 });
@@ -183,10 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Criar indicadores para cada slide
-            slides.forEach((_, index) => {
-                const indicator = document.createElement('button');
-                indicator.className = 'hero-indicator';
+            // Event listeners para indicadores
+            indicators.forEach((indicator, index) => {
                 indicator.setAttribute('aria-label', `Ir para slide ${index + 1}`);
                 indicator.setAttribute('aria-pressed', 'false');
                 indicator.addEventListener('click', () => {
@@ -194,21 +180,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     mostrarSlide(index);
                     iniciarAutoSlide();
                 });
-                indicatorsContainer.appendChild(indicator);
             });
 
-            // Event listeners para controles
-            prevButton.addEventListener('click', () => {
-                pararAutoSlide();
-                slideAnterior();
-                iniciarAutoSlide();
-            });
+            // Event listeners para controles de navegação
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    pararAutoSlide();
+                    slideAnterior();
+                    iniciarAutoSlide();
+                });
+            }
 
-            nextButton.addEventListener('click', () => {
-                pararAutoSlide();
-                proximoSlide();
-                iniciarAutoSlide();
-            });
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    pararAutoSlide();
+                    proximoSlide();
+                    iniciarAutoSlide();
+                });
+            }
 
             // Pausar no hover
             slidesContainer.addEventListener('mouseenter', pararAutoSlide);
@@ -231,11 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slidesContainer.setAttribute('tabindex', '0');
             slidesContainer.setAttribute('role', 'region');
             slidesContainer.setAttribute('aria-label', 'Carrossel de destaques');
-            
-            // Adicionar elementos ao DOM
-            slidesContainer.appendChild(prevButton);
-            slidesContainer.appendChild(nextButton);
-            slidesContainer.appendChild(indicatorsContainer);
 
             // Inicializar
             mostrarSlide(0);

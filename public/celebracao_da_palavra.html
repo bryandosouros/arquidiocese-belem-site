@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebração da Palavra - Arquidiocese de Belém</title>
+    <meta name="description" content="Subsídio para preparação de folhetos da Celebração da Palavra - Arquidiocese de Belém do Pará">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/celebracao.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0c4a6e">
+    <link rel="icon" type="image/x-icon" href="images/logo-arquidiocese-belem.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
+                        <span>Arquidiocese de Belém</span>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Início</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
+                                <li><a href="#">Orientações Litúrgicas</a></li>
+                                <li><a href="#">Cartas Pastorais</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Celebração da Palavra</h1>
+                    <p>Subsídio para preparação de folhetos da Celebração da Palavra</p>
+                    <div class="hero-subtitle">
+                        <strong>ARQUIDIOCESE DE BELÉM DO PARÁ</strong><br>
+                        <em>PASTORAL LITÚRGICA</em>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <section class="controls">
+                <div class="date-selector">
+                    <label for="liturgical-date">Data da Celebração:</label>
+                    <input type="date" id="liturgical-date" name="liturgical-date">
+                    <button id="load-liturgy" class="btn-primary">
+                        <i class="fas fa-search"></i> Carregar Liturgia
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="copy-all" class="btn-secondary">
+                        <i class="fas fa-copy"></i> Copiar Tudo
+                    </button>
+                    <button id="print-page" class="btn-secondary">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Carregando liturgia do dia...</p>
+            </div>
+
+            <!-- Content Sections -->
+            <div id="liturgical-content" class="liturgical-content">
+                
+                <!-- Orientações Gerais -->
+                <section class="section orientation">
+                    <h2><i class="fas fa-info-circle"></i> Orientações Gerais</h2>
+                    <div class="content-box">
+                        <p>Seguindo o <strong>Documento 52 da CNBB</strong> e <strong>Constituição Conciliar Sacrosanctum Concilium</strong> do Concílio Vaticano II, a Canção Nova preparou uma análise sobre a natureza e finalidade da Celebração da Palavra, escrita pelo Pe. Flávio Sobreiro, disponível <a href="https://formacao.cancaonova.com/liturgia/catequese-liturgica/como-celebrar-a-palavra-quando-nao-ha-um-sacerdote-ou-diacono/" target="_blank">AQUI</a>.</p>
+                        
+                        <p>Notadamente, como é presidida por um ministro leigo ou diácono, a Celebração da Palavra <strong>NÃO POSSUI</strong> caráter sacrifical nem oblativo, mas focado em:</p>
+                        <ol>
+                            <li>Reunir a comunidade</li>
+                            <li>Meditar a palavra de Deus</li>
+                            <li>Render graças</li>
+                            <li>Partir em missão</li>
+                        </ol>
+                        
+                        <p>O leigo/diácono também não possui autoridade para abençoar e perdoar, portanto, nas invocações em que o padre diria "VOS", o presidente da celebração da palavra dirá "NOS". Por exemplo: "o Senhor <strong>NOS</strong> abençoe" ao invés de "o Senhor <strong>VOS</strong> abençoe".</p>
+                        
+                        <div class="subsection">
+                            <h3>VESTES:</h3>
+                            <p>O diácono use a dalmática, o seminarista e o irmão religioso usem a túnica com cíngulo, as irmãs religiosas usem seu hábito completo, o ministro da eucaristia/palavra use sua veste própria e digna.</p>
+                        </div>
+                        
+                        <div class="subsection">
+                            <h3>ALTAR:</h3>
+                            <p>O altar deve conter 2, 4 ou 6 velas acesas e estar preparado como de costume, com uma toalha branca e com flores ao seu redor, nunca sobre ele.</p>
+                        </div>
+                        
+                        <div class="note">
+                            <p><strong>Nota:</strong> O vermelho em itálico são as ações dentro do jogo que o presidente DEVE fazer para cumprir a rubrica do Missal Romano.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ritos Iniciais -->
+                <section class="section ritual-section">
+                    <h2><i class="fas fa-cross"></i> Ritos Iniciais</h2>
+                    
+                    <!-- Saudação -->
+                    <div class="subsection-card">
+                        <h3>Saudação</h3>
+                        <div class="liturgical-text">
+                            <p>Terminado o canto de entrada, o presidente e os fiéis, todos de pé, fazem o sinal da cruz, enquanto o presidente, voltado para o povo, diz:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Em nome do Pai e do + Filho e do Espírito Santo.
+                                <button class="copy-line" data-text="Em nome do Pai e do + Filho e do Espírito Santo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo responde:</strong><br>
+                                <strong>℟.:</strong> +Amém.
+                                <button class="copy-line" data-text="+Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="action-note">*Abro braços*</div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> A graça de nosso Senhor Jesus Cristo <em>*Vênia*</em>, o amor do Pai e a comunhão do Espírito Santo estejam conosco.
+                                <button class="copy-line" data-text="A graça de nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam conosco.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo responde:</strong><br>
+                                <strong>℟.:</strong> Bendito seja Deus que nos reuniu no amor de Cristo.
+                                <button class="copy-line" data-text="Bendito seja Deus que nos reuniu no amor de Cristo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ato Penitencial -->
+                    <div class="subsection-card">
+                        <h3>Ato Penitencial</h3>
+                        <div class="liturgical-text">
+                            <p>O presidente convida os fiéis ao ato penitencial:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.
+                                <button class="copy-line" data-text="Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <p>Pode-se, agora, cantar algum canto penitencial, ou:</p>
+                            <p>Se o ato penitencial for rezado, o presidente diz:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Tende compaixão de nós, Senhor.
+                                <button class="copy-line" data-text="Tende compaixão de nós, Senhor.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo:</strong><br>
+                                <strong>℟.:</strong> Porque somos pecadores.
+                                <button class="copy-line" data-text="Porque somos pecadores.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O presidente:</strong> Manifestai, Senhor, a vossa misericórdia.
+                                <button class="copy-line" data-text="Manifestai, Senhor, a vossa misericórdia.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo:</strong><br>
+                                <strong>℟.:</strong> E dai-nos a vossa salvação.
+                                <button class="copy-line" data-text="E dai-nos a vossa salvação.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <p>Segue-se a absolvição comunitária:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.
+                                <button class="copy-line" data-text="Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo responde:</strong><br>
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kyrie -->
+                    <div class="subsection-card">
+                        <h3>Senhor, Tende Piedade (Kyrie)</h3>
+                        <div class="liturgical-text">
+                            <p>Seguem-se as invocações Senhor, tende piedade de nós (Kýrie eléison), se já não tiverem sido feitas no canto penitencial:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Kýrie, eléison.
+                                <button class="copy-line" data-text="Kýrie, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Kýrie, eléison.
+                                <button class="copy-line" data-text="℟.: Kýrie, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Christe, eléison.
+                                <button class="copy-line" data-text="Christe, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Christe, eléison.
+                                <button class="copy-line" data-text="℟.: Christe, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Kýrie, eléison.
+                                <button class="copy-line" data-text="Kýrie, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Kýrie, eléison.
+                                <button class="copy-line" data-text="℟.: Kýrie, eléison.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Glória -->
+                    <div class="subsection-card gloria-section">
+                        <h3>Glória <span class="conditional-note">(Apenas quando prescrito. Conferir liturgia do dia)</span></h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Glória a Deus nas alturas,
+                                <button class="copy-line" data-text="Glória a Deus nas alturas,">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line gloria-text">
+                                <strong>℟.:</strong> e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo <em>*Vênia*</em>, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo <em>*Vênia*</em>, com o Espírito Santo, na glória de Deus Pai. Amém.
+                                <button class="copy-line" data-text="℟.: e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oração da Coleta -->
+                    <div class="subsection-card">
+                        <h3>Oração da Coleta</h3>
+                        <div class="liturgical-text">
+                            <p>Terminado o hino o presidente diz:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Oremos.
+                                <button class="copy-line" data-text="Oremos.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <p>E todos oram com o presidente, por algum tempo, em silêncio.</p>
+                            <div class="action-note">*Abro braços*</div>
+                            
+                            <div class="dynamic-content" id="coleta-content">
+                                <div class="prayer-line">
+                                    <strong>Pres.:</strong> <span class="liturgy-text" data-section="coleta">Ver Oração da Coleta do dia.</span>
+                                    <button class="copy-line" data-dynamic="coleta">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Ao terminar, o povo aclama:</strong><br>
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Liturgia da Palavra -->
+                <section class="section liturgy-word">
+                    <h2><i class="fas fa-book-open"></i> Liturgia da Palavra</h2>
+                    
+                    <!-- Primeira Leitura -->
+                    <div class="subsection-card">
+                        <h3>Primeira Leitura</h3>
+                        <div class="liturgical-text">
+                            <div class="dynamic-content" id="primeira-leitura-content">
+                                <div class="reading-header">
+                                    <span class="liturgy-text" data-section="primeira-leitura-ref">Leitura...</span>
+                                </div>
+                                
+                                <div class="reading-text">
+                                    <span class="liturgy-text" data-section="primeira-leitura">Ver primeira leitura do dia.</span>
+                                    <button class="copy-line" data-dynamic="primeira-leitura-full">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O leitor conclui:</strong><br>
+                                <strong>Leitor:</strong> Palavra do Senhor.
+                                <button class="copy-line" data-text="Palavra do Senhor.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Todos aclamam:</strong><br>
+                                <strong>℟.:</strong> Graças a Deus.
+                                <button class="copy-line" data-text="℟.: Graças a Deus.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salmo Responsorial -->
+                    <div class="subsection-card">
+                        <h3>Salmo Responsorial</h3>
+                        <div class="liturgical-text">
+                            <div class="dynamic-content" id="salmo-content">
+                                <div class="psalm-content">
+                                    <span class="liturgy-text" data-section="salmo">Ver Salmo Responsorial do dia.</span>
+                                    <button class="copy-line" data-dynamic="salmo-full">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segunda Leitura -->
+                    <div class="subsection-card segunda-leitura-section">
+                        <h3>Segunda Leitura <span class="conditional-note">(Quando há)</span></h3>
+                        <div class="liturgical-text">
+                            <div class="dynamic-content" id="segunda-leitura-content">
+                                <div class="reading-header">
+                                    <span class="liturgy-text" data-section="segunda-leitura-ref">Leitura...</span>
+                                </div>
+                                
+                                <div class="reading-text">
+                                    <span class="liturgy-text" data-section="segunda-leitura">Ver segunda leitura do dia.</span>
+                                    <button class="copy-line" data-dynamic="segunda-leitura-full">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O leitor conclui:</strong><br>
+                                <strong>Leitor:</strong> Palavra do Senhor.
+                                <button class="copy-line" data-text="Palavra do Senhor.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Todos aclamam:</strong><br>
+                                <strong>℟.:</strong> Graças a Deus.
+                                <button class="copy-line" data-text="℟.: Graças a Deus.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aleluia -->
+                    <div class="subsection-card">
+                        <h3>Aleluia</h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line">
+                                <strong>℣.:</strong> Aleluia, aleluia, aleluia.
+                                <button class="copy-line" data-text="℣.: Aleluia, aleluia, aleluia.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Aleluia, aleluia, aleluia.
+                                <button class="copy-line" data-text="℟.: Aleluia, aleluia, aleluia.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="dynamic-content" id="aleluia-content">
+                                <div class="prayer-line">
+                                    <strong>℣.:</strong> <span class="liturgy-text" data-section="aleluia">Ver verso do Aleluia do dia.</span>
+                                    <button class="copy-line" data-dynamic="aleluia">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Aleluia, aleluia, aleluia.
+                                <button class="copy-line" data-text="℟.: Aleluia, aleluia, aleluia.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℣.:</strong> Limpai o meu coração e os meus lábios, Deus todo-poderoso, para que eu possa anunciar dignamente o vosso santo Evangelho.
+                                <button class="copy-line" data-text="Limpai o meu coração e os meus lábios, Deus todo-poderoso, para que eu possa anunciar dignamente o vosso santo Evangelho.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evangelho -->
+                    <div class="subsection-card">
+                        <h3>Evangelho</h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line">
+                                <strong>℣.:</strong> O Senhor esteja conosco.
+                                <button class="copy-line" data-text="℣.: O Senhor esteja conosco.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Ele está no meio de nós.
+                                <button class="copy-line" data-text="℟.: Ele está no meio de nós.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="dynamic-content" id="evangelho-title-content">
+                                <div class="prayer-line">
+                                    <strong>℣.:</strong> Proclamação + do Evangelho + de Jesus Cristo, + segundo <span class="liturgy-text" data-section="evangelho-evangelista">N.</span> <em>*Persigno-me*</em>
+                                    <button class="copy-line" data-dynamic="evangelho-title">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo aclama:</strong><br>
+                                <strong>℟.:</strong> Glória + a vós +, Senhor +.
+                                <button class="copy-line" data-text="℟.: Glória + a vós +, Senhor +.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="dynamic-content" id="evangelho-content">
+                                <div class="gospel-text">
+                                    <strong>℣.:</strong> <span class="liturgy-text" data-section="evangelho">Ver Evangelho do dia.</span>
+                                    <button class="copy-line" data-dynamic="evangelho-full">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Terminado o Evangelho, o presidente aclama:</strong><br>
+                                <strong>℣.:</strong> Palavra da Salvação.
+                                <button class="copy-line" data-text="℣.: Palavra da Salvação.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo aclama:</strong><br>
+                                <strong>℟.:</strong> Glória a vós, Senhor.
+                                <button class="copy-line" data-text="℟.: Glória a vós, Senhor.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Homilia -->
+                    <div class="subsection-card">
+                        <h3>Homilia</h3>
+                        <div class="liturgical-text">
+                            <p><strong>HOMILIA</strong> (em torno de cinco minutos e não mais que dez).</p>
+                        </div>
+                    </div>
+
+                    <!-- Credo -->
+                    <div class="subsection-card credo-section">
+                        <h3>Credo <span class="conditional-note">(Apenas quando prescrito. Conferir liturgia do dia)</span></h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line credo-text">
+                                <strong>℟.:</strong> Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, <em>*Inclino-me profundamente*</em> que foi concebido pelo poder do Espírito Santo; nasceu da virgem Maria <em>*Volto-me*</em>; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia, subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.
+                                <button class="copy-line" data-text="℟.: Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo; nasceu da virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia, subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oração dos Fiéis -->
+                    <div class="subsection-card">
+                        <h3>Oração dos Fiéis (Preces da Comunidade)</h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Irmãos e irmãs, reunidos para celebrar os mistérios da nossa Redenção, roguemos ao Deus todo-poderoso que o mundo inteiro seja lavado na fonte de toda bênção e toda vida.
+                                <button class="copy-line" data-text="Irmãos e irmãs, reunidos para celebrar os mistérios da nossa Redenção, roguemos ao Deus todo-poderoso que o mundo inteiro seja lavado na fonte de toda bênção e toda vida.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Senhor, escutai a nossa prece. (ou outra aclamação)
+                                <button class="copy-line" data-text="℟.: Senhor, escutai a nossa prece.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="dynamic-content" id="preces-content">
+                                <p><strong>Ver preces próprias do tempo:</strong> <a href="https://missalromano-habbo.blogspot.com/p/oracao-dos-fieis.html" target="_blank">AQUI</a></p>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Sede propício, ó Deus, às súplicas de vosso povo, para que, sem demora, alcancemos de vossa bondade o que, por vossa inspiração, pedimos cheios de fé. Por Cristo, nosso Senhor.
+                                <button class="copy-line" data-text="Sede propício, ó Deus, às súplicas de vosso povo, para que, sem demora, alcancemos de vossa bondade o que, por vossa inspiração, pedimos cheios de fé. Por Cristo, nosso Senhor.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Preparação para a Comunhão -->
+                <section class="section communion-prep">
+                    <h2><i class="fas fa-bread-slice"></i> Preparação para a Comunhão</h2>
+                    
+                    <!-- Preparo do Altar -->
+                    <div class="subsection-card">
+                        <h3>Preparo do Altar</h3>
+                        <div class="liturgical-text">
+                            <p>Inicia-se o canto da preparação, enquanto os ministros colocam no altar o corporal e tomam o cibório com as hóstias consagradas do sacrário e o colocam sobre o corporal, no altar.</p>
+                            
+                            <div class="note">
+                                <p><strong>CANTO DA PREPARAÇÃO</strong> (Escolher um canto digno e apropriado. NÃO usar cantos que falem de sacrifício, vinho, ou outros elementos próprios da Santa Missa).</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Rito da Comunhão -->
+                <section class="section communion-rite">
+                    <h2><i class="fas fa-praying-hands"></i> Rito da Comunhão</h2>
+                    
+                    <!-- Pai Nosso -->
+                    <div class="subsection-card">
+                        <h3>Pai Nosso</h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Obedientes à palavra do Salvador e formados por seu divino ensinamento, ousamos dizer:
+                                <button class="copy-line" data-text="Obedientes à palavra do Salvador e formados por seu divino ensinamento, ousamos dizer:">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="action-note">*Abro braços*</div>
+                            
+                            <div class="prayer-line pai-nosso-text">
+                                <strong>℟.:</strong> Pai nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade, assim na terra como no céu; o pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal.
+                                <button class="copy-line" data-text="℟.: Pai nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade, assim na terra como no céu; o pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Livrai-nos de todos os males, ó Pai, e dai-nos hoje a vossa paz. Ajudados pela vossa misericórdia, sejamos sempre livres do pecado e protegidos de todos os perigos, enquanto aguardamos a feliz esperança e a vinda do nosso Salvador, Jesus Cristo. <em>*Uno mãos*</em>
+                                <button class="copy-line" data-text="Livrai-nos de todos os males, ó Pai, e dai-nos hoje a vossa paz. Ajudados pela vossa misericórdia, sejamos sempre livres do pecado e protegidos de todos os perigos, enquanto aguardamos a feliz esperança e a vinda do nosso Salvador, Jesus Cristo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo conclui a oração, aclamando:</strong><br>
+                                <strong>℟.:</strong> Vosso é o reino, o poder e a glória para sempre!
+                                <button class="copy-line" data-text="℟.: Vosso é o reino, o poder e a glória para sempre!">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oração pela Paz -->
+                    <div class="subsection-card">
+                        <h3>Oração pela Paz</h3>
+                        <div class="liturgical-text">
+                            <div class="action-note">*Abro braços*</div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Senhor Jesus Cristo, dissestes aos vossos Apóstolos: Eu vos deixo a paz, eu vos dou a minha paz. Não olheis os nossos pecados, mas a fé que anima vossa Igreja; dai-lhe, segundo o vosso desejo, a paz e a unidade. <em>*Uno mãos*</em> Vós, que sois Deus com o Pai e o Espírito Santo.
+                                <button class="copy-line" data-text="Senhor Jesus Cristo, dissestes aos vossos Apóstolos: Eu vos deixo a paz, eu vos dou a minha paz. Não olheis os nossos pecados, mas a fé que anima vossa Igreja; dai-lhe, segundo o vosso desejo, a paz e a unidade. Vós, que sois Deus com o Pai e o Espírito Santo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo responde:</strong><br>
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="action-note">*Abro e uno mãos*</div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> A paz do Senhor esteja sempre conosco.
+                                <button class="copy-line" data-text="A paz do Senhor esteja sempre conosco.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>O povo responde:</strong><br>
+                                <strong>℟.:</strong> O amor de Cristo nos uniu.
+                                <button class="copy-line" data-text="℟.: O amor de Cristo nos uniu.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Abraço da Paz -->
+                    <div class="subsection-card">
+                        <h3>Abraço da Paz</h3>
+                        <div class="liturgical-text">
+                            <p>Em seguida, se for oportuno, o presidente diz:</p>
+                            
+                            <div class="prayer-line">
+                                <strong>℣.:</strong> Irmãos e irmãs, saudai-vos em Cristo Jesus.
+                                <button class="copy-line" data-text="℣.: Irmãos e irmãs, saudai-vos em Cristo Jesus.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <p>E, todos, segundo o costume do lugar, manifestam uns aos outros a paz, a comunhão e a caridade.</p>
+                            
+                            <div class="note">
+                                <p><strong>NÃO SE REZA O CORDEIRO DE DEUS</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Convite à Comunhão -->
+                    <div class="subsection-card">
+                        <h3>Convite à Comunhão</h3>
+                        <div class="liturgical-text">
+                            <p>Após todos manifestarem a paz uns aos outros, o presidente toma uma hóstia (partícula) e a eleva diante dos olhos, sobre o cibório.</p>
+                            
+                            <div class="action-note">*Tomo uma partícula e a elevo sobre o cibório*</div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Felizes os convidados para a Ceia do Senhor. Eis o Cordeiro de Deus, que tira o pecado do mundo.
+                                <button class="copy-line" data-text="Felizes os convidados para a Ceia do Senhor. Eis o Cordeiro de Deus, que tira o pecado do mundo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>E acrescenta, com o povo, uma só vez:</strong><br>
+                                <strong>℟.:</strong> Senhor, eu não sou digno de que entreis em minha morada, mas dizei uma palavra e serei salvo.
+                                <button class="copy-line" data-text="℟.: Senhor, eu não sou digno de que entreis em minha morada, mas dizei uma palavra e serei salvo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comunhão -->
+                    <div class="subsection-card">
+                        <h3>Comunhão</h3>
+                        <div class="liturgical-text">
+                            <p>O presidente reverentemente comunga do Corpo de Cristo.</p>
+                            <p>Procede-se à distribuição do Corpo de Cristo aos presentes.</p>
+                            <p><strong>CANTO DA COMUNHÃO</strong></p>
+                            <p>Após todos terem comungado, o presidente guarda o cibório no sacrário e depois de dobrar o corporal, guarda-o na credência.</p>
+                            <p>Depois, o presidente volta à cadeira. É aconselhável guardar algum tempo de silêncio sagrado ou proferir um salmo ou outro cântico de louvor.</p>
+                        </div>
+                    </div>
+
+                    <!-- Alma de Cristo -->
+                    <div class="subsection-card">
+                        <h3>Alma de Cristo</h3>
+                        <div class="liturgical-text">
+                            <div class="prayer-line alma-cristo-text">
+                                <strong>℟.:</strong> Alma de Cristo, santificai-me. Corpo de Cristo, salvai-me. Sangue de Cristo, inebriai-me. Água do lado de Cristo, lavai-me. Paixão de Cristo, confortai-me. Ó bom Jesus, ouvi-me. Dentro das Vossas chagas, escondei-me. Não permitais que eu me separe de Vós. Do inimigo maligno defendei-me. Na hora da minha morte, chamai-me. Mandai-me ir para Vós, Para que Vos louve com os Vossos Santos Pelos séculos dos séculos. Amém.
+                                <button class="copy-line" data-text="℟.: Alma de Cristo, santificai-me. Corpo de Cristo, salvai-me. Sangue de Cristo, inebriai-me. Água do lado de Cristo, lavai-me. Paixão de Cristo, confortai-me. Ó bom Jesus, ouvi-me. Dentro das Vossas chagas, escondei-me. Não permitais que eu me separe de Vós. Do inimigo maligno defendei-me. Na hora da minha morte, chamai-me. Mandai-me ir para Vós, Para que Vos louve com os Vossos Santos Pelos séculos dos séculos. Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oração Depois da Comunhão -->
+                    <div class="subsection-card">
+                        <h3>Oração Depois da Comunhão</h3>
+                        <div class="liturgical-text">
+                            <div class="action-note">*Abro braços*</div>
+                            
+                            <div class="dynamic-content" id="pos-comunhao-content">
+                                <div class="prayer-line">
+                                    <strong>Pres.:</strong> <span class="liturgy-text" data-section="pos-comunhao">Ver Oração Depois da Comunhão do dia.</span>
+                                    <button class="copy-line" data-dynamic="pos-comunhao">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Ao terminar, o povo aclama:</strong><br>
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ritos Finais -->
+                <section class="section final-rites">
+                    <h2><i class="fas fa-hands"></i> Ritos Finais</h2>
+                    
+                    <!-- Avisos -->
+                    <div class="subsection-card">
+                        <h3>Avisos</h3>
+                        <div class="liturgical-text">
+                            <p><strong>AVISOS PAROQUIAIS OU DIOCESANOS</strong>, se houverem.</p>
+                        </div>
+                    </div>
+
+                    <!-- Bênção Final -->
+                    <div class="subsection-card">
+                        <h3>Bênção Final e Despedida</h3>
+                        <div class="liturgical-text">
+                            <p>O presidente, voltado para o povo, abre os braços e diz:</p>
+                            
+                            <div class="action-note">*Abro e uno mãos*</div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> O Senhor esteja conosco.
+                                <button class="copy-line" data-text="O Senhor esteja conosco.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Ele está no meio de nós.
+                                <button class="copy-line" data-text="℟.: Ele está no meio de nós.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Abençoe-nos Deus todo-poderoso, + Pai e Filho e Espírito Santo.
+                                <button class="copy-line" data-text="Abençoe-nos Deus todo-poderoso, + Pai e Filho e Espírito Santo.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Amém.
+                                <button class="copy-line" data-text="℟.: Amém.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>Pres.:</strong> Ide em paz e o Senhor vos acompanhe.
+                                <button class="copy-line" data-text="Ide em paz e o Senhor vos acompanhe.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="prayer-line">
+                                <strong>℟.:</strong> Graças a Deus.
+                                <button class="copy-line" data-text="℟.: Graças a Deus.">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Disclaimer -->
+                <div id="weekday-disclaimer" class="disclaimer" style="display: none;">
+                    <div class="disclaimer-content">
+                        <i class="fas fa-info-circle"></i>
+                        <p><strong>Nota:</strong> Em dias de semana comuns, algumas seções como o Glória e o Credo podem não ser recitadas. Consulte sempre o calendário litúrgico para verificar as particularidades do dia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Arquidiocese de Belém</h3>
+                    <p>Servindo à Igreja Católica no Pará com fé, esperança e caridade.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@arquidiocesebelem.org.br</p>
+                    <p><i class="fas fa-phone"></i> (91) 3210-1234</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Horários de Missas</h3>
+                    <p>Segunda a Sexta: 7h e 18h</p>
+                    <p>Sábado: 18h</p>
+                    <p>Domingo: 8h, 10h e 18h</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Arquidiocese de Belém do Pará. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Texto copiado para a área de transferência!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/celebracao.js"></script>
+</body>
+</html>

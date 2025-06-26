@@ -10,7 +10,9 @@
     "dev": "npm run scss:watch",
     "build": "npm run scss:build",
     "clean": "rm -rf public/css/style.css public/css/style.css.map",
-    "start": "npm run build && echo \"Build completed! Open public/index.html in your browser.\""
+    "start": "npm run build && echo \"Build completed! Open public/index.html in your browser.\"",
+    "serve": "npx serve public -p 3000",
+    "deploy": "firebase deploy --only hosting"
   },
   "author": "Seu Nome ou Nome da Equipe Aqui",
   "license": "ISC",

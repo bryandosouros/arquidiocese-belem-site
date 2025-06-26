@@ -118,6 +118,75 @@
     transition: all 0.3s ease;
 }
 
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dropdown-toggle i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--cor-fundo-claro);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(12, 74, 110, 0.15);
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border: 1px solid var(--cor-borda);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    color: var(--cor-texto-principal);
+    padding: 0.75rem 1.5rem;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    position: relative;
+    font-weight: 500;
+}
+
+.dropdown-menu a::after {
+    display: none;
+}
+
+.dropdown-menu a:hover {
+    background: var(--cor-primaria);
+    color: var(--cor-fundo-claro);
+    transform: translateX(5px);
+}
+
 /* Overlay para menu mobile */
 .nav-overlay {
     position: fixed;
@@ -261,16 +330,20 @@
 }
 
 .hero-indicator {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-.hero-indicator.ativo {
+.hero-indicator.ativo,
+.hero-indicator:hover {
     background-color: white;
+    border-color: white;
+    transform: scale(1.2);
 }
 
 /* Setas de Navegação */
@@ -288,14 +361,17 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     transition: all 0.3s ease;
     z-index: 3;
+    font-weight: bold;
+    user-select: none;
 }
 
 .hero-nav:hover {
     background-color: rgba(255, 255, 255, 0.4);
     border-color: white;
+    transform: translateY(-50%) scale(1.1);
 }
 
 .hero-prev {
@@ -900,6 +976,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top; /* Ajusta o posicionamento para mostrar o rosto */
 }
 
 .mensagem-arcebispo-info {
@@ -1082,84 +1159,341 @@
     font-size: 1rem;
 }
 
-/* Responsividade para seções específicas */
+/* -------------------
+   WhatsApp Integration
+   ------------------- */
+.whatsapp-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.whatsapp-floating-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-floating-btn:hover {
+    background: #22BF5A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.whatsapp-text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.whatsapp-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(37, 211, 102, 0.3);
+    border-radius: 25px;
+    animation: whatsapp-pulse 2s infinite;
+}
+
+@keyframes whatsapp-pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* Modal do WhatsApp */
+.whatsapp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.whatsapp-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.whatsapp-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-modal-header {
+    background: #25D366;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.whatsapp-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.whatsapp-header-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.whatsapp-status {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.online-indicator {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.whatsapp-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.whatsapp-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.whatsapp-modal-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.whatsapp-welcome {
+    margin-bottom: 20px;
+}
+
+.whatsapp-message {
+    background: #E3F2FD;
+    padding: 12px 16px;
+    border-radius: 15px 15px 15px 5px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.whatsapp-message p {
+    margin: 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.whatsapp-time {
+    font-size: 0.8rem;
+    color: #666;
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.whatsapp-options h4,
+.whatsapp-custom-message h4 {
+    color: var(--cor-primaria);
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.whatsapp-option-buttons {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.whatsapp-option-btn {
+    background: #F5F5F5;
+    border: 2px solid transparent;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--cor-texto-principal);
+}
+
+.whatsapp-option-btn:hover {
+    background: #E8F5E8;
+    border-color: #25D366;
+}
+
+.whatsapp-option-btn.active {
+    background: #E8F5E8;
+    border-color: #25D366;
+    color: #25D366;
+}
+
+.whatsapp-custom-message textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--fonte-principal);
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.whatsapp-custom-message textarea:focus {
+    outline: none;
+    border-color: #25D366;
+}
+
+.whatsapp-char-counter {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.whatsapp-modal-footer {
+    padding: 20px;
+    border-top: 1px solid #E0E0E0;
+    background: #F9F9F9;
+}
+
+.whatsapp-send-btn {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.whatsapp-send-btn:hover {
+    background: #22BF5A;
+    transform: translateY(-1px);
+}
+
+.whatsapp-send-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Botões de compartilhamento WhatsApp */
+.whatsapp-share-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.whatsapp-share-btn:hover {
+    background: #22BF5A;
+    transform: translateY(-1px);
+}
+
+/* Responsividade do WhatsApp */
 @media (max-width: 768px) {
-    /* Header Mobile */
-    .menu-lista-principal {
+    .whatsapp-floating-btn {
+        padding: 10px 16px;
+        border-radius: 50px;
+    }
+    
+    .whatsapp-text {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        flex-direction: column;
-        padding: 1rem;
-        box-shadow: var(--sombra-card);
-        gap: 0;
     }
-
-    .menu-lista-principal.ativo {
-        display: flex;
+    
+    .whatsapp-modal-content {
+        width: 95%;
+        max-height: 90vh;
     }
-
-    .menu-lista-principal li {
-        width: 100%;
-    }
-
-    .menu-lista-principal a {
-        display: block;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--cor-bordas);
-    }
-
-    .menu-hamburger {
-        display: flex;
-    }
-
-    .sobre-resumo-conteudo {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .mensagem-arcebispo-conteudo {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .mensagem-arcebispo-foto {
-        width: 150px;
-        height: 150px;
-    }
-
-    .mensagem-citacao {
-        padding: 0 1rem;
-    }
-
-    .mensagem-arcebispo-acoes {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .grid-noticias {
-        grid-template-columns: 1fr;
-    }
-
-    .titulo-secao {
-        font-size: 2rem;
-    }
-
-    /* Logo Mobile */
-    .logo-imagem {
-        height: 40px;
-    }
-
-    .texto-arquidiocese {
-        font-size: 1rem;
-    }
-
-    .texto-localidade {
-        font-size: 1.1rem;
+    
+    .whatsapp-widget {
+        bottom: 15px;
+        right: 15px;
     }
 }

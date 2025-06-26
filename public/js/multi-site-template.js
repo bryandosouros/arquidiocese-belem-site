@@ -316,6 +316,11 @@ class MultiSiteTemplateEngine {
     }
 
     setupDonationFeatures() {
+        // Não adicionar seção de doações no admin
+        if (window.location.pathname.includes('admin.html')) {
+            return;
+        }
+        
         // Adicionar seção de doações para Arquidiocese
         const donationSection = document.createElement('div');
         donationSection.className = 'donation-section';

@@ -36,7 +36,14 @@
                     <li><a href="#noticias">Notícias</a></li>
                     <li><a href="#sobre">Sobre Nós</a></li>
                     <li><a href="#clero">Clero</a></li>
-                    <li><a href="#documentos">Documentos</a></li>
+                    <li class="dropdown">
+                        <a href="#documentos" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
+                            <li><a href="#orientacoes">Orientações Litúrgicas</a></li>
+                            <li><a href="#cartas">Cartas Pastorais</a></li>
+                        </ul>
+                    </li>
                     <li><a href="login.html">Admin</a></li>
                 </ul>
             </nav>
@@ -75,6 +82,18 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Controles do Carrossel -->
+            <div class="hero-controls">
+                <span class="hero-indicator ativo" data-slide="0"></span>
+                <span class="hero-indicator" data-slide="1"></span>
+                <span class="hero-indicator" data-slide="2"></span>
+                <span class="hero-indicator" data-slide="3"></span>
+            </div>
+            
+            <!-- Setas de Navegação -->
+            <button class="hero-nav hero-prev" type="button" aria-label="Slide anterior">‹</button>
+            <button class="hero-nav hero-next" type="button" aria-label="Próximo slide">›</button>
         </section>
 
         <section id="noticias-recentes" class="secao-site secao-vatican-inspired">

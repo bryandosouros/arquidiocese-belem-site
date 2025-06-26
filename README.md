@@ -813,3 +813,72 @@ Com o Release 6B concluído, o ecossistema PWA avançado está completamente imp
 
 **💡 O projeto atingiu um novo nível de sofisticação tecnológica!**  
 Release 3A ✅ → Release 3B ✅ → Release 4A ✅ → Release 4B ✅ → Release 5A ✅ → Release 5B ✅ → Release 6A ✅ → Release 6B ✅ → Release 7A 🔄
+
+## 🎯 Nova Funcionalidade: Celebração da Palavra
+
+### 📖 Descrição
+Sistema dinâmico para geração e formatação de subsídios da Celebração da Palavra, integrando conteúdo estático do subsídio original com dados litúrgicos dinâmicos do Pocket Terço.
+
+### ✨ Características Principais
+
+#### 🔄 **Conteúdo Dinâmico**
+- **Integração com Pocket Terço**: Busca automática de leituras, antífonas e orações
+- **Formatação Inteligente**: Quebra de linha automática (máx. 100 caracteres)
+- **Substituição de Hyperlinks**: Converte links do Pocket Terço em conteúdo textual
+
+#### 📋 **Seções Incluídas**
+- Orientações Gerais (estático)
+- Ritos Iniciais (estático com dinâmico)
+- Liturgia da Palavra (dinâmico)
+- Preparação para Comunhão (estático)
+- Rito da Comunhão (estático)
+- Ritos Finais (estático)
+
+#### 🎛️ **Funcionalidades Interativas**
+- **Seletor de Data**: Interface para escolher data litúrgica
+- **Botões de Cópia**: Cada linha tem botão para copiar texto
+- **Copiar Tudo**: Exporta todo o conteúdo formatado
+- **Impressão**: Layout otimizado para impressão
+- **Lógica Condicional**: Adapta conteúdo para domingos/dias de semana
+
+#### 📱 **Design Responsivo**
+- **Paleta Mariana**: Cores azul mariano, dourado e branco
+- **Tipografia Montserrat**: Consistente com o site principal  
+- **Mobile-First**: Otimizado para dispositivos móveis
+- **Toast Notifications**: Feedback visual para ações do usuário
+
+### 📂 **Arquivos Criados**
+```
+public/
+├── celebracao_da_palavra.html    # Página principal
+├── css/
+│   └── celebracao.css            # Estilos específicos
+└── js/
+    └── celebracao.js             # Lógica dinâmica
+```
+
+### 🔗 **Integração**
+- **Header do Site**: Link adicionado no dropdown "Documentos"
+- **Navegação Consistente**: Mesmo header/footer do site principal
+- **Estilo Unificado**: Paleta de cores e tipografia consistente
+
+### 🛠️ **Tecnologias Utilizadas**
+- **HTML5**: Estrutura semântica e acessível
+- **CSS3**: Grid, Flexbox, Custom Properties, Media Queries
+- **JavaScript ES6+**: Classes, Async/Await, Event Delegation
+- **Font Awesome**: Ícones consistentes
+- **Google Fonts**: Tipografia Montserrat
+
+### 🎨 **Paleta de Cores Mariana**
+```css
+--azul-mariano: #0c4a6e      /* Cor principal */
+--azul-claro: #0ea5e9        /* Destaque */
+--azul-escuro: #0369a1       /* Contraste */
+--dourado: #fbbf24           /* Acentos */
+--branco-puro: #ffffff       /* Background */
+--cinza-claro: #f8fafc       /* Background alternativo */
+```
+
+---
+
+## 🚀 Status do Desenvolvimento

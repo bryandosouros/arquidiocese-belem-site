@@ -45,11 +45,38 @@ onAuthStateChanged(auth, (user) => {
             userNameElement.textContent = user.email;
         }
         initializeAdmin();
+        initializeNavigation();
     } else {
         // Redirecionar para login se não estiver autenticado
         window.location.href = 'login.html';
     }
 });
+
+// Inicializar navegação entre seções
+function initializeNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.admin-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remove active class from all links and sections
+            navLinks.forEach(l => l.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Show corresponding section
+            const sectionId = link.getAttribute('data-section') + '-section';
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        });
+    });
+}
 
 // Função de logout
 if (logoutBtn) {
@@ -327,13 +354,20 @@ function openPostEditor(postId = null) {
         renderTags();
     }
     
-    postEditorModal.classList.add('active');
+    // Show modal
+    if (postEditorModal) {
+        postEditorModal.style.display = 'flex';
+        postEditorModal.classList.add('active');
+    }
     document.body.style.overflow = 'hidden';
 }
 
 // Fechar editor
 function closePostEditor() {
-    postEditorModal.classList.remove('active');
+    if (postEditorModal) {
+        postEditorModal.style.display = 'none';
+        postEditorModal.classList.remove('active');
+    }
     document.body.style.overflow = '';
     currentEditingPost = null;
     currentTags = [];
