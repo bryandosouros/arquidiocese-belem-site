@@ -1,0 +1,2682 @@
+/*
+  Theme Name: Arquidiocese de Belém - Padrão
+  Author: Bryan Verneck
+  Description: Tema claro e limpo inspirado na identidade visual da Arquidiocese de Belém, com foco em acessibilidade e legibilidade.
+*/
+
+/* -------------------
+   1. Variáveis e Cores
+   ------------------- */
+:root {
+    /* Paleta Principal - Nossa Senhora de Nazaré (Azul, Vermelho, Branco) */
+    --cor-primaria: #004A7F; /* Azul de Nossa Senhora principal */
+    --cor-secundaria: #C0002A; /* Vermelho do manto para acentos */
+    --cor-acento: #C0002A; /* Vermelho Mariano (coração de Maria) */
+    --cor-texto-principal: #333333; /* Cinza escuro para textos - mantido */
+    --cor-texto-secundario: #666666; /* Cinza médio para textos de apoio - mantido */
+    --cor-links: #C0002A; /* Vermelho para links */
+    --cor-links-hover: #004A7F; /* Azul para hover */
+    --cor-fundo-cabecalho: #FFFFFF; /* Branco puro - mantido */
+    --cor-fundo-rodape: #EFEFEF; /* Branco suave - mantido */
+    --cor-bordas: #DDDDDD; /* Bordas suaves - mantido */
+
+    /* Cores para o Hero Section (Paleta Nossa Senhora de Nazaré - Fundos Coloridos) */
+    --cor-fundo-hero-slide-1: #004A7F; /* Azul de Nossa Senhora */
+    --cor-fundo-hero-slide-2: #C0002A; /* Vermelho do manto */
+    --cor-fundo-hero-slide-3: #003A65; /* Azul mais escuro */
+    --cor-fundo-hero-slide-4: #990021; /* Vermelho mais escuro */
+
+    /* Cores para Botões (Estilo Nossa Senhora de Nazaré) */
+    --cor-botao-primario-vatican-fundo: #C0002A; /* Vermelho principal */
+    --cor-botao-primario-vatican-texto: #FFFFFF;
+    --cor-botao-primario-vatican-fundo-hover: #990021; /* Vermelho mais escuro */
+    --cor-botao-outline-branco-vatican-texto: #FFFFFF;
+    --cor-botao-outline-branco-vatican-borda: #FFFFFF;
+    --cor-botao-outline-branco-vatican-fundo-hover: rgba(255, 255, 255, 0.1);
+    --cor-botao-secundario-vatican-fundo: #004A7F; /* Azul secundário */
+    --cor-botao-secundario-vatican-texto: #FFFFFF;
+    --cor-botao-secundario-vatican-fundo-hover: #003A65;
+
+
+    /* Tipografia */
+    --fonte-principal: 'Open Sans', sans-serif;
+    --fonte-titulos: 'Montserrat', sans-serif;
+
+    /* Espaçamentos */
+    --espacamento-base: 1rem; /* 16px */
+    --espacamento-vertical-secao: 4rem;
+
+    /* Sombras */
+    --sombra-suave: 0 2px 5px rgba(0,0,0,0.05);
+    --sombra-card: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* Bordas */
+    --raio-borda: 5px;
+}
+
+/* -------------------
+   2. Estilos Globais
+   ------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Garante base de 16px */
+}
+
+body {
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    color: var(--cor-texto-principal);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espacamento-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--cor-texto-principal);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+    color: var(--cor-links);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-links-hover);
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.secao-site {
+    padding: var(--espacamento-vertical-secao) 0;
+}
+
+.secao-alternada {
+    background-color: #FFFFFF;
+}
+
+.titulo-secao {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.titulo-secao::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    margin: 0.5rem auto 0;
+}
+
+/* -------------------
+   3. Cabeçalho
+   ------------------- */
+.site-header {
+    background-color: var(--cor-fundo-cabecalho);
+    padding: 1rem 0;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-imagem {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.texto-arquidiocese {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--cor-texto-secundario);
+}
+
+.texto-localidade {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: var(--fonte-titulos);
+}
+
+.navegacao-principal ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navegacao-principal a {
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.navegacao-principal a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-primaria);
+    transition: width 0.3s ease;
+}
+
+.navegacao-principal a:hover::after,
+.navegacao-principal a.ativo::after {
+    width: 100%;
+}
+
+.menu-hamburger {
+    display: none; /* Oculto por padrão */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-linha {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cor-texto-principal);
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+/* -------------------
+   4. Hero Section
+   ------------------- */
+.hero-section {
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+}
+
+.hero-slides-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.hero-slides-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    min-height: 500px;
+}
+
+.hero-slide {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.hero-slide.slide-ativo {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-slide .container {
+    position: relative;
+    z-index: 10;
+    color: #FFFFFF;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hero-titulo {
+    font-family: var(--fonte-titulos);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #FFFFFF !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitulo {
+    font-family: var(--fonte-principal);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95) !important;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.hero-subtitulo {
+    font-size: 1.25rem;
+    font-family: var(--fonte-principal);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: #ffffff; /* Texto branco nos slides coloridos */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* -------------------
+   Hero Section - Carrossel Nossa Senhora de Nazaré
+   ------------------- */
+
+/* Fundos alternados para os slides */
+.hero-slide:nth-child(1) {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-1), #0056A3);
+}
+
+.hero-slide:nth-child(2) {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-2), #D42030);
+}
+
+.hero-slide:nth-child(3) {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-3), #005580);
+}
+
+.hero-slide:nth-child(4) {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-4), #AA0025);
+}
+
+.hero-titulo {
+    font-family: var(--fonte-titulos);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitulo {
+    font-family: var(--fonte-principal);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Garantir visibilidade do primeiro slide */
+.hero-slide:first-child,
+.hero-slide.slide-ativo {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Botões do carrossel visíveis */
+.hero-slide .botao {
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-shadow: none;
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.hero-slide .botao:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* -------------------
+   Controles do Carrossel (Setas e Indicadores)
+   ------------------- */
+
+/* Setas de navegação */
+.hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+.hero-nav:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: #FFFFFF;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.hero-nav:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.hero-nav-prev {
+    left: 20px;
+}
+
+.hero-nav-next {
+    right: 20px;
+}
+
+/* Indicadores (bolinhas) */
+.hero-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.hero-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hero-indicator:hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: #FFFFFF;
+    transform: scale(1.2);
+}
+
+.hero-indicator.ativo {
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Responsividade dos controles */
+@media (max-width: 768px) {
+    .hero-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+    
+    .hero-nav-prev {
+        left: 15px;
+    }
+    
+    .hero-nav-next {
+        right: 15px;
+    }
+    
+    .hero-indicators {
+        bottom: 20px;
+        gap: 8px;
+    }
+    
+    .hero-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    .hero-nav-prev {
+        left: 10px;
+    }
+    
+    .hero-nav-next {
+        right: 10px;
+    }
+    
+    .hero-indicators {
+        bottom: 15px;
+    }
+}
+
+/* -------------------
+   5. Botões
+   ------------------- */
+.botao {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    border-radius: var(--raio-borda);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border: 2px solid transparent;
+    font-size: 1rem;
+}
+
+.botao:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.botao-primario-vatican {
+    background-color: var(--cor-botao-primario-vatican-fundo);
+    color: var(--cor-botao-primario-vatican-texto);
+}
+
+.botao-primario-vatican:hover {
+    background-color: var(--cor-botao-primario-vatican-fundo-hover);
+    color: var(--cor-botao-primario-vatican-texto);
+}
+
+.botao-outline-branco-vatican {
+    background-color: transparent;
+    color: var(--cor-botao-outline-branco-vatican-texto);
+    border-color: var(--cor-botao-outline-branco-vatican-borda);
+}
+
+.botao-outline-branco-vatican:hover {
+    background-color: var(--cor-botao-outline-branco-vatican-fundo-hover);
+    color: var(--cor-botao-outline-branco-vatican-texto);
+}
+
+.botao-secundario-vatican {
+    background-color: var(--cor-botao-secundario-vatican-fundo);
+    color: var(--cor-botao-secundario-vatican-texto);
+}
+
+.botao-secundario-vatican:hover {
+    background-color: var(--cor-botao-secundario-vatican-fundo-hover);
+    color: var(--cor-botao-secundario-vatican-texto);
+}
+
+.botao-pequeno {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+/* -------------------
+   Nossa Senhora de Nazaré - Elementos Especiais
+   ------------------- */
+
+/* Gradiente sutil para seções especiais */
+.secao-mariana {
+    background: linear-gradient(135deg, 
+        var(--cor-fundo-hero-slide-1) 0%, 
+        var(--cor-fundo-hero-slide-2) 50%, 
+        var(--cor-fundo-hero-slide-3) 100%);
+}
+
+/* Botão especial vermelho mariano */
+.botao-mariano {
+    background: linear-gradient(135deg, var(--cor-acento) 0%, #b91c1c 100%);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-mariano:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, var(--cor-acento) 100%);
+    color: white;
+}
+
+.botao-mariano::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.botao-mariano:hover::before {
+    left: 100%;
+}
+
+/* Destaque azul mariano */
+.destaque-azul-mariano {
+    border-left: 4px solid var(--cor-primaria);
+    background: linear-gradient(90deg, 
+        rgba(30, 58, 138, 0.05) 0%, 
+        transparent 100%);
+    padding-left: 1rem;
+}
+
+/* Ícone de coração mariano */
+.coracao-mariano {
+    color: var(--cor-acento);
+    font-size: 1.2em;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Aplicar classe mariana à seção da newsletter */
+.newsletter-section {
+    background: #FFFFFF;
+    border-top: 1px solid var(--cor-bordas);
+}
+
+/* Melhorar o botão da newsletter com cores marianas */
+.newsletter-submit {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, #1e40af 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-submit:hover {
+    background: linear-gradient(135deg, #1e40af 0%, var(--cor-primaria) 100%);
+    transform: translateY(-1px);
+}
+
+/* Efeito de brilho nos botões principais */
+.botao-primario-vatican,
+.newsletter-submit {
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-primario-vatican::after,
+.newsletter-submit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
+.botao-primario-vatican:hover::after,
+.newsletter-submit:hover::after {
+    left: 100%;
+}
+
+/* -------------------
+   6. Seção de Notícias
+   ------------------- */
+.grid-noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card-noticia {
+    background-color: #fff;
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-noticia:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-link-area {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-noticia-imagem-placeholder {
+    height: 200px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 1.5rem;
+    background-image: url('https://source.unsplash.com/random/400x250/?church,faith');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-conteudo {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.card-categoria {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cor-links);
+    text-transform: uppercase;
+}
+
+.card-titulo {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-resumo {
+    font-size: 0.95rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+}
+
+.card-footer {
+    padding: 0 1.5rem 1.5rem;
+    margin-top: auto;
+}
+
+.card-link-leia-mais {
+    font-weight: 700;
+    font-family: var(--fonte-titulos);
+    font-size: 0.9rem;
+}
+
+.card-link-leia-mais .seta {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.card-link-leia-mais:hover .seta {
+    transform: translateX(5px);
+}
+
+/* -------------------
+   7. Seção Sobre (Resumo)
+   ------------------- */
+.sobre-resumo-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.sobre-resumo-texto {
+    flex: 1;
+}
+
+.sobre-resumo-texto h3 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.sobre-resumo-texto p {
+    margin-bottom: 1.5rem;
+}
+
+.sobre-resumo-imagem-container {
+    flex: 1;
+    max-width: 450px;
+}
+
+.sobre-resumo-imagem-placeholder {
+    width: 100%;
+    padding-top: 75%; /* Proporção 4:3 */
+    background-color: #f0e8d9;
+    border-radius: var(--raio-borda);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #fff;
+    background-image: url('https://source.unsplash.com/random/450x340/?cathedral,architecture');
+    background-size: cover;
+    background-position: center;
+}
+
+.sobre-resumo-imagem {
+    width: 100%;
+    border-radius: var(--raio-borda);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sobre-resumo-imagem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.imagem-basilica {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--raio-borda);
+}
+
+/* -------------------
+   8. Mensagem do Arcebispo
+   ------------------- */
+.mensagem-arcebispo-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+
+.mensagem-arcebispo-foto-container {
+    text-align: center;
+    position: sticky;
+    top: 20px;
+}
+
+.mensagem-arcebispo-foto-placeholder {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-1), var(--cor-fundo-hero-slide-2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--cor-primaria);
+    box-shadow: var(--sombra-card);
+}
+
+.mensagem-arcebispo-foto-placeholder .placeholder-icone {
+    font-size: 4rem;
+}
+
+/* Estilos para a foto real do arcebispo */
+.mensagem-arcebispo-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--cor-primaria);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    position: relative;
+    background: #f8f9fa;
+}
+
+.foto-arcebispo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Foca no rosto */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.mensagem-arcebispo-foto:hover .foto-arcebispo {
+    transform: scale(1.05);
+}
+
+.mensagem-arcebispo-info h3 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.3rem;
+    color: var(--cor-texto-principal);
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+}
+
+.titulo-arcebispo-resumo {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}
+
+.mensagem-citacao {
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--cor-texto-principal);
+    font-style: italic;
+    margin: 0 0 2rem 0;
+    padding: 0;
+}
+
+.aspas-abertura,
+.aspas-fechamento {
+    font-size: 3rem;
+    color: var(--cor-primaria);
+    font-family: Georgia, serif;
+    line-height: 1;
+    display: block;
+}
+
+.aspas-abertura {
+    margin-bottom: -1rem;
+}
+
+.aspas-fechamento {
+    text-align: right;
+    margin-top: -1rem;
+}
+
+.mensagem-assinatura {
+    display: block;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #F8F9FA, #F1F3F4);
+    border-radius: 8px;
+    border-left: 4px solid var(--cor-primaria);
+}
+
+.mensagem-assinatura span {
+    display: block;
+    font-style: normal;
+    text-align: center;
+}
+
+.nome-arcebispo-completo {
+    font-family: var(--fonte-titulos);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+.titulo-arcebispo-linha {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 0.2rem;
+}
+
+.titulo-localidade-arcebispo {
+    font-size: 1rem;
+    color: var(--cor-primaria);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.mensagem-arcebispo-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mensagem-arcebispo-redes {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.redes-titulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+}
+
+.redes-icones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rede-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--cor-botao-secundario-vatican-fundo);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.rede-social:hover {
+    background: var(--cor-primaria);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+}
+
+/* -------------------
+   Admin & Login Pages - Elegância Arquidiocese
+   ------------------- */
+
+/* Admin Body */
+.admin-body {
+    background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+    min-height: 100vh;
+    font-family: var(--fonte-principal);
+}
+
+/* Admin Header */
+.admin-header {
+    background: linear-gradient(135deg, var(--cor-primaria), #0056A3);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 74, 127, 0.2);
+}
+
+.admin-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.admin-title-area h1 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.admin-subtitle {
+    font-family: var(--fonte-principal);
+    font-size: 0.9rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+/* Admin Navigation */
+.admin-nav {
+    background: white;
+    border-bottom: 1px solid var(--cor-bordas);
+    padding: 1rem 0;
+}
+
+.admin-nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.admin-nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-nav a {
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+/* Admin Main Content */
+.admin-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+}
+
+.admin-card h2 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-primaria);
+    padding-bottom: 0.5rem;
+}
+
+/* Admin Forms */
+.admin-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.admin-form-label {
+    display: block;
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+.admin-form-input,
+.admin-form-textarea,
+.admin-form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.admin-form-input:focus,
+.admin-form-textarea:focus,
+.admin-form-select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+}
+
+/* Admin Buttons */
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.admin-btn-primary {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+.admin-btn-primary:hover {
+    background: #003A65;
+    transform: translateY(-1px);
+}
+
+.admin-btn-secondary {
+    background: var(--cor-secundaria);
+    color: white;
+}
+
+.admin-btn-secondary:hover {
+    background: #990021;
+    transform: translateY(-1px);
+}
+
+.admin-btn-outline {
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+}
+
+.admin-btn-outline:hover {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+/* Login Page Styles */
+.login-body {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: var(--fonte-principal);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+}
+
+.login-header {
+    background: linear-gradient(135deg, #F8F9FA, #E9ECEF);
+    text-align: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    border-radius: 12px;
+}
+
+.login-titulo {
+    font-family: var(--fonte-titulos);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin: 0 0 0.5rem 0;
+}
+
+.login-subtitulo {
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-secundario);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.login-form {
+    padding: 2rem;
+}
+
+.login-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-label {
+    display: block;
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #003A65;
+    transform: translateY(-1px);
+}
+
+.login-footer {
+    text-align: center;
+    padding: 1rem 2rem 2rem;
+    border-top: 1px solid var(--cor-bordas);
+}
+
+.login-footer a {
+    color: var(--cor-links);
+    text-decoration: none;
+    font-family: var(--fonte-principal);
+    font-size: 0.9rem;
+}
+
+.login-footer a:hover {
+    color: var(--cor-links-hover);
+    text-decoration: underline;
+}
+
+/* -------------------
+   Admin Layout - Estilos Faltantes
+   ------------------- */
+
+/* User Area in Header */n form */
+.admin-user-area {n {
+    display: flex;FFFFF;
+    align-items: center;
+    gap: 1rem;: 1px solid var(--cor-bordas);
+}
+
+.user-info {container {
+    display: flex;px;
+    align-items: center;
+    gap: 0.75rem;enter;
+}   padding: 0 20px;
+}
+.user-avatar {
+    width: 40px;e {
+    height: 40px;var(--fonte-titulos);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;xto-principal);
+    display: flex; 1rem;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;n {
+}   font-family: var(--fonte-principal);
+    color: var(--cor-texto-secundario);
+.user-details {om: 2rem;
+    display: flex;.6;
+    flex-direction: column;
+    line-height: 1.2;
+}newsletter-form {
+    display: flex;
+.user-name {x;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    color: white;nt: center;
+    font-size: 0.9rem;
+}
+.newsletter-input {
+.user-title {
+    font-family: var(--fonte-principal);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;var(--cor-bordas);
+}   border-radius: 8px;
+    font-family: var(--fonte-principal);
+.btn-logout {: 14px;
+    display: flex;l 0.2s ease;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);can-fundo);
+    border-radius: 6px;px rgba(192, 0, 42, 0.1);
+    color: white;
+    font-family: var(--fonte-principal);
+    cursor: pointer;
+    transition: all 0.3s ease;t(135deg, var(--cor-primaria) 0%, #1e40af 100%);
+}   color: white;
+    position: relative;
+.btn-logout:hover {n;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}   border: none;
+    padding: 12px 20px;
+/* Admin Layout */ 8px;
+.admin-layout {: var(--fonte-principal);
+    display: flex;00;
+    min-height: calc(100vh - 100px);
+}   transition: background 0.2s ease;
+    display: flex;
+/* Sidebar */ms: center;
+.admin-sidebar {ent: center;
+    width: 280px;
+    background: white;
+    border-right: 1px solid var(--cor-bordas);
+    position: fixed;over {
+    height: calc(100vh - 100px);135deg, #1e40af 0%, var(--cor-primaria) 100%);
+    overflow-y: auto;ateY(-1px);
+    z-index: 100;
+}
+.newsletter-privacy {
+.admin-nav {e: 12px;
+    padding: 0;--cor-texto-secundario);
+}   line-height: 1.4;
+}
+.nav-list {
+    list-style: none; {
+    padding: 1rem 0;-links);
+    margin: 0;ation: none;
+}
+
+.nav-item {-privacy a:hover {
+    margin: 0;(--cor-links-hover);
+}   text-decoration: underline;
+}
+.nav-link {
+    display: flex;ess/error messages */
+    align-items: center;
+    gap: 0.75rem; 16px;
+    padding: 0.875rem 1.5rem;
+    color: var(--cor-texto-principal);
+    text-decoration: none;te-principal);
+    font-family: var(--fonte-principal);
+    font-weight: 500;r;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}newsletter-message.success {
+    background: #d4edda;
+.nav-link:hover {4;
+    background: #f8f9fa;3e6cb;
+    color: var(--cor-primaria);
+    border-left-color: var(--cor-primaria);
+}newsletter-message.error {
+    background: #f8d7da;
+.nav-link.active {;
+    background: linear-gradient(90deg, rgba(0, 74, 127, 0.1), transparent);
+    color: var(--cor-primaria);
+    border-left-color: var(--cor-primaria);
+    font-weight: 600;-
+}  9. Rodapé
+   ------------------- */
+.nav-icon {r {
+    font-size: 1.2rem;var(--cor-fundo-rodape);
+    width: 20px;-cor-texto-secundario);
+    text-align: center;
+}   font-size: 0.9rem;
+}
+.nav-text {
+    font-size: 0.9rem;
+}   display: flex;
+    flex-wrap: wrap;
+.nav-divider {ntent: space-between;
+    height: 1px;
+    background: var(--cor-bordas);
+    margin: 1rem 1.5rem;olid var(--cor-bordas);
+}
+
+.nav-quick-actions {
+    padding: 1rem 1.5rem;
+}   align-items: center;
+    gap: 10px;
+.quick-title {ht: 2rem;
+    font-family: var(--fonte-titulos);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}   display: flex;
+    flex-direction: column;
+.quick-btn,ight: 1.2;
+.quick-link {ly: var(--fonte-titulos);
+    display: flex;00;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;, .footer-redes h4 {
+    padding: 0.75rem;--fonte-titulos);
+    background: transparent;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;;
+    color: var(--cor-texto-principal);
+    font-family: var(--fonte-principal);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}footer-links ul li {
+    margin-bottom: 0.5rem;
+.quick-btn:hover,
+.quick-link:hover {
+    background: var(--cor-primaria);
+    color: white;cor-texto-secundario);
+    border-color: var(--cor-primaria);
+}
+.footer-links a:hover {
+.quick-icon {r(--cor-links-hover);
+    font-size: 1rem; none;
+}
+
+/* Main Content Area */
+.admin-main {: 300px;
+    flex: 1;
+    margin-left: 280px;
+    padding: 2rem;{
+    background: #f8f9fa;
+    min-height: calc(100vh - 100px);
+    max-width: calc(100% - 280px);
+}
+/* -------------------
+/* Admin Sections */ion Styles
+.admin-section {------ */
+    display: none;
+}* Widget flutuante do WhatsApp */
+.whatsapp-widget {
+.admin-section.active {
+    display: block;
+}   right: 20px;
+    z-index: 1000;
+.section-header {var(--fonte-principal);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-bordas);
+}   display: flex;
+    align-items: center;
+.section-title {
+    font-family: var(--fonte-titulos);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin: 0 0 0.5rem 0;
+}   cursor: pointer;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+.section-subtitle { 0.3s ease;
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-secundario);
+    margin: 0;ation: none;
+    font-size: 1rem;ve;
+}   overflow: hidden;
+}
+/* Stats Cards */
+.stats-grid {ating-btn:hover {
+    display: grid;faa52;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;0 6px 20px rgba(37, 211, 102, 0.4);
+    margin-bottom: 2rem;
+}
+.whatsapp-icon {
+.stat-card {4px;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+    transition: all 0.3s ease;rincipal);
+}   font-weight: 500;
+}
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}   top: 50%;
+    left: 50%;
+.stat-header { translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 0.3);
+    margin-bottom: 1rem;
+}   animation: whatsapp-pulse 2s infinite;
+}
+.stat-title {
+    font-family: var(--fonte-titulos);
+    font-size: 0.9rem;
+    font-weight: 600;anslate(-50%, -50%) scale(1);
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;orm: translate(-50%, -50%) scale(1.5);
+}       opacity: 0;
+    }
+.stat-icon {
+    font-size: 1.5rem;
+    opacity: 0.7;App */
+}whatsapp-modal {
+    position: fixed;
+.stat-value {
+    font-family: var(--fonte-titulos);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    margin: 0 0 0.5rem 0;
+}   font-family: var(--fonte-principal);
+}
+.stat-change {
+    font-family: var(--fonte-principal);
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+}
+.whatsapp-modal-overlay {
+.stat-change.positive {
+    color: #22c55e;
+}   left: 0;
+    width: 100%;
+.stat-change.negative {
+    color: #ef4444;a(0, 0, 0, 0.5);
+}   cursor: pointer;
+}
+/* Dashboard Specific Styles */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));    top: 50%;
+    gap: 1.5rem;
+    margin-bottom: 2rem;ate(-50%, -50%);
+}
+2px;
+.stat-content {
+    text-align: center;   max-width: 500px;
+}    max-height: 90vh;
+
+.stat-number {x 40px rgba(0, 0, 0, 0.2);
+    font-family: var(--fonte-titulos);
+    font-size: 2.5rem;
+    font-weight: 700;er {
+    color: var(--cor-primaria);   background: #25D366;
+    margin: 0.5rem 0;    color: white;
+}
+
+.stat-label {;
+    font-family: var(--fonte-principal);
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);r h3 {
+    font-weight: 500;   margin: 0;
+}    font-family: var(--fonte-titulos);
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem; {
+}   position: absolute;
+    top: 15px;
+.dashboard-widget {
+    background: white;ne;
+    border-radius: 12px;ne;
+    padding: 1.5rem;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+}   width: 30px;
+    height: 30px;
+.widget-title {
+    font-family: var(--fonte-titulos);ems: center;
+    font-size: 1.2rem;center;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--cor-bordas);e:hover {
+} 255, 0.2);
+
+.recent-posts {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.loading-state {
+    text-align: center;
+    padding: 2rem;{
+    color: var(--cor-texto-secundario);
+}
+
+.loading-spinner {
+    width: 30px;n {
+    height: 30px;x;
+    border: 3px solid var(--cor-bordas);center;
+    border-top: 3px solid var(--cor-primaria);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem; #e9ecef;
+}px;
+
+@keyframes spin {l 0.2s ease;
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+} var(--fonte-principal);
+
+.liturgical-calendar {
+    text-align: center;er {
+}
+
+.calendar-today {   transform: translateY(-1px);
+    padding: 1rem;}
+    background: linear-gradient(135deg, var(--cor-primaria), #0056A3);
+    color: white;con {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}   text-align: center;
+}
+/* Posts/Content Management */
+.content-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;cipal);
+}   margin-bottom: 4px;
+    font-size: 14px;
+.search-filter {
+    display: flex;
+    gap: 1rem; {
+    align-items: center;
+    flex: 1;texto-secundario);
+}
+
+.search-input {
+    flex: 1;whatsapp-custom-message {
+    max-width: 300px;    margin-top: 20px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;ssage h4 {
+    font-family: var(--fonte-principal);
+}   font-family: var(--fonte-titulos);
+    font-size: 16px;
+.filter-select {principal);
+    padding: 0.5rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;
+    font-family: var(--fonte-principal);   width: 100%;
+}    min-height: 80px;
+
+.posts-table {1px solid #e9ecef;
+    width: 100%;
+    border-collapse: collapse;--fonte-principal);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+}
+
+.posts-table th,
+.posts-table td {
+    padding: 1rem;7, 211, 102, 0.1);
+    text-align: left;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.posts-table th {
+    background: #f8f9fa;   background: #25D366;
+    font-family: var(--fonte-titulos);    color: white;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+}
+   font-family: var(--fonte-principal);
+.posts-table tr:hover {    font-weight: 600;
+    background: #f8f9fa;
+}
+
+.action-buttons {   align-items: center;
+    display: flex;    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-small {whatsapp-send-btn:hover {
+    padding: 0.25rem 0.5rem;    background: #1faa52;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+  10. Responsividade
+/* Responsive Admin */   ------------------- */
+@media (max-width: 1024px) {
+    .admin-sidebar {
+        width: 250px;       flex-direction: column;
+    }        text-align: center;
+    
+    .admin-main {
+        margin-left: 250px;   .sobre-resumo-imagem-container {
+        max-width: calc(100% - 250px);        max-width: 100%;
+    }
+}
+eudo {
+@media (max-width: 768px) {umn;
+    .admin-sidebar {ter;
+        position: fixed;   text-align: center;
+        left: -280px;}
+        transition: left 0.3s ease;
+        z-index: 1000;{
+    }   border-left: none;
+        border-top: 4px solid var(--cor-primaria);
+    .admin-sidebar.mobile-open {0;
+        left: 0;
+    }
+    
+    .admin-main {
+        margin-left: 0;x) {
+        max-width: 100%;m; }
+    }2 { font-size: 1.8rem; }
+    .hero-titulo { font-size: 2.5rem; }
+    .admin-header-content {
+        flex-direction: column;ncipal ul {
+        gap: 1rem;e;
+        text-align: center;on: column;
+    }olute;
+    
+    .dashboard-stats {   left: 0;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));       width: 100%;
+    }        background-color: var(--cor-fundo-cabecalho);
+    ra-suave);
+    .dashboard-grid {dding: 1rem 0;
+        grid-template-columns: 1fr;ter;
+    }
+    
+    .content-controls {principal ul.menu-aberto {
+        flex-direction: column;flex;
+        align-items: stretch;
+    }
+     li {
+    .search-filter {: 0;
+        flex-direction: column;   }
+    }
+    al a {
+    .search-input {
+        max-width: none;
+    }        width: 100%;
+}
+
+/* -------------------
+   Newsletter System Stylesy: none;
+   ------------------- */
+
+/* Newsletter subscription form */   .menu-hamburger {
+.newsletter-section {        display: block;
+    background: #FFFFFF;
+    padding: 3rem 0;
+    border-top: 1px solid var(--cor-bordas);ria-expanded="true"] .hamburger-linha:nth-child(1) {
+}orm: translateY(8px) rotate(45deg);
+   }
+.newsletter-container {    .menu-hamburger[aria-expanded="true"] .hamburger-linha:nth-child(2) {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;r[aria-expanded="true"] .hamburger-linha:nth-child(3) {
+    padding: 0 20px;
+}
+
+.newsletter-title {
+    font-family: var(--fonte-titulos);mn;
+    font-size: 1.8rem;ter;
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}    .footer-logo-area {
+
+.newsletter-description {m: 1rem;
+    font-family: var(--fonte-principal);   }
+    color: var(--cor-texto-secundario);}
+    margin-bottom: 2rem;
+    line-height: 1.6;ogin */
+}"] {
+: #3d82f6; /* Azul Mariano mais claro para contraste */
+.newsletter-form {ef4444; /* Vermelho Mariano mais claro */
+    display: flex;4; /* Vermelho Mariano mais claro */
+    gap: 12px;
+    margin-bottom: 1rem;;
+    flex-wrap: wrap;444; /* Vermelho claro para links */
+    justify-content: center;#3d82f6; /* Azul claro para hover */
+}o: #1a1a1a;
+   --cor-fundo-rodape: #1a1a1a;
+.newsletter-input {    --cor-bordas: #404040;
+    flex: 1;ero-slide-1: #1e3a5f; /* Azul escuro */
+    min-width: 250px;hero-slide-2: #7f1d1d; /* Vermelho escuro */
+    padding: 12px 16px;ero-slide-3: #1e2a4a; /* Azul mais escuro */
+    border: 1px solid var(--cor-bordas);lide-4: #6b1818; /* Vermelho mais escuro */
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    transition: all 0.2s ease;   background-color: #1a1a1a;
+}    color: var(--cor-texto-principal);
+
+.newsletter-input:focus {
+    outline: none;data-theme="dark"] .site-header {
+    border-color: var(--cor-botao-primario-vatican-fundo);    background-color: var(--cor-fundo-cabecalho);
+    box-shadow: 0 0 0 3px rgba(192, 0, 42, 0.1);--cor-bordas);
+}
+
+.newsletter-submit {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, #1e40af 100%);(--cor-fundo-rodape);
+    color: white; var(--cor-bordas);
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;noticia {
+    width: 100%;
+    border: none;--cor-bordas);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: var(--fonte-principal);data-theme="dark"] .secao-site {
+    font-weight: 600;    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;ecao-alternada {
+    align-items: center; #2d2d2d;
+    justify-content: center;
+       gap: 8px;
+}ts */
+th: 768px) {
+.newsletter-submit:hover {   .whatsapp-floating-btn {
+    background: linear-gradient(135deg, #1e40af 0%, var(--cor-primaria) 100%);        padding: 10px 14px;
+    transform: translateY(-1px);e: 13px;
+}
+
+.newsletter-privacy {
+    font-size: 12px;
+    color: var(--cor-texto-secundario);
+    line-height: 1.4;
+}   .newsletter-form {
+        flex-direction: column;
+.newsletter-privacy a {ms: stretch;
+    color: var(--cor-links);
+    text-decoration: none;   
+}    .newsletter-input {
+unset;
+.newsletter-privacy a:hover {
+    color: var(--cor-links-hover);
+    text-decoration: underline;   .dark-mode-toggle {
+}        top: 70px;
+
+/* Newsletter success/error messages */;
+.newsletter-message {
+    padding: 12px 16px;8px;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-family: var(--fonte-principal);
+    font-size: 14px;* Screen reader only class */
+    text-align: center;.sr-only {
+}
+
+.newsletter-message.success {
+    background: #d4edda;
+    color: #155724;   margin: -1px;
+    border: 1px solid #c3e6cb;    overflow: hidden;
+};
+
+.newsletter-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}  Improved Archbishop Message Section
+   ------------------- */
+/* -------------------
+   Dark Modenteudo {
+   ------------------- */
+[data-theme="dark"] { 1fr 2fr;
+    --cor-primaria: #3d82f6; /* Azul Mariano mais claro para contraste */   gap: 3rem;
+    --cor-secundaria: #ef4444; /* Vermelho Mariano mais claro */    align-items: start;
+    --cor-acento: #ef4444; /* Vermelho Mariano mais claro */
+    --cor-texto-principal: #e0e0e0;
+    --cor-texto-secundario: #b0b0b0;
+    --cor-links: #ef4444; /* Vermelho claro para links */oto-container {
+    --cor-links-hover: #3d82f6; /* Azul claro para hover */
+    --cor-fundo-cabecalho: #1a1a1a;   position: sticky;
+    --cor-fundo-rodape: #1a1a1a;    top: 20px;
+    --cor-bordas: #404040;
+    --cor-fundo-hero-slide-1: #1e3a5f; /* Azul escuro */
+    --cor-fundo-hero-slide-2: #7f1d1d; /* Vermelho escuro */aceholder {
+    --cor-fundo-hero-slide-3: #1e2a4a; /* Azul mais escuro */;
+    --cor-fundo-hero-slide-4: #6b1818; /* Vermelho mais escuro */   height: 150px;
+}    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-1), var(--cor-fundo-hero-slide-2));
+
+[data-theme="dark"] body {
+    background-color: #1a1a1a;
+    color: var(--cor-texto-principal);ntent: center;
+}rem;
+   border: 4px solid var(--cor-primaria);
+[data-theme="dark"] .site-header {    box-shadow: var(--sombra-card);
+    background-color: var(--cor-fundo-cabecalho);
+    border-bottom-color: var(--cor-bordas);
+}laceholder-icone {
+
+[data-theme="dark"] .site-footer {
+    background-color: var(--cor-fundo-rodape);
+    border-top-color: var(--cor-bordas); a foto real do arcebispo */
+}o-foto {
+;
+[data-theme="dark"] .card-noticia {   height: 150px;
+    background-color: #2d2d2d;    border-radius: 50%;
+    border-color: var(--cor-bordas);auto 1rem;
+}(--cor-primaria);
+mbra-card);
+[data-theme="dark"] .secao-site {
+    background-color: #1a1a1a;lative;
+}f8f9fa;
+
+[data-theme="dark"] .secao-alternada {
+    background-color: #2d2d2d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {   object-position: center top; /* Foca no rosto */
+    .whatsapp-floating-btn {    border-radius: 50%;
+        padding: 10px 14px;sform 0.3s ease;
+        font-size: 13px;
+    }
+    
+    .whatsapp-text {   transform: scale(1.05);
+        display: none;}
+    }
+    
+    .newsletter-form {nte-titulos);
+        flex-direction: column;    font-size: 1.3rem;
+        align-items: stretch;-cor-texto-principal);
+    } 0 0.5rem 0;
+    
+    .newsletter-input {
+        min-width: unset;
+    }titulo-arcebispo-resumo {
+        color: var(--cor-texto-secundario);
+    .dark-mode-toggle {rem;
+        top: 70px; italic;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }   position: relative;
+}    font-size: 1.1rem;
+
+/* Screen reader only class */exto-principal);
+.sr-only {lic;
+    position: absolute; 0;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;aspas-abertura,
+    overflow: hidden;.aspas-fechamento {
+    clip: rect(0, 0, 0, 0);m;
+    white-space: nowrap;or-primaria);
+    border: 0;, serif;
+}t: 1;
+   display: block;
+/* -------------------}
+   Improved Archbishop Message Section
+   ------------------- */{
+: -1rem;
+.mensagem-arcebispo-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;.aspas-fechamento {
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+natura {
+.mensagem-arcebispo-foto-container {k;
+    text-align: center;   margin-bottom: 2rem;
+    position: sticky;    padding: 1.5rem;
+    top: 20px;inear-gradient(135deg, #F8F9FA, #F1F3F4);
+}
+olid var(--cor-primaria);
+.mensagem-arcebispo-foto-placeholder {
+    width: 150px;
+    height: 150px;span {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-1), var(--cor-fundo-hero-slide-2));   display: block;
+    border-radius: 50%;    font-style: normal;
+    display: flex;;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--cor-primaria);(--fonte-titulos);
+    box-shadow: var(--sombra-card);   font-size: 1.1rem;
+}    font-weight: 700;
+-texto-principal);
+.mensagem-arcebispo-foto-placeholder .placeholder-icone {rem;
+    font-size: 4rem;
+}
+titulo-arcebispo-linha {
+/* Estilos para a foto real do arcebispo */    font-size: 0.9rem;
+.mensagem-arcebispo-foto {--cor-texto-secundario);
+    width: 150px; 0.2rem;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;ade-arcebispo {
+    border: 4px solid var(--cor-primaria); 1rem;
+    box-shadow: var(--sombra-card);   color: var(--cor-primaria);
+    overflow: hidden;    font-weight: 600;
+    position: relative;: 0.5rem;
+    background: #f8f9fa;
+}
+
+.foto-arcebispo {
+    width: 100%;n;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Foca no rosto */
+    border-radius: 50%;.mensagem-arcebispo-redes {
+    transition: transform 0.3s ease;
+}er;
+
+.mensagem-arcebispo-foto:hover .foto-arcebispo {ap;
+    transform: scale(1.05);
+}
+
+.mensagem-arcebispo-info h3 {: 0.9rem;
+    font-family: var(--fonte-titulos);exto-secundario);
+    font-size: 1.3rem;0;
+    color: var(--cor-texto-principal);
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;.redes-icones {
+}flex;
+
+.titulo-arcebispo-resumo {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}   justify-content: center;
+    width: 40px;
+.mensagem-citacao {;
+    position: relative;ario-vatican-fundo);
+    font-size: 1.1rem;;
+    line-height: 1.7;none;
+    color: var(--cor-texto-principal);
+    font-style: italic; ease;
+    margin: 0 0 2rem 0;
+    padding: 0;
+}
+.rede-social:hover {
+.aspas-abertura,ar(--cor-primaria);
+.aspas-fechamento {slateY(-2px);
+    font-size: 3rem; rgba(184, 134, 11, 0.3);
+    color: var(--cor-primaria);
+    font-family: Georgia, serif;
+    line-height: 1;---
+    display: block;ges - Elegância Arquidiocese
+}
+
+.aspas-abertura {
+    margin-bottom: -1rem;
+}   background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+    min-height: 100vh;
+.aspas-fechamento {ar(--fonte-principal);
+    text-align: right;
+    margin-top: -1rem;
+}*/
+
+.mensagem-assinatura {var(--cor-primaria), #0056A3);
+    display: block;
+    margin-bottom: 2rem;
+    padding: 1.5rem;x 15px rgba(0, 74, 127, 0.2);
+    background: linear-gradient(135deg, #F8F9FA, #F1F3F4);
+    border-radius: 8px;
+    border-left: 4px solid var(--cor-primaria);.admin-header-content {
+}
+
+.mensagem-assinatura span {
+    display: block;
+    font-style: normal;
+    text-align: center;
+}
+
+.nome-arcebispo-completo {
+    font-family: var(--fonte-titulos); flex;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+.titulo-arcebispo-linha {
+    font-size: 0.9rem;x;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 0.2rem;
+}
+   font-family: var(--fonte-titulos);
+.titulo-localidade-arcebispo {    font-size: 1.8rem;
+    font-size: 1rem;;
+    color: var(--cor-primaria);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.mensagem-arcebispo-acoes {onte-principal);
+    display: flex;
+    flex-direction: column;   margin: 0;
+    gap: 1.5rem;    color: rgba(255, 255, 255, 0.9);
+}
+
+.mensagem-arcebispo-redes {
+    display: flex;* Admin Navigation */
+    align-items: center;.admin-nav {
+    gap: 1rem;
+    flex-wrap: wrap;olid var(--cor-bordas);
+}
+
+.redes-titulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+}
+
+.redes-icones {
+    display: flex;
+    gap: 0.5rem;
+}
+   list-style: none;
+.rede-social {    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;ar(--fonte-titulos);
+    background: var(--cor-botao-secundario-vatican-fundo);
+    border-radius: 50%;rincipal);
+    text-decoration: none;ne;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;   border-radius: 6px;
+    border: 2px solid transparent;    transition: all 0.3s ease;
+}
+
+.rede-social:hover {
+    background: var(--cor-primaria);admin-nav a.active {
+    transform: translateY(-2px);    background: var(--cor-primaria);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);ite;
+}
+
+/* ------------------- */
+   Admin & Login Pages - Elegância Arquidiocese
+   ------------------- */
+   margin: 0 auto;
+/* Admin Body */    padding: 2rem;
+.admin-body {
+    background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+    min-height: 100vh;
+    font-family: var(--fonte-principal);ite;
+}
+   padding: 2rem;
+/* Admin Header */    margin-bottom: 2rem;
+.admin-header {px solid var(--cor-bordas);
+    background: linear-gradient(135deg, var(--cor-primaria), #0056A3);var(--sombra-card);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 74, 127, 0.2);
+}   font-family: var(--fonte-titulos);
+    font-size: 1.5rem;
+.admin-header-content {: 600;
+    max-width: 1200px;
+    margin: 0 auto;m;
+    padding: 0 2rem;x solid var(--cor-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}/* Admin Forms */
+{
+.admin-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}   display: block;
+    font-family: var(--fonte-titulos);
+.admin-logo {ht: 500;
+    width: 50px;or-texto-principal);
+    height: 50px;   margin-bottom: 0.5rem;
+    border-radius: 8px;}
+}
+
+.admin-title-area h1 {admin-form-textarea,
+    font-family: var(--fonte-titulos);.admin-form-select {
+    font-size: 1.8rem;%;
+    font-weight: 700;m;
+    margin: 0;);
+    color: white;x;
+});
+
+.admin-subtitle {   transition: all 0.3s ease;
+    font-family: var(--fonte-principal);}
+    font-size: 0.9rem;
+    margin: 0;t:focus,
+    color: rgba(255, 255, 255, 0.9);ocus,
+    font-weight: 400;
+}
+
+/* Admin Navigation */0 3px rgba(0, 74, 127, 0.1);
+.admin-nav {
+    background: white;
+    border-bottom: 1px solid var(--cor-bordas);/* Admin Buttons */
+    padding: 1rem 0;
+}e-flex;
+
+.admin-nav-content {
+    max-width: 1200px;   padding: 0.75rem 1.5rem;
+    margin: 0 auto;    border: none;
+    padding: 0 2rem;adius: 6px;
+} var(--fonte-titulos);
+
+.admin-nav ul {
+    display: flex;ll 0.3s ease;
+    gap: 2rem;on: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}--cor-primaria);
+
+.admin-nav a {
+    font-family: var(--fonte-titulos);
+    font-weight: 500;.admin-btn-primary:hover {
+    color: var(--cor-texto-principal);03A65;
+    text-decoration: none;Y(-1px);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;.admin-btn-secondary {
+} var(--cor-secundaria);
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    background: var(--cor-primaria);admin-btn-secondary:hover {
+    color: white;    background: #990021;
+}anslateY(-1px);
+
+/* Admin Main Content */
+.admin-main {
+    max-width: 1200px;arent;
+    margin: 0 auto;   color: var(--cor-primaria);
+    padding: 2rem;    border: 2px solid var(--cor-primaria);
+}
+
+.admin-card {
+    background: white;   background: var(--cor-primaria);
+    border-radius: 12px;    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);.login-body {
+}adient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+0vh;
+.admin-card h2 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.5rem;ntent: center;
+    font-weight: 600;   padding: 2rem 1rem;
+    color: var(--cor-texto-principal);    font-family: var(--fonte-principal);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-primaria);
+    padding-bottom: 0.5rem;
+}
+   max-width: 400px;
+/* Admin Forms */}
+.admin-form-group {
+    margin-bottom: 1.5rem;
+}hite;
+
+.admin-form-label {
+    display: block;20px 40px rgba(0, 0, 0, 0.15);
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}   background: linear-gradient(135deg, #F8F9FA, #E9ECEF);
+    text-align: center;
+.admin-form-input,em;
+.admin-form-textarea, 1px solid var(--cor-bordas);
+.admin-form-select {
+    width: 100%;
+    padding: 0.75rem;login-logo {
+    border: 1px solid var(--cor-bordas);    width: 80px;
+    border-radius: 6px;80px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;px;
+    transition: all 0.3s ease;
+}
+login-titulo {
+.admin-form-input:focus,    font-family: var(--fonte-titulos);
+.admin-form-textarea:focus,: 1.5rem;
+.admin-form-select:focus {
+    outline: none;);
+    border-color: var(--cor-primaria); 0;
+    box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+}
+ulo {
+/* Admin Buttons */ar(--fonte-principal);
+.admin-btn {to-secundario);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;   margin-bottom: 1.5rem;
+    text-decoration: none;}
+}
+
+.admin-btn-primary {
+    background: var(--cor-primaria);   font-family: var(--fonte-titulos);
+    color: white;    font-weight: 500;
+}or-texto-principal);
+om: 0.5rem;
+.admin-btn-primary:hover {
+    background: #003A65;
+    transform: translateY(-1px);login-input {
+}    width: 100%;
+0.875rem;
+.admin-btn-secondary {solid var(--cor-bordas);
+    background: var(--cor-secundaria);: 8px;
+    color: white;-fonte-principal);
+}
+0.3s ease;
+.admin-btn-secondary:hover {
+    background: #990021;
+    transform: translateY(-1px);s {
+}   outline: none;
+    border-color: var(--cor-primaria);
+.admin-btn-outline {ow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);.login-btn {
+}100%;
+;
+.admin-btn-outline:hover {--cor-primaria);
+    background: var(--cor-primaria);te;
+    color: white;   border: none;
+}    border-radius: 8px;
+mily: var(--fonte-titulos);
+/* Login Page Styles */t: 600;
+.login-body {   font-size: 1rem;
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);    cursor: pointer;
+    min-height: 100vh;ion: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;{
+    padding: 2rem 1rem;
+    font-family: var(--fonte-principal);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}   border-top: 1px solid var(--cor-bordas);
+}
+.login-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);   font-family: var(--fonte-principal);
+    margin-bottom: 2rem;    font-size: 0.9rem;
+}
+
+.login-header {
+    background: linear-gradient(135deg, #F8F9FA, #E9ECEF);
+    text-align: center;underline;
+}
+
+/* -------------------
+   Newsletter System Styles
+   ------------------- */
+
+/* Newsletter subscription form */
+.newsletter-section {
+    background: #FFFFFF;
+    padding: 3rem 0;
+    border-top: 1px solid var(--cor-bordas);
+}
+
+.newsletter-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.newsletter-title {
+    font-family: var(--fonte-titulos);
+    font-size: 1.8rem;
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.newsletter-description {
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.newsletter-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: var(--cor-botao-primario-vatican-fundo);
+    box-shadow: 0 0 0 3px rgba(192, 0, 42, 0.1);
+}
+
+.newsletter-submit {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, #1e40af 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;
+    width: 100%;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+       gap: 8px;
+}
+
+.newsletter-submit:hover {
+    background: linear-gradient(135deg, #1e40af 0%, var(--cor-primaria) 100%);
+    transform: translateY(-1px);
+}
+
+.newsletter-privacy {
+    font-size: 12px;
+    color: var(--cor-texto-secundario);
+    line-height: 1.4;
+}
+
+.newsletter-privacy a {
+    color: var(--cor-links);
+    text-decoration: none;
+}
+
+.newsletter-privacy a:hover {
+    color: var(--cor-links-hover);
+    text-decoration: underline;
+}
+
+/* Newsletter success/error messages */
+.newsletter-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    text-align: center;
+}
+
+.newsletter-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.newsletter-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* -------------------
+   Dark Mode
+   ------------------- */
+[data-theme="dark"] {
+    --cor-primaria: #3d82f6; /* Azul Mariano mais claro para contraste */
+    --cor-secundaria: #ef4444; /* Vermelho Mariano mais claro */
+    --cor-acento: #ef4444; /* Vermelho Mariano mais claro */
+    --cor-texto-principal: #e0e0e0;
+    --cor-texto-secundario: #b0b0b0;
+    --cor-links: #ef4444; /* Vermelho claro para links */
+    --cor-links-hover: #3d82f6; /* Azul claro para hover */
+    --cor-fundo-cabecalho: #1a1a1a;
+    --cor-fundo-rodape: #1a1a1a;
+    --cor-bordas: #404040;
+    --cor-fundo-hero-slide-1: #1e3a5f; /* Azul escuro */
+    --cor-fundo-hero-slide-2: #7f1d1d; /* Vermelho escuro */
+    --cor-fundo-hero-slide-3: #1e2a4a; /* Azul mais escuro */
+    --cor-fundo-hero-slide-4: #6b1818; /* Vermelho mais escuro */
+}
+
+[data-theme="dark"] body {
+    background-color: #1a1a1a;
+    color: var(--cor-texto-principal);
+}
+
+[data-theme="dark"] .site-header {
+    background-color: var(--cor-fundo-cabecalho);
+    border-bottom-color: var(--cor-bordas);
+}
+
+[data-theme="dark"] .site-footer {
+    background-color: var(--cor-fundo-rodape);
+    border-top-color: var(--cor-bordas);
+}
+
+[data-theme="dark"] .card-noticia {
+    background-color: #2d2d2d;
+    border-color: var(--cor-bordas);
+}
+
+[data-theme="dark"] .secao-site {
+    background-color: #1a1a1a;
+}
+
+[data-theme="dark"] .secao-alternada {
+    background-color: #2d2d2d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .whatsapp-floating-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .whatsapp-text {
+        display: none;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .newsletter-input {
+        min-width: unset;
+    }
+    
+    .dark-mode-toggle {
+        top: 70px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}

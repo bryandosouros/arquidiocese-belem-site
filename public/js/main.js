@@ -230,7 +230,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Tornar o container focável para navegação por teclado
             slidesContainer.setAttribute('tabindex', '0');
             slidesContainer.setAttribute('role', 'region');
-            slidesContainer.setAttribute('aria-label', 'Carrossel de destaques');            // Adicionar elementos ao DOM
+            slidesContainer.setAttribute('aria-label', 'Carrossel de destaques');
+            
+            // Adicionar elementos ao DOM
             slidesContainer.appendChild(prevButton);
             slidesContainer.appendChild(nextButton);
             slidesContainer.appendChild(indicatorsContainer);

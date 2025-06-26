@@ -1,24 +1,16 @@
 // src/scss/style.scss
 
-// 1. Variáveis (precisa ser usável pelos outros módulos)
-@forward 'variables'; // Torna as variáveis de _variables.scss disponíveis para outros módulos que importam style.scss
-                     // E também as inclui no CSS global (ex: :root custom properties)
+// 1. Variáveis e Configurações Globais
+@forward 'variables';
 
-// 2. Módulo de Cor do Sass (se algum arquivo aqui usar color.adjust diretamente, o que não é o caso)
-// @use 'sass:color'; // Geralmente não precisa no arquivo principal se os parciais já usam
-
-// 3. Mixins (importado primeiro para uso nos outros módulos)
+// 2. Mixins e Funções
 @use 'mixins';
 
-// 4. Estilos Base e Reset
+// 3. Base e Reset
 @use 'base';
 
-// 5. Componentes de Layout Principais
+// 4. Layout Geral
 @use 'layout';
 
-// 6. Mobile UX Enhancements - Release 6A
+// 5. Melhorias para Experiência Móvel (Mobile UX)
 @use 'mobile-ux';
-
-// Se você tiver outros parciais, importe-os com @use também:
-// @use 'components/buttons';
-// @use 'pages/home';

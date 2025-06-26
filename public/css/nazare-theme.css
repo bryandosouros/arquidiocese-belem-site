@@ -1,0 +1,250 @@
+/* Restauração da Paleta Nossa Senhora de Nazaré */
+
+/* ================================
+   PALETA NOSSA SENHORA DE NAZARÉ
+   ================================ */
+:root {
+  /* Cores primárias inspiradas em Nossa Senhora de Nazaré */
+  --cor-azul-nazare: #004A7F;
+  --cor-vermelho-nazare: #C0002A;
+  --cor-branco-nazare: #FFFFFF;
+  
+  /* Substituindo as variáveis anteriores */
+  --cor-primaria: var(--cor-azul-nazare);
+  --cor-secundaria: var(--cor-vermelho-nazare);
+  
+  /* Hero slides com as cores corretas */
+  --cor-fundo-hero-slide-1: #004A7F;
+  --cor-fundo-hero-slide-2: #C0002A;
+  --cor-fundo-hero-slide-3: #003660;
+  --cor-fundo-hero-slide-4: #a0001f;
+}
+
+/* ================================
+   HEADER COM PALETA ORIGINAL
+   ================================ */
+.site-header {
+    background: linear-gradient(135deg, var(--cor-azul-nazare) 0%, var(--cor-vermelho-nazare) 100%);
+    box-shadow: 0 4px 12px rgba(0, 74, 127, 0.15);
+    border-bottom: 3px solid var(--cor-branco-nazare);
+}
+
+.site-logo {
+    border: 3px solid var(--cor-branco-nazare);
+}
+
+.nav-link:hover,
+.nav-link.ativo {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--cor-branco-nazare);
+    border-bottom: 2px solid var(--cor-branco-nazare);
+}
+
+/* ================================
+   HERO CAROUSEL RESTAURADO
+   ================================ */
+.hero-carousel {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.hero-slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+.hero-slide.slide-ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-1"] {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-1) 0%, rgba(0, 74, 127, 0.9) 100%);
+}
+
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-2"] {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-2) 0%, rgba(192, 0, 42, 0.9) 100%);
+}
+
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-3"] {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-3) 0%, rgba(0, 54, 96, 0.9) 100%);
+}
+
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-4"] {
+    background: linear-gradient(135deg, var(--cor-fundo-hero-slide-4) 0%, rgba(160, 0, 31, 0.9) 100%);
+}
+
+/* Indicadores do carrossel */
+.hero-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.ativo {
+    background: white;
+}
+
+/* Controles do carrossel */
+.hero-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.hero-control:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.hero-control.prev {
+    left: 30px;
+}
+
+.hero-control.next {
+    right: 30px;
+}
+
+/* ================================
+   BOTÕES COM PALETA ORIGINAL
+   ================================ */
+.botao-primario {
+    background: var(--cor-vermelho-nazare);
+    color: white;
+    border: 2px solid var(--cor-vermelho-nazare);
+}
+
+.botao-primario:hover {
+    background: #a0001f;
+    border-color: #a0001f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 0, 42, 0.3);
+}
+
+.botao-outline-branco {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.botao-outline-branco:hover {
+    background: white;
+    color: var(--cor-azul-nazare);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ================================
+   CARDS E ELEMENTOS COM CORES ORIGINAIS
+   ================================ */
+.card-categoria {
+    background: linear-gradient(45deg, var(--cor-azul-nazare), var(--cor-vermelho-nazare));
+}
+
+.card-noticia {
+    border-left: 4px solid var(--cor-vermelho-nazare);
+}
+
+.titulo-secao {
+    color: var(--cor-azul-nazare);
+}
+
+.welcome-title {
+    color: var(--cor-azul-nazare);
+}
+
+/* ================================
+   NEWSLETTER COM CORES ORIGINAIS
+   ================================ */
+.newsletter-section {
+    background: linear-gradient(135deg, var(--cor-azul-nazare) 0%, var(--cor-vermelho-nazare) 100%);
+}
+
+.newsletter-submit-btn {
+    background: var(--cor-vermelho-nazare);
+    color: white;
+}
+
+.newsletter-submit-btn:hover {
+    background: #a0001f;
+}
+
+/* ================================
+   FOOTER COM PALETA ORIGINAL
+   ================================ */
+.site-footer {
+    background: linear-gradient(135deg, var(--cor-azul-nazare) 0%, #003660 100%);
+}
+
+.footer-section h4 {
+    color: white;
+}
+
+.footer-logo-text p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ================================
+   RESPONSIVO
+   ================================ */
+@media (max-width: 768px) {
+    .hero-control {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .hero-control.prev {
+        left: 15px;
+    }
+    
+    .hero-control.next {
+        right: 15px;
+    }
+    
+    .hero-indicators {
+        bottom: 20px;
+    }
+}

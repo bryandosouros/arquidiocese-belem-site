@@ -1,0 +1,1039 @@
+/*
+  Theme Name: Arquidiocese de Belém - Padrão
+  Author: Bryan Verneck
+  Description: Tema claro e limpo inspirado na identidade visual da Arquidiocese de Belém, com foco em acessibilidade e legibilidade.
+*/
+
+/* -------------------
+   1. Variáveis e Cores
+   ------------------- */
+:root {
+    /* Paleta Principal - Nossa Senhora de Nazaré (Azul, Vermelho, Branco) */
+    --cor-primaria: #004A7F; /* Azul de Nossa Senhora principal */
+    --cor-secundaria: #C0002A; /* Vermelho do manto para acentos */
+    --cor-acento: #C0002A; /* Vermelho Mariano (coração de Maria) */
+    --cor-texto-principal: #333333; /* Cinza escuro para textos */
+    --cor-texto-secundario: #666666; /* Cinza médio para textos de apoio */
+    --cor-links: #C0002A; /* Vermelho para links */
+    --cor-links-hover: #004A7F; /* Azul para hover */
+    --cor-fundo-cabecalho: #FFFFFF; /* Branco puro */
+    --cor-fundo-rodape: #EFEFEF; /* Branco suave */
+    --cor-bordas: #DDDDDD; /* Bordas suaves */
+
+    /* Cores para o Hero Section (Paleta Nossa Senhora de Nazaré - Fundos Coloridos) */
+    --cor-fundo-hero-slide-1: #004A7F; /* Azul de Nossa Senhora */
+    --cor-fundo-hero-slide-2: #C0002A; /* Vermelho do manto */
+    --cor-fundo-hero-slide-3: #003A65; /* Azul mais escuro */
+    --cor-fundo-hero-slide-4: #990021; /* Vermelho mais escuro */
+
+    /* Cores para Botões (Estilo Nossa Senhora de Nazaré) */
+    --cor-botao-primario-fundo: #C0002A; /* Vermelho principal */
+    --cor-botao-primario-texto: #FFFFFF;
+    --cor-botao-primario-hover: #990021; /* Vermelho mais escuro */
+    --cor-botao-outline-branco-texto: #FFFFFF;
+    --cor-botao-outline-branco-borda: #FFFFFF;
+    --cor-botao-outline-branco-hover: rgba(255, 255, 255, 0.1);
+    --cor-botao-secundario-fundo: #004A7F; /* Azul secundário */
+    --cor-botao-secundario-texto: #FFFFFF;
+    --cor-botao-secundario-hover: #003A65;
+
+    /* Tipografia */
+    --fonte-principal: 'Open Sans', sans-serif;
+    --fonte-titulos: 'Montserrat', sans-serif;
+
+    /* Espaçamentos */
+    --espacamento-base: 1rem; /* 16px */
+    --espacamento-vertical-secao: 4rem;
+
+    /* Sombras */
+    --sombra-suave: 0 2px 5px rgba(0,0,0,0.05);
+    --sombra-card: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* Bordas */
+    --raio-borda: 5px;
+}
+
+/* -------------------
+   2. Estilos Globais
+   ------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Garante base de 16px */
+}
+
+body {
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    color: var(--cor-texto-principal);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espacamento-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--cor-texto-principal);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+    color: var(--cor-links);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-links-hover);
+}
+
+/* -------------------
+   3. Header
+   ------------------- */
+.cabecalho {
+    background: var(--cor-fundo-cabecalho);
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.cabecalho-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.logo-texto h1 {
+    font-size: 1.5rem;
+    color: var(--cor-primaria);
+    margin: 0;
+}
+
+.logo-texto .subtitulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* Menu Principal */
+.menu-principal {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.menu-principal a {
+    color: var(--cor-texto-principal);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.menu-principal a:hover {
+    color: var(--cor-primaria);
+}
+
+.menu-principal a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--cor-primaria);
+    transition: width 0.3s ease;
+}
+
+.menu-principal a:hover::after {
+    width: 100%;
+}
+
+/* Menu Hamburger para Mobile */
+.menu-hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 30px;
+    height: 24px;
+    justify-content: space-between;
+}
+
+.hamburger-linha {
+    height: 3px;
+    background-color: var(--cor-texto-principal);
+    transition: all 0.3s ease;
+}
+
+/* -------------------
+   4. Hero Section (Carrossel)
+   ------------------- */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.hero-slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    color: white;
+    text-align: center;
+}
+
+.hero-slide.slide-ativo {
+    opacity: 1;
+}
+
+.hero-slide .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-slide h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.hero-slide p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    color: white;
+}
+
+/* Cores dos slides */
+.hero-slide:nth-child(1) {
+    background: var(--cor-fundo-hero-slide-1);
+}
+
+.hero-slide:nth-child(2) {
+    background: var(--cor-fundo-hero-slide-2);
+}
+
+.hero-slide:nth-child(3) {
+    background: var(--cor-fundo-hero-slide-3);
+}
+
+.hero-slide:nth-child(4) {
+    background: var(--cor-fundo-hero-slide-4);
+}
+
+/* Botões do Hero */
+.hero-slide .botao {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 1rem 2rem;
+    border: 2px solid white;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 0 0.5rem;
+    text-shadow: none;
+}
+
+.hero-slide .botao:hover {
+    background-color: white;
+    color: var(--cor-primaria);
+    transform: translateY(-2px);
+}
+
+/* Controles do Carrossel */
+.hero-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+}
+
+.hero-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-indicator.ativo {
+    background-color: white;
+}
+
+/* Setas de Navegação */
+.hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.hero-nav:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-color: white;
+}
+
+.hero-prev {
+    left: 20px;
+}
+
+.hero-next {
+    right: 20px;
+}
+
+/* -------------------
+   5. Seções Principais
+   ------------------- */
+.secao {
+    padding: var(--espacamento-vertical-secao) 0;
+    background-color: #FFFFFF; /* Fundo claro para seções principais */
+}
+
+.secao h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--cor-primaria);
+}
+
+/* -------------------
+   6. Botões
+   ------------------- */
+.botao {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--fonte-principal);
+    text-decoration: none;
+}
+
+.botao-primario {
+    background-color: var(--cor-botao-primario-fundo);
+    color: var(--cor-botao-primario-texto);
+}
+
+.botao-primario:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+.botao-secundario {
+    background-color: var(--cor-botao-secundario-fundo);
+    color: var(--cor-botao-secundario-texto);
+}
+
+.botao-secundario:hover {
+    background-color: var(--cor-botao-secundario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+/* -------------------
+   7. Newsletter
+   ------------------- */
+.newsletter-section {
+    background-color: #F8F9FA;
+    padding: 3rem 0;
+}
+
+.newsletter-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-title {
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+}
+
+.newsletter-description {
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid var(--cor-bordas);
+    border-radius: var(--raio-borda);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}
+
+.newsletter-submit {
+    background-color: var(--cor-botao-primario-fundo);
+    color: var(--cor-botao-primario-texto);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-submit:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+}
+
+.newsletter-privacy {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin-top: 1rem;
+}
+
+.newsletter-message {
+    padding: 1rem;
+    border-radius: var(--raio-borda);
+    margin-top: 1rem;
+    display: none;
+}
+
+.newsletter-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.newsletter-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* -------------------
+   8. Rodapé
+   ------------------- */
+.rodape {
+    background-color: var(--cor-fundo-rodape);
+    padding: 3rem 0 1rem;
+    margin-top: auto;
+}
+
+.rodape-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.rodape-secao h3 {
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.rodape-secao p,
+.rodape-secao li {
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
+
+.rodape-secao ul {
+    list-style: none;
+}
+
+.rodape-secao ul li {
+    margin-bottom: 0.5rem;
+}
+
+.rodape-secao a {
+    color: var(--cor-texto-secundario);
+    transition: color 0.3s ease;
+}
+
+.rodape-secao a:hover {
+    color: var(--cor-primaria);
+}
+
+.rodape-bottom {
+    border-top: 1px solid var(--cor-bordas);
+    padding-top: 1rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+/* -------------------
+   9. Admin Styles
+   ------------------- */
+.admin-body {
+    background-color: #F8F9FA;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background: white;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.admin-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-logo {
+    height: 40px;
+    width: auto;
+}
+
+.admin-title-area h1 {
+    font-size: 1.5rem;
+    color: var(--cor-primaria);
+    margin: 0;
+    font-weight: 600;
+}
+
+.admin-subtitle {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin: 0;
+}
+
+.admin-nav {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+.admin-nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.admin-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav a {
+    color: white;
+    padding: 1rem 0;
+    display: block;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.admin-main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--sombra-card);
+    margin-bottom: 2rem;
+}
+
+.admin-card h2 {
+    color: var(--cor-primaria);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #E9ECEF;
+    padding-bottom: 0.5rem;
+}
+
+.admin-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.admin-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+}
+
+.admin-form-input,
+.admin-form-textarea,
+.admin-form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #E9ECEF;
+    border-radius: var(--raio-borda);
+    font-size: 1rem;
+    font-family: var(--fonte-principal);
+    transition: border-color 0.3s ease;
+}
+
+.admin-form-input:focus,
+.admin-form-textarea:focus,
+.admin-form-select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+}
+
+.admin-form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.admin-button {
+    background-color: var(--cor-botao-primario-fundo);
+    color: var(--cor-botao-primario-texto);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.admin-button:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+.admin-button-secondary {
+    background-color: #6C757D;
+    color: white;
+}
+
+.admin-button-secondary:hover {
+    background-color: #5A6268;
+}
+
+/* Grid para Cards Admin */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* -------------------
+   10. Login Styles
+   ------------------- */
+.login-body {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-logo {
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.login-title {
+    color: var(--cor-primaria);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+}
+
+.login-form-input {
+    padding: 0.75rem;
+    border: 2px solid #E9ECEF;
+    border-radius: var(--raio-borda);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.login-form-input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 74, 127, 0.1);
+}
+
+.login-button {
+    background-color: var(--cor-botao-primario-fundo);
+    color: var(--cor-botao-primario-texto);
+    padding: 1rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+}
+
+/* -------------------
+   11. Responsividade
+   ------------------- */
+@media (max-width: 768px) {
+    /* Header Mobile */
+    .menu-principal {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: var(--sombra-card);
+    }
+
+    .menu-principal.ativo {
+        display: flex;
+    }
+
+    .menu-hamburger {
+        display: flex;
+    }
+
+    /* Hero Mobile */
+    .hero-slide h1 {
+        font-size: 2rem;
+    }
+
+    .hero-slide p {
+        font-size: 1rem;
+    }
+
+    .hero-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .hero-prev {
+        left: 10px;
+    }
+
+    .hero-next {
+        right: 10px;
+    }
+
+    /* Newsletter Mobile */
+    .newsletter-form {
+        flex-direction: column;
+        max-width: none;
+    }
+
+    /* Admin Mobile */
+    .admin-header-content {
+        padding: 1rem;
+    }
+
+    .admin-nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .admin-nav a {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .admin-main {
+        padding: 1rem;
+    }
+
+    .admin-card {
+        padding: 1.5rem;
+    }
+
+    /* Login Mobile */
+    .login-container {
+        margin: 1rem;
+        padding: 2rem;
+    }
+
+    /* Typography Mobile */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+
+    .container {
+        width: 95%;
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-slide h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-slide p {
+        font-size: 0.9rem;
+    }
+
+    .admin-card {
+        padding: 1rem;
+    }
+
+    .login-container {
+        padding: 1.5rem;
+    }
+}
+
+/* -------------------
+   12. Animações e Transições
+   ------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Smooth scrolling para links internos */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--cor-primaria);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* -------------------
+   13. Utilitários
+   ------------------- */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+/* Acessibilidade */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus para acessibilidade */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+/* -------------------
+   14. Print Styles
+   ------------------- */
+@media print {
+    .cabecalho,
+    .hero-section,
+    .newsletter-section,
+    .admin-nav,
+    .menu-hamburger {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .admin-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+}

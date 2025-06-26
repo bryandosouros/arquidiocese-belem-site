@@ -15,11 +15,11 @@ $cor-branco-nazare: #FFFFFF; // Branco puro
 $cor-primaria: $cor-azul-nazare;
 $cor-secundaria: $cor-vermelho-nazare;
 
-// Cores de fundo para os slides do Hero - alternando azul e vermelho
-$cor-fundo-hero-slide-1: $cor-azul-nazare; // Azul
-$cor-fundo-hero-slide-2: $cor-vermelho-nazare; // Vermelho
-$cor-fundo-hero-slide-3: color.adjust($cor-azul-nazare, $lightness: -5%); // Azul mais escuro
-$cor-fundo-hero-slide-4: color.adjust($cor-vermelho-nazare, $lightness: -5%); // Vermelho mais escuro
+// Cores de fundo para os slides do Hero
+$cor-fundo-hero-slide-1: $cor-primaria;
+$cor-fundo-hero-slide-2: $cor-secundaria;
+$cor-fundo-hero-slide-3: color.adjust($cor-primaria, $lightness: -8%);
+$cor-fundo-hero-slide-4: color.adjust($cor-secundaria, $lightness: -10%, $saturation: -15%);
 
 // Cores de texto
 $cor-texto-principal: #212529;

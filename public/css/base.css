@@ -1,0 +1,197 @@
+/*
+  Arquidiocese de Belém - CSS Base
+  Variáveis e estilos compartilhados entre todas as páginas
+*/
+
+/* -------------------
+   Variáveis Globais
+   ------------------- */
+:root {
+    /* Paleta Principal - Nossa Senhora de Nazaré */
+    --cor-primaria: #004A7F;
+    --cor-secundaria: #C0002A;
+    --cor-acento: #C0002A;
+    --cor-texto-principal: #333333;
+    --cor-texto-secundario: #666666;
+    --cor-links: #C0002A;
+    --cor-links-hover: #004A7F;
+    --cor-fundo-cabecalho: #FFFFFF;
+    --cor-fundo-rodape: #EFEFEF;
+    --cor-bordas: #DDDDDD;
+
+    /* Cores para o Hero Section */
+    --cor-fundo-hero-slide-1: #004A7F;
+    --cor-fundo-hero-slide-2: #C0002A;
+    --cor-fundo-hero-slide-3: #003A65;
+    --cor-fundo-hero-slide-4: #990021;
+
+    /* Cores para Botões */
+    --cor-botao-primario-fundo: #C0002A;
+    --cor-botao-primario-texto: #FFFFFF;
+    --cor-botao-primario-hover: #990021;
+    --cor-botao-secundario-fundo: #004A7F;
+    --cor-botao-secundario-texto: #FFFFFF;
+    --cor-botao-secundario-hover: #003A65;
+
+    /* Tipografia */
+    --fonte-principal: 'Open Sans', sans-serif;
+    --fonte-titulos: 'Montserrat', sans-serif;
+
+    /* Espaçamentos */
+    --espacamento-base: 1rem;
+    --espacamento-vertical-secao: 4rem;
+
+    /* Sombras */
+    --sombra-suave: 0 2px 5px rgba(0,0,0,0.05);
+    --sombra-card: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* Bordas */
+    --raio-borda: 5px;
+}
+
+/* -------------------
+   Reset e Estilos Globais
+   ------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    color: var(--cor-texto-principal);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espacamento-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--cor-texto-principal);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+    color: var(--cor-links);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-links-hover);
+}
+
+/* -------------------
+   Botões Base
+   ------------------- */
+.botao {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--raio-borda);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--fonte-principal);
+    text-decoration: none;
+}
+
+.botao-primario {
+    background-color: var(--cor-botao-primario-fundo);
+    color: var(--cor-botao-primario-texto);
+}
+
+.botao-primario:hover {
+    background-color: var(--cor-botao-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+.botao-secundario {
+    background-color: var(--cor-botao-secundario-fundo);
+    color: var(--cor-botao-secundario-texto);
+}
+
+.botao-secundario:hover {
+    background-color: var(--cor-botao-secundario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-card);
+}
+
+/* -------------------
+   Utilitários
+   ------------------- */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+/* Acessibilidade */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+/* -------------------
+   Responsividade Base
+   ------------------- */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+
+    .container {
+        width: 95%;
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.125rem; }
+}

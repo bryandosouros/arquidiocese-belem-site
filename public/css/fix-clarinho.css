@@ -1,0 +1,65 @@
+/* Fix para manter tudo clarinho - Nossa Senhora de Nazaré */
+
+/* APENAS o carrossel tem fundos coloridos alternando azul/vermelho */
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-1"] { 
+    background-color: #004A7F; /* Azul de Nossa Senhora */
+}
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-2"] { 
+    background-color: #C0002A; /* Vermelho do manto */
+}
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-3"] { 
+    background-color: #003A65; /* Azul mais escuro */
+}
+.hero-slide[data-bg-color-var="--cor-fundo-hero-slide-4"] { 
+    background-color: #990021; /* Vermelho mais escuro */
+}
+
+/* TODO O RESTO fica clarinho - fundo branco */
+body {
+    background-color: #FFFFFF !important;
+}
+
+.secao-site {
+    background-color: #FFFFFF !important;
+}
+
+.secao-alternada {
+    background-color: #FFFFFF !important;
+}
+
+.newsletter-section {
+    background: #FFFFFF !important;
+}
+
+.mensagem-assinatura {
+    background: #FFFFFF !important;
+    border: 1px solid var(--cor-bordas) !important;
+}
+
+.mensagem-arcebispo-foto-placeholder {
+    background: #F5F5F5 !important;
+}
+
+/* Garantir que o texto seja visível no carrossel com fundo colorido */
+.hero-slide .hero-titulo,
+.hero-slide .hero-subtitulo {
+    color: #FFFFFF !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7) !important;
+}
+
+/* Botões no carrossel ficam com outline branco para contraste */
+.hero-slide .botao-outline-branco-vatican {
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+}
+
+.hero-slide .botao-primario-vatican {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+.hero-slide .botao-primario-vatican:hover {
+    background-color: #FFFFFF !important;
+    color: var(--cor-primaria) !important;
+}
