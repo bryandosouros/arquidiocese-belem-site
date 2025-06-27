@@ -49,9 +49,15 @@
                         </li>
                         <li><a href="#sobre">Sobre</a></li>
                         <li><a href="#contato">Contato</a></li>
-                        <li><a href="login.html">Admin</a></li>
                     </ul>
                 </nav>
+                
+                <div class="header-actions">
+                    <a href="login.html" class="curia-digital-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Cúria Digital</span>
+                    </a>
+                </div>
                 
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
                     <span></span>
@@ -164,9 +170,9 @@
             <div class="container">
                 <h2 class="section-title">Últimas Notícias</h2>
                 <div class="news-grid" id="news-container">
-                    <!-- Notícias serão carregadas dinamicamente aqui -->
+                    <!-- Notícias serão carregadas dinamicamente do Firebase -->
                     <div class="loading-message">
-                        <p>Carregando notícias...</p>
+                        <p><i class="fas fa-spinner fa-spin"></i> Carregando notícias...</p>
                     </div>
                 </div>
             </div>
@@ -507,61 +513,7 @@
             if (slides.length > 0) {
                 startAutoSlide();
             }
-
-            // Carregar notícias do Firebase
-            loadNewsFromFirebase();
         });
-
-        // Função para carregar notícias do Firebase
-        async function loadNewsFromFirebase() {
-            const newsContainer = document.getElementById('news-container');
-            
-            try {
-                // Simulação de carregamento do Firebase
-                // Aqui você conectaria com o Firebase real
-                const mockNews = [
-                    {
-                        id: 1,
-                        title: "Nova plataforma digital da Arquidiocese",
-                        excerpt: "Sistema moderno para melhor atendimento às comunidades e facilitar o acesso aos recursos pastorais.",
-                        category: "Tecnologia",
-                        date: "26 de Junho, 2025",
-                        image: "images/logo-arquidiocese-belem.png"
-                    },
-                    {
-                        id: 2,
-                        title: "Orientações para Celebração da Palavra",
-                        excerpt: "Novas diretrizes para coordenadores de celebrações nas comunidades sem padre.",
-                        category: "Liturgia",
-                        date: "25 de Junho, 2025",
-                        image: "images/logo-arquidiocese-belem.png"
-                    }
-                ];
-
-                // Limpar container
-                newsContainer.innerHTML = '';
-
-                // Criar cards de notícias
-                mockNews.forEach(news => {
-                    const newsCard = document.createElement('div');
-                    newsCard.className = 'news-card';
-                    newsCard.innerHTML = `
-                        <img src="${news.image}" alt="${news.title}">
-                        <div class="news-content">
-                            <div class="news-date">${news.date}</div>
-                            <h3 class="news-title">${news.title}</h3>
-                            <p class="news-excerpt">${news.excerpt}</p>
-                            <a href="post.html?id=${news.id}" class="news-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    `;
-                    newsContainer.appendChild(newsCard);
-                });
-                
-            } catch (error) {
-                console.error('Erro ao carregar notícias:', error);
-                newsContainer.innerHTML = '<p>Erro ao carregar notícias. Tente novamente mais tarde.</p>';
-            }
-        }
     </script>
     <script src="js/main.js" type="module"></script>
     <script src="js/darkmode.js" type="module"></script>

@@ -292,26 +292,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderNews(posts) {
-        const newsGrid = document.querySelector('.grid-noticias');
+        const newsGrid = document.querySelector('.news-grid') || document.getElementById('news-container');
         if (!newsGrid) return;
         
+        // Limpar mensagem de loading
+        newsGrid.innerHTML = '';
+        
         newsGrid.innerHTML = posts.map(post => `
-            <article class="card-noticia card-vatican-inspired ${post.offline ? 'offline-card' : ''}">
+            <article class="news-card ${post.offline ? 'offline-card' : ''}">
                 ${post.offline ? '<div class="offline-badge">📴 Offline</div>' : ''}
                 <a href="post.html?id=${post.id}" class="card-link-area">
                     ${post.featuredImage ? 
-                        `<img src="${post.featuredImage}" alt="${post.title}" class="card-noticia-imagem">` :
-                        `<div class="card-noticia-imagem-placeholder"></div>`
+                        `<img src="${post.featuredImage}" alt="${post.title}" class="news-card-image">` :
+                        `<div class="news-card-placeholder"></div>`
                     }
-                    <div class="card-conteudo">
-                        <span class="card-categoria">${getCategoryLabel(post.category)}</span>
-                        <h3 class="card-titulo">${post.title}</h3>
-                        <p class="card-resumo">${post.excerpt || extractExcerpt(post.content)}</p>
-                        <div class="card-data">${formatPostDate(post.createdAt)}</div>
+                    <div class="news-content">
+                        <span class="news-category">${getCategoryLabel(post.category)}</span>
+                        <h3 class="news-title">${post.title}</h3>
+                        <p class="news-excerpt">${post.excerpt || extractExcerpt(post.content)}</p>
+                        <div class="news-date">${formatPostDate(post.createdAt)}</div>
                     </div>
                 </a>
-                <div class="card-footer">
-                    <a href="post.html?id=${post.id}" class="card-link-leia-mais">Leia mais <span class="seta">&rarr;</span></a>
+                <div class="news-footer">
+                    <a href="post.html?id=${post.id}" class="news-link">Leia mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
         `).join('');
