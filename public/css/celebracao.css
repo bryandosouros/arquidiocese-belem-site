@@ -456,6 +456,12 @@ body {
     font-weight: var(--font-weight-semibold);
 }
 
+/* Prefixos de fala em negrito */
+.speech-line strong {
+    color: var(--azul-mariano);
+    font-weight: var(--font-weight-bold);
+}
+
 /* Action Notes */
 .action-note {
     font-style: italic;

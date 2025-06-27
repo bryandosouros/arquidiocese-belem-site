@@ -776,9 +776,10 @@ class CelebracaoController {
         // Excluir instruções entre parênteses, asteriscos ou texto descritivo
         if (/^\s*[\(\*].*[\)\*]\s*$/.test(text)) return false;
         if (/^(Terminado|Após|Durante|Em seguida|Depois)/i.test(text)) return false;
+        if (/^(O povo responde|O leitor conclui|Todos aclamam|O presidente aclama|Ao terminar|E acrescenta)/i.test(text)) return false;
         if (/^\s*[A-Z][a-z]+ [a-z]+ [a-z]+, [a-z]+ [a-z]+/i.test(text) && !/(?:Pres\.|℟\.|℣\.)/i.test(text)) return false;
         
-        return /(?:Pres\.|℟\.|℣\.|Leitor:|Todos aclamam:|O povo responde:|O leitor conclui:)/i.test(text);
+        return /(?:Pres\.|℟\.|℣\.|Leitor:)/i.test(text);
     }
 
     processElementSpeech(element) {
@@ -821,20 +822,16 @@ class CelebracaoController {
         if (/^(Terminado|Após|Durante|Em seguida|Depois|Ao terminar)/i.test(textContent)) {
             return { isSpeech: false, fullText: textContent, speechText: null, originalHTML: lineHTML };
         }
+        if (/^(O povo responde|O leitor conclui|Todos aclamam|O presidente aclama|E acrescenta)/i.test(textContent)) {
+            return { isSpeech: false, fullText: textContent, speechText: null, originalHTML: lineHTML };
+        }
         
-        // Padrões de fala mais específicos
+        // Padrões de fala mais específicos (apenas os essenciais)
         const speechPatterns = [
             /^(Pres\.):\s*(.+)/,
             /^(℟\.):\s*(.+)/,
             /^(℣\.):\s*(.+)/,
-            /^(Leitor):\s*(.+)/,
-            /^(Todos aclamam):\s*(℟\.):\s*(.+)/,
-            /^(O povo responde):\s*(℟\.):\s*(.+)/,
-            /^(O leitor conclui):\s*Leitor:\s*(.+)/,
-            /^(E acrescenta, com o povo, uma só vez):\s*(℟\.):\s*(.+)/,
-            /^(Terminado o Evangelho, o presidente aclama):\s*(℣\.):\s*(.+)/,
-            /^(O povo aclama):\s*(℟\.):\s*(.+)/,
-            /^(Ao terminar, o povo aclama):\s*(℟\.):\s*(.+)/
+            /^(Leitor):\s*(.+)/
         ];
         
         for (let pattern of speechPatterns) {
@@ -861,6 +858,12 @@ class CelebracaoController {
             !textContent.startsWith('Durante') &&
             !textContent.startsWith('Em seguida') &&
             !textContent.startsWith('Depois') &&
+            !textContent.startsWith('O povo') &&
+            !textContent.startsWith('O leitor') &&
+            !textContent.startsWith('Todos aclamam') &&
+            !textContent.startsWith('O presidente') &&
+            !textContent.startsWith('E acrescenta') &&
+            !textContent.startsWith('Ao terminar') &&
             !/^[A-Z][a-z]+ [a-z]+ [a-z]+, [a-z]+ [a-z]+/i.test(textContent)) {
             return {
                 isSpeech: true,
@@ -882,8 +885,11 @@ class CelebracaoController {
         const lineDiv = document.createElement('div');
         lineDiv.className = 'prayer-line-individual speech-line';
         
+        // Processar o texto para colocar prefixos em negrito
+        const processedText = this.formatSpeechWithBoldPrefix(displayText, speechText);
+        
         const textSpan = document.createElement('span');
-        textSpan.innerHTML = displayText;
+        textSpan.innerHTML = processedText;
         
         // Quebrar a fala se necessário
         if (speechText.length > 100) {
@@ -896,7 +902,8 @@ class CelebracaoController {
                     
                     const firstTextSpan = document.createElement('span');
                     const prefix = displayText.replace(speechText, '').trim();
-                    firstTextSpan.innerHTML = prefix + ' ' + line;
+                    const formattedFirstLine = this.formatSpeechWithBoldPrefix(prefix + ' ' + line, line);
+                    firstTextSpan.innerHTML = formattedFirstLine;
                     
                     const firstCopyButton = this.createCopyButton(line);
                     
@@ -926,6 +933,24 @@ class CelebracaoController {
             lineDiv.appendChild(copyButton);
             container.appendChild(lineDiv);
         }
+    }
+
+    formatSpeechWithBoldPrefix(fullText, speechText) {
+        // Identificar e formatar prefixos em negrito
+        const prefixPatterns = [
+            { pattern: /^(Pres\.:)\s*(.*)/, replacement: '<strong>$1</strong> $2' },
+            { pattern: /^(℟\.:)\s*(.*)/, replacement: '<strong>$1</strong> $2' },
+            { pattern: /^(℣\.:)\s*(.*)/, replacement: '<strong>$1</strong> $2' },
+            { pattern: /^(Leitor:)\s*(.*)/, replacement: '<strong>$1</strong> $2' }
+        ];
+        
+        for (let prefixPattern of prefixPatterns) {
+            if (prefixPattern.pattern.test(fullText)) {
+                return fullText.replace(prefixPattern.pattern, prefixPattern.replacement);
+            }
+        }
+        
+        return fullText;
     }
 
     createSimpleLine(container, text) {
@@ -1258,8 +1283,30 @@ class CelebracaoController {
                 line.style.background = '#fffbeb';
                 line.style.borderLeft = '4px solid var(--dourado)';
                 line.style.borderRadius = 'var(--border-radius)';
+                
+                // Aplicar formatação de prefixo em negrito
+                this.formatPrefixesInElement(line);
             }
         });
+    }
+
+    formatPrefixesInElement(element) {
+        // Formatar prefixos em negrito dentro do elemento
+        let innerHTML = element.innerHTML;
+        
+        // Padrões para colocar prefixos em negrito
+        const prefixPatterns = [
+            { search: /(<strong>)?(Pres\.:)(<\/strong>)?/g, replace: '<strong>$2</strong>' },
+            { search: /(<strong>)?(℟\.:)(<\/strong>)?/g, replace: '<strong>$2</strong>' },
+            { search: /(<strong>)?(℣\.:)(<\/strong>)?/g, replace: '<strong>$2</strong>' },
+            { search: /(<strong>)?(Leitor:)(<\/strong>)?/g, replace: '<strong>$2</strong>' }
+        ];
+        
+        prefixPatterns.forEach(pattern => {
+            innerHTML = innerHTML.replace(pattern.search, pattern.replace);
+        });
+        
+        element.innerHTML = innerHTML;
     }
 }
 
