@@ -30,6 +30,21 @@
     <meta name="twitter:description" id="twitter-description" content="">
     <meta name="twitter:image" id="twitter-image" content="">
     
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0c4a6e">
+    <link rel="icon" type="image/x-icon" href="images/logo-arquidiocese-belem.png">
+    
     <!-- Dynamic JSON-LD Structured Data -->
     <script type="application/ld+json" id="structured-data">
     {
@@ -47,7 +62,7 @@
             "name": "Arquidiocese de Belém do Pará",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://arquidiocese-belem.web.app/images/logo-arquidiocese-belem.png"
+                "url": ""
             }
         },
         "datePublished": "",
@@ -66,30 +81,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/post.css">
+    
+    <!-- Dynamic JSON-LD Structured Data -->
+    <script type="application/ld+json" id="structured-data"></script>
 </head>
 <body>
-    <header id="cabecalho-principal" class="site-header">
-        <div class="container container-header">
-            <div class="logo-area">
-                <a href="index.html" title="Página Inicial da Arquidiocese de Belém do Pará">
-                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese de Belém do Pará" class="logo-imagem">
-                    <div class="logo-texto">
-                        <span class="texto-arquidiocese">Arquidiocese de</span>
-                        <span class="texto-localidade">Belém do Pará</span>
-                    </div>
-                </a>
+   <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
+                        <div class="header-logo-texto">
+                            <span>Arquidiocese de<br></span>
+                            <span>Belém do Pará</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active">Início</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
+                                <li><a href="#">Orientações Litúrgicas</a></li>
+                                <li><a href="#">Cartas Pastorais</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="login.html">Admin</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <nav class="navegacao-principal" aria-label="Navegação Principal">
-                <ul class="menu-lista-principal">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="index.html#noticias">Notícias</a></li>
-                    <li><a href="index.html#sobre">Sobre Nós</a></li>
-                    <li><a href="index.html#clero">Clero</a></li>
-                    <li><a href="index.html#documentos">Documentos</a></li>
-                    <li><a href="login.html">Admin</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
@@ -511,6 +544,19 @@
                 localStorage.setItem('pushNotificationAsked', 'true');
             }
         }
+        
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const nav = document.getElementById('nav');
+            
+            if (mobileMenuBtn && nav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    mobileMenuBtn.classList.toggle('active');
+                });
+            }
+        });
     </script>
 </body>
 </html>

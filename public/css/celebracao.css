@@ -1,7 +1,10 @@
 /* Celebração da Palavra Styles */
+/* Garantir importação do header unificado */
+@import url('./header.css');
+
 /* Paleta Mariana - Arquidiocese de Belém */
 :root {
-    /* Cores Marianas */
+    /* Cores Marianas - Sincronizadas com header.css */
     --azul-mariano: #0c4a6e;
     --azul-claro: #0ea5e9;
     --azul-escuro: #0369a1;
@@ -12,7 +15,7 @@
     --dourado: #fbbf24;
     --dourado-escuro: #d97706;
     
-    /* Tipografia */
+    /* Tipografia - Sincronizada com header.css */
     --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-weight-light: 300;
     --font-weight-normal: 400;
@@ -37,11 +40,18 @@
     --transition-slow: 0.5s ease;
 }
 
-/* Reset e Base */
-* {
+/* Reset completo e Base - Sincronizado com index-new.css */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -51,140 +61,22 @@ body {
     color: var(--cinza-escuro);
     background-color: var(--cinza-claro);
     min-height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Garantir que o main ocupe o espaço disponível */
+.main {
+    flex: 1;
+    padding-top: 2rem;
 }
 
 .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Header */
-.header {
-    background: linear-gradient(135deg, var(--azul-mariano), var(--azul-escuro));
-    color: var(--branco-puro);
-    padding: 1rem 0;
-    box-shadow: var(--shadow-large);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-}
-
-.logo a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--branco-puro);
-    font-weight: var(--font-weight-bold);
-    font-size: 1.1rem;
-    transition: var(--transition-fast);
-}
-
-.logo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.logo a:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* Navigation */
-.nav-list {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    list-style: none;
-}
-
-.nav-list a {
-    color: var(--branco-puro);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-small);
-    transition: var(--transition-fast);
-}
-
-.nav-list a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px);
-}
-
-/* Dropdown */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--branco-puro);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-large);
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: var(--transition-medium);
-    z-index: 1000;
-    list-style: none;
-    padding: 0.5rem 0;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu a {
-    color: var(--cinza-escuro);
-    padding: 0.75rem 1.5rem;
-    display: block;
-    border-radius: 0;
-}
-
-.dropdown-menu a:hover {
-    background: var(--cinza-claro);
-    color: var(--azul-mariano);
-}
-
-/* Mobile Menu */
-.mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.mobile-menu-btn span {
-    width: 25px;
-    height: 3px;
-    background: var(--branco-puro);
-    border-radius: 2px;
-    transition: var(--transition-fast);
 }
 
 /* Hero Section */
